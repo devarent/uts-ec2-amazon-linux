@@ -882,3 +882,11 @@ Materi Part 2 melengkapi Part 1:
 
 - **AWS Architecture Q&amp;A (30 pertanyaan, 6 bagian)** — VPC, IAM, ECS, RDS, server &amp; serverless, cache, antrian, Lambda, CDN, Route 53, Terraform, observability, Well-Architected: [`docs/13-aws-architecture-qanda.md`](docs/13-aws-architecture-qanda.md)
 - **Next.js + AI: dari localhost ke production AWS** — arsitektur &amp; AI hybrid (`/api/ai`), roadmap 12 tahap (GitHub → Docker → ECR → EC2 → RDS → Route 53 → ACM/Nginx HTTPS → monitoring → GitHub Actions → optimasi biaya), decision matrix, rollback otomatis, checklist production: [`docs/14-nextjs-ai-production.md`](docs/14-nextjs-ai-production.md)
+
+---
+
+## Project Governance
+
+[![CI](https://github.com/aryafatthurahman4-collab/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/aryafatthurahman4-collab/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml)
+
+[Contributing](CONTRIBUTING.md) | [Security Policy](SECURITY.md) | [Code of Conduct](CODE_OF_CONDUCT.md)
