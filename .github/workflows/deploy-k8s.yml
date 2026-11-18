@@ -1,0 +1,118 @@
+name: Deploy to Kubernetes (Helm)
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Tag image di GHCR (kosongkan = build dari commit ini)"
+        required: false
+        type: string
+      namespace:
+        description: "Namespace tujuan"
+        required: true
+        default: ec2-lab
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    name: Build & push image
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      image: ${{ steps.image.outputs.ref }}
+      repository: ${{ steps.image.outputs.repository }}
+      tag: ${{ steps.image.outputs.tag }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve image reference
+        id: image
+        run: |
+          TAG="${{ inputs.image_tag }}"
+          if [ -z "$TAG" ]; then TAG="sha-${GITHUB_SHA::7}"; fi
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "repository=${REGISTRY}/${IMAGE_NAME}" >> "$GITHUB_OUTPUT"
+          echo "ref=${REGISTRY}/${IMAGE_NAME}:${TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Buildx
+        if: ${{ inputs.image_tag == '' }}
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        if: ${{ inputs.image_tag == '' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        if: ${{ inputs.image_tag == '' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: ./app
+          push: true
+          tags: ${{ steps.image.outputs.ref }}
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL || 'https://app.example.com' }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+
+  deploy:
+    name: Helm upgrade
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: latest
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.16.4
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          printf '%s' "${{ secrets.KUBE_CONFIG }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Helm upgrade --install
+        run: |
+          helm upgrade --install nextjs ./helm/nextjs-app \
+            --namespace "${{ inputs.namespace }}" \
+            --create-namespace \
+            --set image.repository="${{ needs.build.outputs.repository }}" \
+            --set image.tag="${{ needs.build.outputs.tag }}" \
+            --set ingress.hosts[0].host="${{ vars.APP_HOST || 'app.example.com' }}" \
+            --set ingress.tls[0].hosts[0]="${{ vars.APP_HOST || 'app.example.com' }}" \
+            --set ingress.tls[0].secretName=nextjs-app-tls \
+            --set env.NEXT_PUBLIC_SITE_URL="${{ vars.SITE_URL || 'https://app.example.com' }}" \
+            --atomic \
+            --wait \
+            --timeout 5m
+
+      - name: Verify rollout
+        run: |
+          kubectl rollout status deployment/nextjs-nextjs-app \
+            -n "${{ inputs.namespace }}" --timeout=180s
+          kubectl get pods,svc,ingress -n "${{ inputs.namespace }}"

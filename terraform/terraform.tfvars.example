@@ -1,0 +1,43 @@
+# Salin ke terraform.tfvars lalu sesuaikan.
+aws_region    = "ap-southeast-3"
+project_name  = "ec2-web-hosting"
+environment   = "lab"
+instance_type = "t3.micro"
+
+# WAJIB: batasi SSH/PuTTY ke IP publik kamu.
+# Cek IP: curl -s https://api.ipify.org
+ssh_cidr = "103.10.20.30/32"
+
+# Pilih salah satu:
+# 1) pakai key pair yang sudah ada
+# key_name = "aws-keypair"
+# 2) buat key pair baru dari public key lokal (private key .ppk untuk PuTTY)
+ssh_public_key = "ssh-ed25519 AAAA... kamu@laptop"
+
+# Opsional: Route 53 otomatis
+# domain_name      = "app.example.com"
+# hosted_zone_name = "example.com"
+
+root_volume_size = 20
+
+# ------------------------------------------------------------------
+# AWS RDS PostgreSQL Configuration
+# ------------------------------------------------------------------
+# Uncomment these and provide TF_VAR_rds_master_password to enable RDS.
+# RDS is created in isolated private subnets and incurs separate AWS charges.
+
+# rds_postgres_version      = "15.4"
+# rds_instance_class        = "db.t3.micro"  # Free tier eligible
+# rds_allocated_storage     = 20
+# rds_max_allocated_storage = 100
+# rds_database_name         = "ec2lab"
+# rds_master_username       = "ec2lab_admin"
+# rds_multi_az              = false  # Set to true for production
+# rds_backup_retention_period = 7
+# rds_performance_insights  = true
+# rds_deletion_protection   = true
+# rds_skip_final_snapshot   = false
+
+# Set the password out-of-band; do not save it in this file:
+# Linux/macOS: export TF_VAR_rds_master_password='strong-url-safe-password'
+# PowerShell:  $env:TF_VAR_rds_master_password = 'strong-url-safe-password'

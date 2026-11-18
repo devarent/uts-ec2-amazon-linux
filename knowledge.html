@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Knowledge base Cloud & DevOps UTS Cloud Computing - Muhammad Arya Fatthurahman (NIM 2023230006). Roadmap, AWS, EC2, Docker, Kubernetes, Terraform, CI/CD, observability, dan troubleshooting.">
+  <meta name="author" content="Muhammad Arya Fatthurahman">
+  <title>Knowledge Base Cloud &amp; DevOps — Muhammad Arya Fatthurahman</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress" aria-hidden="true"></div>
+
+<!-- Back to top button -->
+<button class="back-top" aria-label="Kembali ke atas" type="button">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<!-- Toast container (untuk ui.js) -->
+<div class="toast-wrap" aria-live="polite"></div>
+
+<header class="app-top">
+  <div class="container app-top__inner">
+    <a href="index.html" class="app-brand">
+      <span class="app-brand__mark">MAF</span>
+      <span class="app-brand__text">
+        <strong>Cloud &amp; DevOps Portal</strong>
+        <small>Muhammad Arya Fatthurahman &middot; 2023230006</small>
+      </span>
+    </a>
+    <span class="app-top__spacer"></span>
+    <nav class="app-top__links" aria-label="Navigasi portal">
+      <a class="btn btn--ghost btn--sm" href="index.html">Portofolio</a>
+      <a class="btn btn--ghost btn--sm" href="index.html#cloud">Ringkasan Cloud</a>
+      <a class="btn btn--primary btn--sm" href="login.html">Masuk</a>
+    </nav>
+  </div>
+</header>
+
+<section class="kb-hero">
+  <div class="container">
+    <p class="kb-hero__eyebrow">UTS Cloud Computing &middot; Knowledge Base</p>
+    <h1>Semua materi Cloud &amp; DevOps dalam satu halaman</h1>
+    <p>
+      Kumpulan catatan belajar, konfigurasi, dan perintah yang saya pakai untuk membangun
+      website ini: mulai dari Linux dan jaringan, AWS EC2, Docker, Kubernetes, Terraform,
+      CI/CD, sampai observability dan troubleshooting. Halaman ini menjadi lampiran teknis
+      dari portofolio dan workspace yang bisa diakses lewat IP publik.
+    </p>
+    <div class="kb-hero__stats">
+      <span class="kb-hero__stat"><strong>7</strong> tahap roadmap utama</span>
+      <span class="kb-hero__stat"><strong>17</strong> modul DevOps</span>
+      <span class="kb-hero__stat"><strong>30</strong> topik AWS cloud-native</span>
+      <span class="kb-hero__stat">Host aktif: <strong data-host>—</strong></span>
+    </div>
+    <nav class="kb-quicklinks" aria-label="Pintasan teknologi utama">
+      <span class="kb-quicklinks__label">Jelajahi stack</span>
+      <a href="#wsl2">WSL2 Ubuntu</a>
+      <a href="#docker">Docker</a>
+      <a href="#kubernetes">Kubernetes · Helm · K3s</a>
+      <a href="#terraform">Terraform</a>
+      <a href="#cicd">CI/CD</a>
+      <a href="#nextjs">Next.js · Nginx</a>
+    </nav>
+    <div class="kb-topic-search">
+      <label for="kbTopicSearch">Cari topik di daftar isi</label>
+      <input id="kbTopicSearch" type="search" placeholder="Contoh: Docker, Helm, Terraform…" autocomplete="off" aria-describedby="kbSearchStatus">
+      <p id="kbSearchStatus" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<div class="container kb-layout">
+
+  <aside class="kb-toc" aria-label="Daftar isi">
+    <p class="kb-toc__title">Daftar isi</p>
+    <a href="#mulai">Cara memakai halaman ini</a>
+    <a href="#roadmap7">Roadmap 7 tahap</a>
+    <a href="#roadmap-devops">17 modul DevOps</a>
+    <a href="#aws-handbook" class="is-sub">AWS Cloud-Native Handbook</a>
+    <a href="#aws-dasar" class="is-sub">A. Dasar cloud &amp; IAM</a>
+    <a href="#aws-jaringan" class="is-sub">B. Compute &amp; jaringan</a>
+    <a href="#aws-data" class="is-sub">C. Data &amp; storage</a>
+    <a href="#aws-operasi" class="is-sub">D. Operasi &amp; delivery</a>
+    <a href="#aws-keamanan" class="is-sub">E. Keamanan</a>
+    <a href="#aws-arsitektur" class="is-sub">F. Arsitektur &amp; biaya</a>
+    <a href="#tech-stack">Tech Stack Modern</a>
+    <a href="#ec2">Deploy AWS EC2 langkah demi langkah</a>
+    <a href="#linux">Linux &amp; SSH referensi</a>
+    <a href="#wsl2" class="is-sub">WSL2 Ubuntu</a>
+    <a href="#webserver">Nginx / Apache2</a>
+    <a href="#docker">Docker</a>
+    <a href="#kubernetes">Kubernetes, Helm, K3s</a>
+    <a href="#terraform">Terraform</a>
+    <a href="#cicd">CI/CD GitHub Actions</a>
+    <a href="#nextjs">Next.js + Docker + Nginx</a>
+    <a href="#observability">Observability</a>
+    <a href="#keamanan">Keamanan &amp; biaya</a>
+    <a href="#troubleshooting">Troubleshooting</a>
+    <a href="#sumber">Sumber referensi</a>
+  </aside>
+
+  <main class="app-main">
+
+    <!-- ============ 1. MULAI ============ -->
+    <section class="kb-section" id="mulai">
+      <p class="kb-kicker">00 &middot; Orientasi</p>
+      <h2>Cara memakai halaman ini</h2>
+      <p>
+        Halaman ini disusun seperti runbook: bagian awal menjelaskan urutan belajar, bagian
+        tengah berisi konfigurasi yang benar-benar dipakai di lab, dan bagian akhir berisi
+        cara mencari masalah saat deployment gagal. Gunakan daftar isi di kiri untuk melompat.
+      </p>
+
+      <div class="callout">
+        <strong>Konteks tugas.</strong> Website portofolio ini adalah hasil UTS Cloud Computing
+        Program Studi Teknologi Informasi, Universitas Darma Persada. Identitas: Muhammad Arya
+        Fatthurahman, NIM 2023230006, kelas TIFM. Target deployment: AWS EC2 dengan alamat
+        publik (bukan <code>localhost</code>), web server Nginx/Apache2, Security Group
+        SSH 22 + HTTP 80.
+      </div>
+
+      <h3 class="kb-h3">Tiga jalur yang bisa dipakai</h3>
+      <div class="grid-3">
+        <div class="tile">
+          <p class="tile__title">1. Jalur statis (dipakai sekarang)</p>
+          <p class="tile__sub">Paling cepat dan paling aman untuk penilaian.</p>
+          <ul class="kb-list">
+            <li><code>index.html</code> + <code>assets/</code> disalin ke docroot</li>
+            <li>Nginx/Apache2 menyajikan file langsung</li>
+            <li>Portal login berjalan di sisi browser (localStorage)</li>
+            <li>Tidak butuh Node.js, database, atau container</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <p class="tile__title">2. Jalur Dinamis (lokal)</p>
+          <p class="tile__sub">Next.js + PostgreSQL dari folder <code>app/</code>.</p>
+          <ul class="kb-list">
+            <li><code>next dev</code> / <code>next start</code> di port 3000</li>
+            <li>API auth, guestbook, health check</li>
+            <li>Reverse proxy Nginx dari 80 ke 3000</li>
+            <li>Cocok untuk demonstrasi fitur CRUD</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <p class="tile__title">3. Jalur container (opsional)</p>
+          <p class="tile__sub">Docker Compose → Kubernetes/Helm.</p>
+          <ul class="kb-list">
+            <li>Image multi-stage, health check</li>
+            <li>Compose untuk satu VM</li>
+            <li>Deployment + Service + Ingress di K8s</li>
+            <li>Helm chart di folder <code>helm/</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="kb-h3">Perintah verifikasi cepat</h3>
+      <div class="code"><span class="code__label">terminal — dari komputer sendiri</span>curl -I http://<span data-host>IP-PUBLIK</span>/
+curl -s http://<span data-host>IP-PUBLIK</span>/ | head -20
+nslookup <span data-host>domain-anda</span></div>
+      <p>
+        Jika <code>curl -I</code> mengembalikan <code>HTTP/1.1 200 OK</code>, berarti DNS dan web
+        server sudah benar. Kalau <code>Connection refused</code>, periksa Security Group dan
+        status service. Kalau <code>timed out</code>, biasanya port 80 belum dibuka.
+      </p>
+    </section>
+
+    <!-- ============ 2. ROADMAP 7 ============ -->
+    <section class="kb-section" id="roadmap7">
+      <p class="kb-kicker">01 &middot; Urutan belajar</p>
+      <h2>Roadmap Cloud &amp; DevOps 7 tahap</h2>
+      <p>
+        Roadmap ini saya pakai supaya tidak melompat terlalu jauh. Setiap tahap punya
+        <em>output</em> yang bisa dibuktikan, bukan hanya daftar materi yang dibaca.
+      </p>
+
+      <div class="stage-grid">
+        <article class="stage">
+          <p class="stage__no">Tahap 01</p>
+          <h4>Fondasi: Linux, jaringan, Git</h4>
+          <p>Navigasi filesystem, permission, proses, service, log, dasar TCP/IP, DNS, HTTP, lalu version control.</p>
+          <p class="stage__meta"><span>Output: bisa SSH ke VM, membaca log, push ke GitHub</span></p>
+        </article>
+        <article class="stage">
+          <p class="stage__no">Tahap 02</p>
+          <h4>Pemrograman &amp; aplikasi web</h4>
+          <p>Satu bahasa (JavaScript/TypeScript atau Python), HTTP method, REST API, JSON, database relasional, environment variable.</p>
+          <p class="stage__meta"><span>Output: aplikasi CRUD kecil berjalan lokal</span></p>
+        </article>
+        <article class="stage">
+          <p class="stage__no">Tahap 03</p>
+          <h4>Cloud fundamentals &amp; AWS core</h4>
+          <p>Model IaaS/PaaS/SaaS, region &amp; availability zone, VPC, IAM, EC2, S3, RDS, Route 53.</p>
+          <p class="stage__meta"><span>Output: satu VM publik menyajikan halaman web</span></p>
+        </article>
+        <article class="stage">
+          <p class="stage__no">Tahap 04</p>
+          <h4>Containerization</h4>
+          <p>Image vs container, Dockerfile, layer cache, port mapping, volume, network, registry, Compose.</p>
+          <p class="stage__meta"><span>Output: aplikasi jalan identik di laptop dan EC2</span></p>
+        </article>
+        <article class="stage">
+          <p class="stage__no">Tahap 05</p>
+          <h4>Orchestration</h4>
+          <p>Kubernetes object model, Deployment, Service, Ingress, ConfigMap, Secret, Helm, K3s untuk lab hemat biaya.</p>
+          <p class="stage__meta"><span>Output: aplikasi ter-deploy dengan replicas &amp; rollout</span></p>
+        </article>
+        <article class="stage">
+          <p class="stage__no">Tahap 06</p>
+          <h4>Infrastructure as Code &amp; CI/CD</h4>
+          <p>Terraform (plan/apply/state), Ansible untuk konfigurasi, GitHub Actions untuk build-test-deploy, GitOps.</p>
+          <p class="stage__meta"><span>Output: infrastruktur bisa dibuat ulang dari repository</span></p>
+        </article>
+        <article class="stage">
+          <p class="stage__no">Tahap 07</p>
+          <h4>Reliability, security, observability</h4>
+          <p>Health check, log terpusat, metrik, alert, SLO, secrets management, least privilege, dan kontrol biaya.</p>
+          <p class="stage__meta"><span>Output: dashboard + alert + runbook singkat</span></p>
+        </article>
+        <article class="stage">
+          <p class="stage__no">Lintas tahap</p>
+          <h4>Dokumentasi &amp; komunikasi</h4>
+          <p>README yang bisa diikuti orang lain, diagram arsitektur, catatan keputusan, dan demo 10–20 menit.</p>
+          <p class="stage__meta"><span>Output: portofolio yang bisa dinilai</span></p>
+        </article>
+      </div>
+
+      <div class="callout callout--warn">
+        <strong>Jangan mulai dari Kubernetes.</strong> Banyak pemula langsung belajar cluster
+        padahal belum nyaman dengan Linux, DNS, dan port. Akibatnya sulit membedakan masalah
+        aplikasi, container, atau jaringan. Selesaikan tahap 1–4 dulu.
+      </div>
+    </section>
+
+    <!-- ============ 3. 17 MODUL ============ -->
+    <section class="kb-section" id="roadmap-devops">
+      <p class="kb-kicker">02 &middot; Kurikulum</p>
+      <h2>17 modul DevOps dan output praktiknya</h2>
+      <p>
+        Versi lebih rinci dari roadmap di atas. Saya kelompokkan menjadi empat blok: fondasi,
+        delivery, platform, dan operasi. Kolom output adalah bukti minimum yang harus ada
+        sebelum lanjut ke modul berikutnya.
+      </p>
+
+      <details class="acc" open>
+        <summary>Blok A &middot; Fondasi (modul 1–5)</summary>
+        <div class="acc__body">
+          <ol class="kb-list kb-list--num">
+            <li><strong>Linux administration.</strong> Filesystem, user/group, permission, systemd, journalctl, package manager. <em>Output:</em> VM baru langsung bisa disiapkan lewat terminal.</li>
+            <li><strong>Networking.</strong> IP, subnet, CIDR, NAT, DNS record, TCP/UDP, port, TLS handshake, HTTP status. <em>Output:</em> bisa menjelaskan kenapa port 80 terbuka tetapi 3000 tidak.</li>
+            <li><strong>Git &amp; collaboration.</strong> Branch, merge, rebase, conflict, pull request, tag, .gitignore. <em>Output:</em> riwayat commit rapi dan tidak ada secret.</li>
+            <li><strong>Scripting.</strong> Bash untuk otomasi, Python/Node untuk tooling. <em>Output:</em> skrip provisioning idempoten.</li>
+            <li><strong>Cloud fundamentals.</strong> IaaS/PaaS/SaaS, shared responsibility, region/AZ, elasticity, managed service. <em>Output:</em> diagram layanan yang dipakai beserta alasannya.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Blok B &middot; Delivery (modul 6–10)</summary>
+        <div class="acc__body">
+          <ol class="kb-list kb-list--num" start="6" style="counter-reset: kbn 5">
+            <li><strong>Docker.</strong> Dockerfile, multi-stage build, layer cache, volume, network, registry. <em>Output:</em> satu image yang bisa dijalankan dengan satu perintah.</li>
+            <li><strong>Kubernetes dasar.</strong> Pod, Deployment, Service, Ingress, ConfigMap, Secret, probe. <em>Output:</em> rollout dan rollback berhasil.</li>
+            <li><strong>Helm.</strong> Chart, values, template, release, upgrade/rollback. <em>Output:</em> satu chart untuk dev dan prod.</li>
+            <li><strong>CI (continuous integration).</strong> Lint, test, build, scan, artifact. <em>Output:</em> pipeline hijau pada pull request.</li>
+            <li><strong>CD (continuous delivery/deployment).</strong> Environment, approval, smoke test, rollback. <em>Output:</em> deploy otomatis dari branch utama.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Blok C &middot; Platform (modul 11–14)</summary>
+        <div class="acc__body">
+          <ol class="kb-list kb-list--num" start="11" style="counter-reset: kbn 10">
+            <li><strong>Terraform / OpenTofu.</strong> Provider, resource, variable, output, state, module, plan review. <em>Output:</em> VPC + EC2 + Security Group dari kode.</li>
+            <li><strong>Configuration management.</strong> Ansible inventory, playbook, idempotensi, handler. <em>Output:</em> konfigurasi server bisa diulang tanpa langkah manual.</li>
+            <li><strong>Cloud networking lanjutan.</strong> VPC peering, NAT Gateway, load balancer, private subnet, Route 53. <em>Output:</em> aplikasi tidak mengekspos database ke internet.</li>
+            <li><strong>Platform engineering.</strong> Template repository, golden path, self-service, dokumentasi. <em>Output:</em> orang lain bisa deploy tanpa bertanya.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Blok D &middot; Operasi (modul 15–17)</summary>
+        <div class="acc__body">
+          <ol class="kb-list kb-list--num" start="15" style="counter-reset: kbn 14">
+            <li><strong>Observability.</strong> Metrik, log, trace, dashboard, alert, SLO. <em>Output:</em> tahu aplikasi sehat atau tidak dalam &lt; 1 menit.</li>
+            <li><strong>Security &amp; DevSecOps.</strong> IAM least privilege, secret rotation, patching, image scanning, WAF, backup. <em>Output:</em> tidak ada kredensial di repository.</li>
+            <li><strong>SRE &amp; FinOps.</strong> Error budget, incident review, capacity, right-sizing, budget alarm. <em>Output:</em> biaya lab terkendali dan resource bisa dimatikan.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ 4. AWS HANDBOOK ============ -->
+    <section class="kb-section" id="aws-handbook">
+      <p class="kb-kicker">03 &middot; AWS</p>
+      <h2>AWS Cloud-Native Architecture Handbook — 30 topik</h2>
+      <p>
+        Rangkuman 30 topik yang saya jadikan acuan saat merancang deployment EC2. Bagian ini
+        bukan salinan buku, melainkan catatan pribadi yang sudah disederhanakan dan dikaitkan
+        dengan praktik di lab.
+      </p>
+      <div class="flow">
+        <span class="flow__node">IAM</span><span class="flow__arrow">→</span>
+        <span class="flow__node">VPC</span><span class="flow__arrow">→</span>
+        <span class="flow__node">EC2 / ECS</span><span class="flow__arrow">→</span>
+        <span class="flow__node">RDS / S3</span><span class="flow__arrow">→</span>
+        <span class="flow__node">CloudWatch</span><span class="flow__arrow">→</span>
+        <span class="flow__node">Route 53</span>
+      </div>
+
+      <h3 class="kb-h3" id="aws-dasar">Bagian A &middot; Dasar cloud dan identitas (topik 1–6)</h3>
+      <details class="acc">
+        <summary>1–3. Model layanan, infrastruktur global, dan IAM</summary>
+        <div class="acc__body">
+          <p><strong>1. Model layanan.</strong> IaaS memberi kontrol penuh (EC2), PaaS mengelola runtime (Elastic Beanstalk/App Runner), SaaS langsung dipakai. Semakin managed, semakin sedikit operasi tetapi semakin sedikit kontrol.</p>
+          <p><strong>2. Infrastruktur global.</strong> Region adalah area geografis, Availability Zone adalah beberapa data center terpisah di dalam region. Untuk latihan pilih region terdekat (<code>ap-southeast-3</code> Jakarta atau <code>ap-southeast-1</code> Singapura) agar latensi rendah.</p>
+          <p><strong>3. IAM.</strong> User untuk manusia, role untuk service, policy sebagai dokumen izin. Prinsip least privilege: mulai dari izin minimum, tambah hanya jika perlu. Jangan pernah menaruh Access Key di kode atau repo.</p>
+          <div class="code"><span class="code__label">aws cli — cek identitas, jangan pakai root</span>aws sts get-caller-identity
+aws iam list-attached-user-policies --user-name NAMA_USER
+aws configure list</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>4–6. VPC, pilihan compute, dan pilihan storage</summary>
+        <div class="acc__body">
+          <p><strong>4. VPC.</strong> Jaringan privat virtual. Subnet publik punya route ke Internet Gateway; subnet privat keluar lewat NAT Gateway. Security Group bersifat stateful dan melekat pada resource; Network ACL stateless dan melekat pada subnet.</p>
+          <p><strong>5. Compute.</strong> EC2 untuk kontrol penuh, Lambda untuk event kecil, ECS/EKS untuk container, App Runner untuk aplikasi web sederhana. Untuk tugas ini EC2 paling sesuai karena harus menunjukkan konfigurasi web server dan IP publik.</p>
+          <p><strong>6. Storage.</strong> EBS untuk disk instance, S3 untuk object, EFS untuk file system bersama. S3 bukan disk untuk database dan bukan tempat menyimpan file yang butuh locking.</p>
+          <div class="callout"><strong>Aturan praktis:</strong> satu EC2 di subnet publik sudah cukup untuk UTS. Jangan membangun VPC multi-tier kalau belum bisa menjelaskan biaya dan cara membersihkannya.</div>
+        </div>
+      </details>
+
+      <h3 class="kb-h3" id="aws-jaringan">Bagian B &middot; Compute dan jaringan (topik 7–12)</h3>
+      <details class="acc">
+        <summary>7–9. Siklus EC2, AMI/EBS, dan Elastic Load Balancing</summary>
+        <div class="acc__body">
+          <p><strong>7. Siklus EC2.</strong> <em>pending → running → stopping → stopped → terminated</em>. Instance <em>stopped</em> tidak dikenai biaya compute tetapi EBS tetap ditagih. <em>Terminated</em> menghapus instance; volume root ikut terhapus kecuali diatur lain.</p>
+          <p><strong>8. AMI dan EBS.</strong> AMI adalah template (OS + snapshot). EBS adalah volume jaringan; snapshot disimpan di S3 dan bisa dibuat image. Ganti tipe volume <code>gp2</code> → <code>gp3</code> biasanya lebih murah dan cepat.</p>
+          <p><strong>9. ELB.</strong> Application Load Balancer untuk HTTP/HTTPS layer 7, Network Load Balancer untuk TCP layer 4. Health check menentukan instance mana yang menerima trafik. Untuk satu instance, ALB tidak wajib.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>10–12. Auto Scaling, Route 53, dan CloudFront</summary>
+        <div class="acc__body">
+          <p><strong>10. Auto Scaling.</strong> Launch template + grup + kebijakan scaling. Untuk lab matikan atau batasi minimum 1 agar tidak ada instance tak terduga.</p>
+          <p><strong>11. Route 53.</strong> Record A mengarah ke IPv4, AAAA ke IPv6, CNAME ke nama lain. Untuk IP publik EC2 gunakan A record. TTL kecil (60–300 detik) memudahkan perubahan saat lab.</p>
+          <p><strong>12. CloudFront.</strong> CDN dengan cache di edge. Untuk website statis ini bisa mempercepat global, tetapi menambah kompleksitas invalidasi. Tidak wajib untuk UTS.</p>
+        </div>
+      </details>
+
+      <h3 class="kb-h3" id="aws-data">Bagian C &middot; Data dan storage (topik 13–17)</h3>
+      <details class="acc">
+        <summary>13–15. RDS, DynamoDB, dan S3 lifecycle</summary>
+        <div class="acc__body">
+          <p><strong>13. RDS.</strong> Database managed: backup otomatis, patching, multi-AZ. Letakkan di subnet privat dan hubungkan lewat Security Group, bukan IP publik.</p>
+          <p><strong>14. DynamoDB.</strong> NoSQL key-value, cocok untuk session atau data akses tinggi dengan pola key jelas. Bukan pengganti otomatis untuk query relasional kompleks.</p>
+          <p><strong>15. S3 lifecycle.</strong> Transisi ke <code>Standard-IA</code> atau <code>Glacier</code>, lalu expiry. Aktifkan versioning untuk perlindungan tidak sengaja hapus, dan blok public access kecuali memang hosting statis.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>16–17. ElastiCache dan strategi backup</summary>
+        <div class="acc__body">
+          <p><strong>16. ElastiCache.</strong> Redis/Memcached managed untuk cache, session, queue ringan. Selalu siapkan fallback jika cache mati.</p>
+          <p><strong>17. Backup.</strong> Tentukan RPO (toleransi kehilangan data) dan RTO (lama pemulihan). Uji restore, bukan hanya membuat backup. Untuk lab, snapshot manual sebelum eksperimen berisiko.</p>
+        </div>
+      </details>
+
+      <h3 class="kb-h3" id="aws-operasi">Bagian D &middot; Operasi dan delivery (topik 18–23)</h3>
+      <details class="acc">
+        <summary>18–20. CloudWatch, CloudTrail, dan AWS Config</summary>
+        <div class="acc__body">
+          <p><strong>18. CloudWatch.</strong> Metrik (CPU, network), log group, alarm, dashboard. Agen CloudWatch diperlukan untuk memori dan disk di level OS.</p>
+          <p><strong>19. CloudTrail.</strong> Jejak siapa melakukan apa lewat API. Aktifkan di semua region untuk audit.</p>
+          <p><strong>20. AWS Config.</strong> Mengevaluasi kepatuhan resource terhadap aturan, misalnya “tidak boleh ada bucket publik”.</p>
+          <div class="code"><span class="code__label">cloudwatch agent — cek status</span>sudo systemctl status amazon-cloudwatch-agent
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
+aws logs describe-log-groups --region ap-southeast-1</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>21–23. CodePipeline, IaC AWS, dan ECS/EKS</summary>
+        <div class="acc__body">
+          <p><strong>21. CodePipeline.</strong> Source (CodeCommit/GitHub) → Build (CodeBuild) → Deploy (CodeDeploy/ECS). Alternatif yang lebih umum di industri: GitHub Actions.</p>
+          <p><strong>22. IaC AWS.</strong> CloudFormation dan CDK adalah native AWS; Terraform/OpenTofu lebih portabel. Pilih satu dan konsisten.</p>
+          <p><strong>23. ECS/EKS.</strong> ECS lebih sederhana tanpa Kubernetes API; EKS memberi ekosistem K8s penuh tetapi menambah biaya control plane. Untuk satu aplikasi kecil, EC2 + Docker sudah cukup.</p>
+        </div>
+      </details>
+
+      <h3 class="kb-h3" id="aws-keamanan">Bagian E &middot; Keamanan (topik 24–27)</h3>
+      <details class="acc">
+        <summary>24–27. Security Group, KMS, Secrets Manager, WAF</summary>
+        <div class="acc__body">
+          <p><strong>24. Security Group vs NACL.</strong> SG stateful, allow-only, melekat pada ENI. NACL stateless, bisa allow dan deny, melekat pada subnet. Untuk tugas: SSH hanya dari IP admin /32, HTTP/HTTPS dari <code>0.0.0.0/0</code>.</p>
+          <p><strong>25. KMS.</strong> Kelola kunci enkripsi untuk EBS, S3, RDS. Pisahkan kunci antar lingkungan.</p>
+          <p><strong>26. Secrets Manager / SSM Parameter Store.</strong> Simpan password dan token, bukan di file <code>.env</code> yang ikut ter-commit. Aktifkan rotasi jika didukung.</p>
+          <p><strong>27. WAF &amp; Shield.</strong> WAF memfilter request (SQL injection, XSS, rate limit); Shield melindungi dari DDoS. Untuk lab, rate limit sederhana di Nginx sudah cukup.</p>
+          <div class="code"><span class="code__label">contoh aturan Nginx — rate limit dasar</span>limit_req_zone $binary_remote_addr zone=web:10m rate=10r/s;
+server {
+  location / {
+    limit_req zone=web burst=20 nodelay;
+    proxy_pass http://127.0.0.1:3000;
+  }
+}</div>
+        </div>
+      </details>
+
+      <h3 class="kb-h3" id="aws-arsitektur">Bagian F &middot; Arsitektur, reliability, dan biaya (topik 28–30)</h3>
+      <details class="acc">
+        <summary>28–30. Well-Architected, DR, dan FinOps</summary>
+        <div class="acc__body">
+          <p><strong>28. Enam pilar Well-Architected.</strong> Operational excellence, security, reliability, performance efficiency, cost optimization, sustainability. Gunakan sebagai daftar pertanyaan, bukan sertifikasi.</p>
+          <p><strong>29. High availability &amp; DR.</strong> Multi-AZ untuk produksi, backup lintas region untuk bencana. RTO/RPO menentukan strategi: backup &amp; restore, pilot light, warm standby, multi-site.</p>
+          <p><strong>30. FinOps.</strong> Tagging (<code>Project</code>, <code>Owner</code>, <code>Environment</code>), budget alarm, right-sizing, matikan instance saat tidak dipakai, hapus Elastic IP dan volume yatim.</p>
+          <div class="callout callout--warn"><strong>Paling sering bocor:</strong> Elastic IP tidak terpasang, EBS snapshot lama, NAT Gateway menganggur, dan instance yang lupa di-stop. Periksa tagihan setiap hari selama masa tugas.</div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ 5. TECH STACK VISUAL ============ -->
+    <section class="kb-section" id="tech-stack">
+      <p class="kb-kicker">04 &middot; Teknologi</p>
+      <h2>Tech Stack Modern Cloud & DevOps</h2>
+      <p>
+        Stack teknologi yang saya pelajari dan gunakan untuk membangun aplikasi modern,
+        dari frontend hingga infrastructure. Setiap layer dipilih dengan pertimbangan
+        performa, skalabilitas, dan biaya.
+      </p>
+
+      <!-- Tabs untuk kategori teknologi -->
+      <div class="tech-tabs" role="tablist" aria-label="Kategori teknologi" aria-orientation="horizontal" style="margin:20px 0">
+        <button class="tech-tab tech-tab--active" id="tab-trigger-frontend" type="button" role="tab" aria-selected="true" aria-controls="tab-frontend" tabindex="0" data-tab="frontend">Frontend</button>
+        <button class="tech-tab" id="tab-trigger-backend" type="button" role="tab" aria-selected="false" aria-controls="tab-backend" tabindex="-1" data-tab="backend">Backend</button>
+        <button class="tech-tab" id="tab-trigger-devops" type="button" role="tab" aria-selected="false" aria-controls="tab-devops" tabindex="-1" data-tab="devops">DevOps</button>
+        <button class="tech-tab" id="tab-trigger-database" type="button" role="tab" aria-selected="false" aria-controls="tab-database" tabindex="-1" data-tab="database">Database</button>
+      </div>
+
+      <!-- Tab Content: Frontend -->
+      <div class="tech-tab-content tech-tab-content--active" id="tab-frontend" role="tabpanel" aria-labelledby="tab-trigger-frontend" tabindex="0">
+        <div class="grid-4" style="margin-top:20px">
+          <div class="card card--gradient" data-tip="React 19 with Server Components">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">React + Next.js</h3>
+                <p class="tile__sub">Frontend Modern</p>
+              </div>
+              <span class="badge badge--blue">v15+</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>React 19 dengan Server Components</li>
+                <li>Next.js App Router</li>
+                <li>TypeScript untuk type safety</li>
+                <li>SSR dan SSG untuk SEO</li>
+                <li>API Routes untuk backend</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="Utility-First CSS Framework">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Tailwind CSS</h3>
+                <p class="tile__sub">Utility-First CSS</p>
+              </div>
+              <span class="badge badge--cyan">v4</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Utility classes untuk rapid development</li>
+                <li>Responsive design out-of-the-box</li>
+                <li>Dark mode support</li>
+                <li>Custom theme configuration</li>
+                <li>Production-optimized CSS</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="Build tool dan bundler modern">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Vite</h3>
+                <p class="tile__sub">Build Tool</p>
+              </div>
+              <span class="badge badge--violet">v5</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Lightning-fast HMR</li>
+                <li>Optimized production builds</li>
+                <li>Plugin ecosystem</li>
+                <li>TypeScript support built-in</li>
+                <li>Zero-config setup</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="CSS-in-JS dengan styled-components">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">CSS Modules</h3>
+                <p class="tile__sub">Scoped Styles</p>
+              </div>
+              <span class="badge badge--green">CSS</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Component-scoped CSS</li>
+                <li>No naming conflicts</li>
+                <li>Tree-shaking support</li>
+                <li>PostCSS integration</li>
+                <li>Better than global CSS</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Backend -->
+      <div class="tech-tab-content" id="tab-backend" role="tabpanel" aria-labelledby="tab-trigger-backend" tabindex="0" hidden>
+        <div class="grid-4" style="margin-top:20px">
+          <div class="card card--gradient" data-tip="Server-side runtime">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Node.js</h3>
+                <p class="tile__sub">Runtime</p>
+              </div>
+              <span class="badge badge--green">v20 LTS</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Event-driven architecture</li>
+                <li>Non-blocking I/O</li>
+                <li>NPM ecosystem</li>
+                <li>Express/Fastify frameworks</li>
+                <li>Serverless ready</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="API Framework">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Next.js API</h3>
+                <p class="tile__sub">API Routes</p>
+              </div>
+              <span class="badge badge--blue">App Router</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Serverless API endpoints</li>
+                <li>Middleware support</li>
+                <li>Edge runtime option</li>
+                <li>Route handlers</li>
+                <li>Streaming responses</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="GraphQL API">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">GraphQL</h3>
+                <p class="tile__sub">Query Language</p>
+              </div>
+              <span class="badge badge--pink">Apollo</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Type-safe queries</li>
+                <li>Single endpoint</li>
+                <li>Real-time subscriptions</li>
+                <li>Introspection</li>
+                <li>Flexible schema</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="REST API patterns">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">REST API</h3>
+                <p class="tile__sub">Standard</p>
+              </div>
+              <span class="badge badge--outline">HTTP</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Stateless architecture</li>
+                <li>Standard HTTP methods</li>
+                <li>JSON data format</li>
+                <li>Caching with ETags</li>
+                <li>Rate limiting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: DevOps -->
+      <div class="tech-tab-content" id="tab-devops" role="tabpanel" aria-labelledby="tab-trigger-devops" tabindex="0" hidden>
+        <div class="grid-4" style="margin-top:20px">
+          <div class="card card--gradient" data-tip="Container orchestration">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Kubernetes</h3>
+                <p class="tile__sub">Orchestration</p>
+              </div>
+              <span class="badge badge--blue">v1.29</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Deployment untuk rolling updates</li>
+                <li>Service untuk load balancing</li>
+                <li>Ingress untuk HTTP routing</li>
+                <li>ConfigMap & Secret</li>
+                <li>HPA untuk auto-scaling</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="Package Manager">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Helm</h3>
+                <p class="tile__sub">Package Manager</p>
+              </div>
+              <span class="badge badge--violet">v3.15</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Charts untuk reusable templates</li>
+                <li>Values untuk environment config</li>
+                <li>Rollback dengan satu command</li>
+                <li>Release management</li>
+                <li>Template engine Go</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="Lightweight K8s">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">K3s</h3>
+                <p class="tile__sub">Lightweight K8s</p>
+              </div>
+              <span class="badge badge--green">v1.29</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Single binary, minimal resource</li>
+                <li>Perfect untuk edge/IoT</li>
+                <li>Full K8s API compatibility</li>
+                <li>Simplified installation</li>
+                <li>ARM & x86 support</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="Infrastructure as Code">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Terraform</h3>
+                <p class="tile__sub">Infrastructure as Code</p>
+              </div>
+              <span class="badge badge--orange">v1.6</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Declarative configuration</li>
+                <li>State management</li>
+                <li>Plan untuk preview changes</li>
+                <li>Modules untuk reusability</li>
+                <li>Multi-cloud support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Database -->
+      <div class="tech-tab-content" id="tab-database" role="tabpanel" aria-labelledby="tab-trigger-database" tabindex="0" hidden>
+        <div class="grid-4" style="margin-top:20px">
+          <div class="card card--gradient" data-tip="Primary database">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">PostgreSQL</h3>
+                <p class="tile__sub">Relational DB</p>
+              </div>
+              <span class="badge badge--blue">v17</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>ACID compliance</li>
+                <li>JSONB support</li>
+                <li>Full-text search</li>
+                <li>Extensions ecosystem</li>
+                <li>Replication & HA</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="Caching layer">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">Redis</h3>
+                <p class="tile__sub">In-Memory Cache</p>
+              </div>
+              <span class="badge badge--red">v7</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Sub-millisecond latency</li>
+                <li>Data structures (lists, sets, hashes)</li>
+                <li>Pub/Sub messaging</li>
+                <li>Persistence to disk</li>
+                <li>Clustering support</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="Document DB">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">MongoDB</h3>
+                <p class="tile__sub">NoSQL Document</p>
+              </div>
+              <span class="badge badge--green">v7</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Flexible schema</li>
+                <li>Horizontal scaling</li>
+                <li>Aggregation framework</li>
+                <li>Change streams</li>
+                <li>Atlas managed service</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card--gradient" data-tip="NoSQL key-value">
+            <div class="card__head">
+              <div>
+                <h3 class="tile__title">DynamoDB</h3>
+                <p class="tile__sub">Serverless NoSQL</p>
+              </div>
+              <span class="badge badge--orange">AWS</span>
+            </div>
+            <div class="card__body">
+              <ul class="kb-list" style="margin-bottom:0">
+                <li>Serverless scaling</li>
+                <li>Single-digit millisecond latency</li>
+                <li>On-demand capacity</li>
+                <li>Global tables</li>
+                <li>TTL for expiration</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="kb-h3" style="margin-top:32px">Arsitektur Full Stack</h3>
+      <div class="arch-grid" style="margin-top:16px">
+        <div class="arch">
+          <div class="arch__row" style="gap:8px;margin-bottom:12px">
+            <div class="arch__box arch__box--ext" style="flex:1">
+              <strong>🌐 User</strong>
+              <span>Browser</span>
+            </div>
+            <div class="arch__arrow">→</div>
+            <div class="arch__box arch__box--ext" style="flex:1">
+              <strong>☁️</strong>
+              <span>Cloud</span>
+            </div>
+          </div>
+          <div class="arch__row" style="gap:8px;margin-bottom:12px">
+            <div class="arch__box arch__box--core" style="flex:1">
+              <strong>🔄</strong>
+              <span>Nginx</span>
+            </div>
+            <div class="arch__arrow">→</div>
+            <div class="arch__box" style="flex:1">
+              <strong>⚛️</strong>
+              <span>Next.js</span>
+            </div>
+          </div>
+          <div class="arch__row" style="gap:8px;margin-bottom:12px">
+            <div class="arch__box" style="flex:1">
+              <strong>🐘</strong>
+              <span>PostgreSQL</span>
+            </div>
+            <div class="arch__arrow">←</div>
+            <div class="arch__box" style="flex:1">
+              <strong>📊</strong>
+              <span>Redis</span>
+            </div>
+          </div>
+          <div class="arch__side">
+            <span class="arch__tag">Docker</span>
+            <span class="arch__tag">K8s</span>
+            <span class="arch__tag">Helm</span>
+            <span class="arch__tag">Terraform</span>
+            <span class="arch__tag">GitHub Actions</span>
+          </div>
+        </div>
+        <div class="arch__notes">
+          <h4>Component Breakdown</h4>
+          <ul class="kb-list">
+            <li><strong>Frontend:</strong> Next.js 15 + React 19 + Tailwind CSS 4 + TypeScript</li>
+            <li><strong>Backend:</strong> Next.js API Routes + PostgreSQL 17 + Redis</li>
+            <li><strong>Container:</strong> Docker multi-stage build + Docker Compose</li>
+            <li><strong>Orchestration:</strong> Kubernetes Deployment + Service + Ingress + Helm</li>
+            <li><strong>IaC:</strong> Terraform untuk AWS resources (VPC, EC2, RDS, EKS)</li>
+            <li><strong>CI/CD:</strong> GitHub Actions untuk build, test, dan deploy</li>
+            <li><strong>Reverse Proxy:</strong> Nginx dengan SSL/TLS dan load balancing</li>
+          </ul>
+          <h4 class="mt">Why This Stack?</h4>
+          <ul class="kb-list">
+            <li><strong>Developer Experience:</strong> Next.js provides excellent DX with hot reload, TypeScript, and modern React features</li>
+            <li><strong>Performance:</strong> Server components, edge caching, and image optimization out-of-the-box</li>
+            <li><strong>Scalability:</strong> Kubernetes allows horizontal scaling with minimal configuration</li>
+            <li><strong>Reliability:</strong> Terraform ensures infrastructure is reproducible and version-controlled</li>
+            <li><strong>Security:</strong> Secrets managed through Kubernetes Secrets and GitHub Actions secrets</li>
+            <li><strong>Cost:</strong> K3s on single VM for dev, EKS for production with auto-scaling</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="kb-h3" style="margin-top:32px">Modern UI Components Demo</h3>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="stat-card">
+          <div class="stat-card__value">99.9%</div>
+          <div class="stat-card__label">Uptime</div>
+          <div class="stat-card__trend stat-card__trend--up">↑ 0.2%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value">1.2s</div>
+          <div class="stat-card__label">Avg Response</div>
+          <div class="stat-card__trend stat-card__trend--down">↓ 0.1s</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value">24</div>
+          <div class="stat-card__label">Services</div>
+          <div class="stat-card__trend stat-card__trend--up">↑ 2</div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px">
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Dropdown Example</h3>
+          </div>
+          <div class="tile__body">
+            <div class="dropdown">
+              <button class="dropdown__trigger" type="button">
+                Actions
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="dropdown__menu">
+                <button class="dropdown__item" type="button">Deploy</button>
+                <button class="dropdown__item" type="button">Rollback</button>
+                <button class="dropdown__item dropdown__item--danger" type="button">Delete</button>
+              </div>
+            </div>
+            <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">Click the dropdown to see menu</p>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Step Indicator</h3>
+          </div>
+          <div class="tile__body">
+            <div class="step-indicator">
+              <div class="step-indicator__step is-completed">
+                <div class="step-indicator__dot">✓</div>
+                <span class="step-indicator__label">Plan</span>
+              </div>
+              <div class="step-indicator__line is-completed"></div>
+              <div class="step-indicator__step is-completed">
+                <div class="step-indicator__dot">✓</div>
+                <span class="step-indicator__label">Apply</span>
+              </div>
+              <div class="step-indicator__line is-completed"></div>
+              <div class="step-indicator__step is-active">
+                <div class="step-indicator__dot">3</div>
+                <span class="step-indicator__label">Verify</span>
+              </div>
+            </div>
+            <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">Deployment progress indicator</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <h3 class="tile__title">Interactive Components Demo</h3>
+          <span class="badge badge--green">Live</span>
+        </div>
+        <div class="tile__body">
+          <div class="grid-4" style="gap:12px">
+            <button class="btn btn--primary btn--sm" type="button" id="toastDemoInfo">Toast Info</button>
+            <button class="btn btn--sm" style="background:#dcfce7;color:#15803d;border:1px solid #bbf7d0" type="button" id="toastDemoSuccess">Toast Success</button>
+            <button class="btn btn--sm" style="background:#ffedd5;color:#c2410c;border:1px solid #fed7aa" type="button" id="toastDemoWarning">Toast Warning</button>
+            <button class="btn btn--danger btn--sm" type="button" id="toastDemoError">Toast Error</button>
+            <button class="btn btn--ghost btn--sm" type="button" id="modalDemoConfirm">Modal Confirm</button>
+            <button class="btn btn--ghost btn--sm" type="button" id="modalDemoDanger">Modal Danger</button>
+          </div>
+          <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">
+            Click buttons to test toast notifications and modal dialogs
+          </p>
+        </div>
+      </div>
+
+      <!-- Advanced UI Components -->
+      <h3 class="kb-h3" style="margin-top:32px">Advanced UI Components</h3>
+      <p style="color:var(--text-muted);margin-top:8px">Komponen UI modern yang terinspirasi dari shadcn/ui, HeroUI, dan Vercel.</p>
+
+      <div class="grid-2" style="margin-top:16px">
+        <!-- Alerts -->
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Alert Components</h3>
+          </div>
+          <div class="tile__body">
+            <div class="alert alert--info" style="margin: 12px 0;">
+              <div class="alert__icon">i</div>
+              <div class="alert__content">
+                <div class="alert__title">Informasi</div>
+                <div class="alert__desc">Ini adalah alert informasi untuk pengguna.</div>
+              </div>
+            </div>
+            <div class="alert alert--success" style="margin: 12px 0;">
+              <div class="alert__icon">✓</div>
+              <div class="alert__content">
+                <div class="alert__title">Berhasil</div>
+                <div class="alert__desc">Operasi berhasil diselesaikan.</div>
+              </div>
+            </div>
+            <div class="alert alert--warning" style="margin: 12px 0;">
+              <div class="alert__icon">!</div>
+              <div class="alert__content">
+                <div class="alert__title">Peringatan</div>
+                <div class="alert__desc">Harap periksa kembali konfigurasi Anda.</div>
+              </div>
+            </div>
+            <div class="alert alert--error" style="margin: 12px 0;">
+              <div class="alert__icon">×</div>
+              <div class="alert__content">
+                <div class="alert__title">Error</div>
+                <div class="alert__desc">Terjadi kesalahan. Silakan coba lagi.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Components -->
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Interactive Components</h3>
+          </div>
+          <div class="tile__body">
+            <!-- Sheet (Drawer) -->
+            <div style="margin-bottom: 16px;">
+              <button class="btn btn--secondary btn--sm" data-sheet-open="demoSheet">Buka Drawer</button>
+              <div class="sheet" id="demoSheet">
+                <div class="sheet__backdrop"></div>
+                <div class="sheet__content">
+                  <div class="sheet__header">
+                    <h3 class="sheet__title">Drawer Menu</h3>
+                    <button class="sheet__close" data-sheet-close>×</button>
+                  </div>
+                  <div class="sheet__body">
+                    <p>Ini adalah contoh sheet/drawer component yang muncul dari sisi kanan.</p>
+                    <p style="margin-top: 12px;">Bisa digunakan untuk menu, detail panel, atau form.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Popover -->
+            <div style="margin-bottom: 16px;">
+              <div class="popover">
+                <button class="popover__trigger btn btn--secondary btn--sm">Info Popover</button>
+                <div class="popover__content">
+                  <div class="popover__arrow"></div>
+                  <p style="font-size: 13px; margin: 0;">Ini adalah popover component dengan arrow indicator.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hover Card -->
+            <div style="margin-bottom: 16px;">
+              <div class="hover-card">
+                <span class="hover-card__trigger" style="color: var(--accent); text-decoration: underline; cursor: pointer;">Hover untuk info</span>
+                <div class="hover-card__content">
+                  <div class="hover-card__arrow"></div>
+                  <p style="font-size: 13px; margin: 0;">Hover card muncul saat hover dengan informasi tambahan.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Switch Toggle -->
+            <div style="margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="switch__slider"></span>
+              </label>
+              <span style="font-size: 13px;">Enable notifications</span>
+            </div>
+
+            <!-- Command Palette Demo -->
+            <div style="margin-bottom: 16px;">
+              <button class="btn btn--secondary btn--sm" onclick="document.querySelector('.command-palette').classList.add('is-visible')">Buka Command Palette (Cmd+K)</button>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div>
+              <nav class="breadcrumb">
+                <div class="breadcrumb__item"><a href="#">Home</a></div>
+                <span class="breadcrumb__separator">/</span>
+                <div class="breadcrumb__item"><a href="#">Docs</a></div>
+                <span class="breadcrumb__separator">/</span>
+                <div class="breadcrumb__item">Components</div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Command Palette -->
+      <div class="command-palette">
+        <div class="command-palette__backdrop"></div>
+        <div class="command-palette__dialog">
+          <input type="text" class="command-palette__input" placeholder="Search commands...">
+          <div class="command-palette__list">
+            <div class="command-palette__item">
+              <div class="command-palette__item-icon">📄</div>
+              <div class="command-palette__item-text">
+                <div class="command-palette__item-title">Go to Knowledge Base</div>
+                <div class="command-palette__item-desc">Navigate to knowledge base section</div>
+              </div>
+              <span class="command-palette__item-kbd">K</span>
+            </div>
+            <div class="command-palette__item">
+              <div class="command-palette__item-icon">🚀</div>
+              <div class="command-palette__item-text">
+                <div class="command-palette__item-title">Go to Deployment</div>
+                <div class="command-palette__item-desc">View deployment guide</div>
+              </div>
+              <span class="command-palette__item-kbd">D</span>
+            </div>
+            <div class="command-palette__item">
+              <div class="command-palette__item-icon">👤</div>
+              <div class="command-palette__item-text">
+                <div class="command-palette__item-title">Go to Dashboard</div>
+                <div class="command-palette__item-desc">Open workspace dashboard</div>
+              </div>
+              <span class="command-palette__item-kbd">W</span>
+            </div>
+            <div class="command-palette__item">
+              <div class="command-palette__item-icon">🔍</div>
+              <div class="command-palette__item-text">
+                <div class="command-palette__item-title">Search Documentation</div>
+                <div class="command-palette__item-desc">Find topics in knowledge base</div>
+              </div>
+              <span class="command-palette__item-kbd">/</span>
+            </div>
+          </div>
+          <div class="command-palette__footer">
+            <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+            <span><kbd>↵</kbd> Select</span>
+            <span><kbd>Esc</kbd> Close</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar & Date Picker -->
+      <div class="grid-2" style="margin-top:16px">
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Calendar Component</h3>
+          </div>
+          <div class="tile__body">
+            <div class="calendar">
+              <div class="calendar__header">
+                <button class="calendar__nav-btn calendar__nav-btn--prev">‹</button>
+                <div class="calendar__title">January 2026</div>
+                <button class="calendar__nav-btn calendar__nav-btn--next">›</button>
+              </div>
+              <div class="calendar__grid">
+                <!-- Calendar grid will be populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Date Picker & Combobox</h3>
+          </div>
+          <div class="tile__body">
+            <div style="margin-bottom: 16px;">
+              <label style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;">Select Date</label>
+              <div class="date-picker">
+                <div class="date-picker__input">
+                  <span class="date-picker__icon">📅</span>
+                  <span>Select date...</span>
+                </div>
+                <div class="date-picker__content">
+                  <div class="calendar">
+                    <div class="calendar__header">
+                      <button class="calendar__nav-btn calendar__nav-btn--prev">‹</button>
+                      <div class="calendar__title">January 2026</div>
+                      <button class="calendar__nav-btn calendar__nav-btn--next">›</button>
+                    </div>
+                    <div class="calendar__grid"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;">Select Technology</label>
+              <div class="combobox">
+                <input type="text" class="combobox__input" placeholder="Search technology...">
+                <div class="combobox__dropdown">
+                  <div class="combobox__option">Next.js</div>
+                  <div class="combobox__option">React</div>
+                  <div class="combobox__option">Docker</div>
+                  <div class="combobox__option">Kubernetes</div>
+                  <div class="combobox__option">Terraform</div>
+                  <div class="combobox__option">AWS</div>
+                  <div class="combobox__option">Nginx</div>
+                  <div class="combobox__option">PostgreSQL</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bars & Spinners -->
+      <div class="grid-2" style="margin-top:16px">
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Progress Bars</h3>
+          </div>
+          <div class="tile__body">
+            <div style="margin-top: 16px;">
+              <div class="progress-bar" style="margin-bottom: 16px;">
+                <div class="progress-bar__fill" data-width="75%" style="width: 75%;"></div>
+              </div>
+              <div class="progress-bar__label">
+                <span>Deployment Progress</span>
+                <span>75%</span>
+              </div>
+              
+              <div class="progress-bar" style="margin-top: 20px; margin-bottom: 16px;">
+                <div class="progress-bar__fill" data-width="45%" style="width: 45%;"></div>
+              </div>
+              <div class="progress-bar__label">
+                <span>Build Progress</span>
+                <span>45%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Loading States</h3>
+          </div>
+          <div class="tile__body">
+            <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="spinner"></span>
+                <span style="font-size: 13px;">Loading data...</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="spinner spinner--sm"></span>
+                <span style="font-size: 13px;">Small spinner</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="spinner spinner--lg"></span>
+                <span style="font-size: 13px;">Large spinner</span>
+              </div>
+              <button class="btn btn--primary btn--sm" data-loading>Click to Load</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collapsible & Tag Input -->
+      <div class="grid-2" style="margin-top:16px">
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Collapsible Sections</h3>
+          </div>
+          <div class="tile__body">
+            <div style="margin-top: 12px;">
+              <div class="collapsible" style="margin-bottom: 8px;">
+                <button class="collapsible__trigger">Section 1: Overview</button>
+                <div class="collapsible__content">
+                  <div class="collapsible__content-inner">
+                    <p>Ini adalah konten collapsible yang bisa dibuka/tutup.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="collapsible">
+                <button class="collapsible__trigger">Section 2: Details</button>
+                <div class="collapsible__content">
+                  <div class="collapsible__content-inner">
+                    <p>Detail informasi yang bisa di-expand.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="tile__head">
+            <h3 class="tile__title">Tag Input</h3>
+          </div>
+          <div class="tile__body">
+            <div style="margin-top: 12px;">
+              <div class="tag-input">
+                <span class="tag-input__tag">Next.js <button class="tag-input__tag-remove">×</button></span>
+                <span class="tag-input__tag">Docker <button class="tag-input__tag-remove">×</button></span>
+                <span class="tag-input__tag">AWS <button class="tag-input__tag-remove">×</button></span>
+                <input type="text" class="tag-input__input" placeholder="Add tag...">
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">Tekan Enter untuk menambah tag</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel -->
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <h3 class="tile__title">Carousel Component</h3>
+        </div>
+        <div class="tile__body">
+          <div class="carousel" style="margin-top: 12px; height: 200px;">
+            <div class="carousel__container">
+              <div class="carousel__slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700;">
+                Slide 1
+              </div>
+              <div class="carousel__slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700;">
+                Slide 2
+              </div>
+              <div class="carousel__slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700;">
+                Slide 3
+              </div>
+            </div>
+            <button class="carousel__button carousel__button--prev">‹</button>
+            <button class="carousel__button carousel__button--next">›</button>
+            <div class="carousel__dots">
+              <button class="carousel__dot is-active"></button>
+              <button class="carousel__dot"></button>
+              <button class="carousel__dot"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item Components -->
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <h3 class="tile__title">Item Components</h3>
+        </div>
+        <div class="tile__body">
+          <div style="margin-top: 12px;">
+            <div class="item">
+              <div class="item__icon">📄</div>
+              <div class="item__content">
+                <div class="item__title">Documentation</div>
+                <div class="item__desc">Complete guide and reference</div>
+              </div>
+              <div class="item__action">
+                <button class="btn btn--ghost btn--sm">View</button>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item__icon">🚀</div>
+              <div class="item__content">
+                <div class="item__title">Deployment</div>
+                <div class="item__desc">Step-by-step deployment guide</div>
+              </div>
+              <div class="item__action">
+                <button class="btn btn--ghost btn--sm">Deploy</button>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item__icon">⚙️</div>
+              <div class="item__content">
+                <div class="item__title">Configuration</div>
+                <div class="item__desc">Setup and configuration options</div>
+              </div>
+              <div class="item__action">
+                <button class="btn btn--ghost btn--sm">Configure</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <h3 class="tile__title">Empty State Component</h3>
+        </div>
+        <div class="tile__body">
+          <div class="empty" style="margin-top: 12px;">
+            <div class="empty__icon">📭</div>
+            <div class="empty__title">No items found</div>
+            <div class="empty__desc">There are no items to display. Try adjusting your filters or create a new item.</div>
+            <button class="btn btn--primary btn--sm">Create New Item</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography Demo -->
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <h3 class="tile__title">Typography Components</h3>
+        </div>
+        <div class="tile__body">
+          <div class="typography" style="margin-top: 12px;">
+            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <p>This is a paragraph with <a href="#">a link</a> and <code>inline code</code>.</p>
+            <blockquote>
+              This is a blockquote with styled border and italic text.
+            </blockquote>
+            <ul>
+              <li>List item 1</li>
+              <li>List item 2</li>
+              <li>List item 3</li>
+            </ul>
+            <pre><code>const example = "code block";
+console.log(example);</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <h3 class="tile__title">Skeleton Loading Example</h3>
+        </div>
+        <div class="tile__body">
+          <div class="grid-3" style="gap:12px">
+            <div class="skeleton-card">
+              <div class="skeleton" style="width:60px;height:60px;border-radius:12px;margin-bottom:12px"></div>
+              <div class="skeleton skeleton-text skeleton-text--lg"></div>
+              <div class="skeleton skeleton-text skeleton-text--sm" style="width:80%"></div>
+              <div class="skeleton skeleton-text skeleton-text--sm" style="width:60%"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton" style="width:60px;height:60px;border-radius:12px;margin-bottom:12px"></div>
+              <div class="skeleton skeleton-text skeleton-text--lg"></div>
+              <div class="skeleton skeleton-text skeleton-text--sm" style="width:70%"></div>
+              <div class="skeleton skeleton-text skeleton-text--sm" style="width:50%"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton" style="width:60px;height:60px;border-radius:12px;margin-bottom:12px"></div>
+              <div class="skeleton skeleton-text skeleton-text--lg"></div>
+              <div class="skeleton skeleton-text skeleton-text--sm" style="width:75%"></div>
+              <div class="skeleton skeleton-text skeleton-text--sm" style="width:65%"></div>
+            </div>
+          </div>
+          <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">Skeleton loading animation for better UX</p>
+        </div>
+      </div>
+
+      <h3 class="kb-h3" style="margin-top:32px">DevOps Pipeline Flow</h3>
+      <div class="pipe" style="margin-top:16px">
+        <div class="pipe__step">
+          <div class="pipe__no">1</div>
+          <div>
+            <h4>Developer Push</h4>
+            <p>Push code to GitHub with conventional commits</p>
+          </div>
+        </div>
+        <div class="pipe__step">
+          <div class="pipe__no">2</div>
+          <div>
+            <h4>CI Build</h4>
+            <p>GitHub Actions: lint, test, build Docker image</p>
+          </div>
+        </div>
+        <div class="pipe__step">
+          <div class="pipe__no">3</div>
+          <div>
+            <h4>Push Image</h4>
+            <p>Push to GHCR or ECR with proper tags</p>
+          </div>
+        </div>
+        <div class="pipe__step">
+          <div class="pipe__no">4</div>
+          <div>
+            <h4>Terraform Apply</h4>
+            <p>Update infrastructure via Terraform</p>
+          </div>
+        </div>
+        <div class="pipe__step">
+          <div class="pipe__no">5</div>
+          <div>
+            <h4>Helm Upgrade</h4>
+            <p>Deploy/upgrade application via Helm chart</p>
+          </div>
+        </div>
+        <div class="pipe__step">
+          <div class="pipe__no">6</div>
+          <div>
+            <h4>Health Check</h4>
+            <p>Kubernetes probes verify application health</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:24px">
+        <strong>Tip Praktis.</strong> Mulai dengan Docker Compose untuk local development,
+        lalu naik ke Kubernetes untuk production. Terraform dipakai untuk mengelola
+        infrastructure AWS, sedangkan Helm mengelola application deployment di K8s.
+        GitHub Actions mengotomasi seluruh pipeline dari commit hingga production.
+      </div>
+    </section>
+
+    <!-- ============ 6. EC2 ============ -->
+    <section class="kb-section" id="ec2">
+      <p class="kb-kicker">05 &middot; Praktik utama</p>
+      <h2>Deploy AWS EC2 langkah demi langkah</h2>
+      <p>
+        Ini alur yang saya gunakan untuk membuat website ini dapat diakses lewat IP publik.
+        Setiap langkah punya pemeriksaan agar kesalahan tidak menumpuk.
+      </p>
+
+      <h3 class="kb-h3">A. Prasyarat dan pemilihan sumber daya</h3>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Komponen</th><th>Pilihan di lab</th><th>Alasan</th></tr></thead>
+          <tbody>
+            <tr><td>Region</td><td><code>ap-southeast-1</code> (Singapura) atau <code>ap-southeast-3</code> (Jakarta)</td><td>Terdekat, latensi rendah, AMI tersedia</td></tr>
+            <tr><td>AMI</td><td>Amazon Linux 2023 atau Ubuntu 24.04 LTS</td><td>Dokumentasi lengkap, paket modern</td></tr>
+            <tr><td>Instance type</td><td><code>t3.micro</code> / <code>t2.micro</code></td><td>Masuk free tier (tergantung akun)</td></tr>
+            <tr><td>Key pair</td><td>RSA <code>.pem</code>, simpan aman</td><td>Dibutuhkan SSH; tidak bisa diunduh ulang</td></tr>
+            <tr><td>Storage</td><td>8–20 GiB gp3</td><td>Cukup untuk web server + log</td></tr>
+            <tr><td>Security Group</td><td>22 dari IP admin /32, 80 dan 443 dari <code>0.0.0.0/0</code></td><td>Akses publik untuk web, SSH tetap tertutup</td></tr>
+            <tr><td>Elastic IP</td><td>Satu alamat, di-associate ke instance</td><td>IP tidak berubah saat stop/start</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="kb-h3">B. Membuat instance lewat Console</h3>
+      <ol class="kb-list kb-list--num">
+        <li>Buka EC2 → <em>Launch instance</em>, isi Name tag <code>uts-cloud-portfolio</code>.</li>
+        <li>Pilih AMI, instance type, dan key pair. Jika belum ada, buat baru dan unduh <code>.pem</code>.</li>
+        <li>Pada Network settings, pilih VPC default, subnet publik, dan <em>Auto-assign public IP: Enable</em>.</li>
+        <li>Buat Security Group baru; tambahkan SSH, HTTP, HTTPS sesuai tabel di atas.</li>
+        <li>Storage 8–20 GiB gp3, lalu <em>Launch</em>. Tunggu status <em>running</em> dan 2/2 checks passed.</li>
+        <li>Catat <em>Public IPv4 address</em> atau <em>Public IPv4 DNS</em>.</li>
+        <li>Alokasikan Elastic IP, associate ke instance, lalu catat alamatnya.</li>
+      </ol>
+
+      <div class="callout">
+        <strong>Jangan pakai IP publik untuk SSH jika bisa dihindari.</strong> Batasi port 22 ke
+        IP rumah/kampus. Jika IP berubah, edit inbound rule — jangan buka ke semua IP.
+      </div>
+
+      <h3 class="kb-h3">C. Menghubungkan lewat SSH (Linux/macOS/WSL2)</h3>
+      <div class="code"><span class="code__label">terminal lokal</span>chmod 400 ~/Downloads/uts-key.pem
+ssh -i ~/Downloads/uts-key.pem ec2-user@<span data-host>PUBLIC-IP</span>
+# Ubuntu: user default adalah ubuntu
+ssh -i ~/Downloads/uts-key.pem ubuntu@<span data-host>PUBLIC-IP</span>
+
+# cek identitas server
+hostname && uname -a && whoami
+cat /etc/os-release</div>
+
+      <h3 class="kb-h3">D. Menghubungkan lewat PuTTY (Windows)</h3>
+      <ol class="kb-list kb-list--num">
+        <li>Buka PuTTYgen → <em>Load</em> file <code>.pem</code> (pilih “All files”) → <em>Save private key</em> sebagai <code>.ppk</code>.</li>
+        <li>Buka PuTTY, Host Name: <code>ec2-user@IP-PUBLIK</code> atau <code>ubuntu@IP-PUBLIK</code>, Port 22.</li>
+        <li>Connection → SSH → Auth → Credentials → pilih file <code>.ppk</code>.</li>
+        <li>Session → Saved Sessions, simpan dengan nama <code>UTS-EC2</code>, lalu Open.</li>
+        <li>Jika muncul peringatan host key, verifikasi fingerprint lalu Accept.</li>
+      </ol>
+
+      <h3 class="kb-h3">E. Menyiapkan web server</h3>
+      <div class="code"><span class="code__label">Amazon Linux 2023 — Nginx</span>sudo dnf update -y
+sudo dnf install -y nginx git
+sudo systemctl enable --now nginx
+sudo systemctl status nginx --no-pager
+
+sudo mkdir -p /usr/share/nginx/html
+# unggah dari komputer lokal:
+# scp -i key.pem index.html ec2-user@IP:/tmp/
+# scp -i key.pem -r assets ec2-user@IP:/tmp/
+sudo cp -r /tmp/index.html /tmp/assets /usr/share/nginx/html/
+sudo chown -R nginx:nginx /usr/share/nginx/html
+sudo restorecon -Rv /usr/share/nginx/html 2>/dev/null || true</div>
+
+      <div class="code"><span class="code__label">Ubuntu — Apache2</span>sudo apt update && sudo apt upgrade -y
+sudo apt install -y apache2 git
+sudo systemctl enable --now apache2
+sudo systemctl status apache2 --no-pager
+
+sudo mkdir -p /var/www/uts
+sudo cp -r /tmp/index.html /tmp/assets /var/www/uts/
+sudo chown -R www-data:www-data /var/www/uts
+sudo tee /etc/apache2/sites-available/uts.conf >/dev/null &lt;&lt;'EOF'
+&lt;VirtualHost *:80&gt;
+  ServerName _default_
+  DocumentRoot /var/www/uts
+  &lt;Directory /var/www/uts&gt;
+    Require all granted
+    Options -Indexes
+  &lt;/Directory&gt;
+  ErrorLog ${APACHE_LOG_DIR}/uts-error.log
+  CustomLog ${APACHE_LOG_DIR}/uts-access.log combined
+&lt;/VirtualHost&gt;
+EOF
+sudo a2dissite 000-default &amp;&amp; sudo a2ensite uts
+sudo apache2ctl configtest &amp;&amp; sudo systemctl reload apache2</div>
+
+      <h3 class="kb-h3">F. Verifikasi dari luar</h3>
+      <div class="code"><span class="code__label">komputer lain / HP — bukan localhost</span>curl -I http://<span data-host>PUBLIC-IP</span>/
+curl -I http://<span data-host>PUBLIC-IP</span>/assets/css/style.css
+curl -s http://<span data-host>PUBLIC-IP</span>/ | grep -i "Cloud &amp; DevOps"
+
+# dari dalam server, pastikan service mendengar di 0.0.0.0
+sudo ss -tlnp | grep ':80'
+sudo tail -n 30 /var/log/nginx/error.log
+sudo tail -n 30 /var/log/apache2/error.log</div>
+
+      <h3 class="kb-h3">G. Domain, TLS, dan pembersihan</h3>
+      <div class="code"><span class="code__label">DNS + TLS + biaya</span># 1. Buat A record: nama -&gt; Elastic IP (TTL 300)
+# 2. Tunggu propagasi
+nslookup domain-anda.com
+
+# 3. Pasang Certbot untuk HTTPS (Nginx)
+sudo dnf install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d domain-anda.com
+
+# 4. Setelah selesai dinilai: stop/terminate instance
+aws ec2 stop-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+aws ec2 release-address --public-ip 203.0.113.10
+
+# 5. Cek resource yang masih menagih
+aws ec2 describe-volumes --filters Name=status,Values=available
+aws ec2 describe-addresses</div>
+
+      <div class="callout callout--warn">
+        <strong>Catatan biaya.</strong> Instance <em>stopped</em> masih menyimpan volume EBS.
+        Elastic IP yang tidak terpasang juga ditagih. Setelah video dan penilaian selesai,
+        <em>terminate</em> instance dan lepaskan Elastic IP.
+      </div>
+    </section>
+
+    <!-- ============ 6. LINUX ============ -->
+    <section class="kb-section" id="linux">
+      <p class="kb-kicker">05 &middot; Referensi</p>
+      <h2>Linux, permission, dan SSH</h2>
+      <p>Perintah yang paling sering saya pakai saat menyiapkan server baru.</p>
+
+      <h3 class="kb-h3">Navigasi dan inspeksi</h3>
+      <div class="code"><span class="code__label">bash</span>pwd; ls -lah; cd /var/www
+df -h; du -sh /var/log/* | sort -h | tail
+free -h; uptime; top -b -n1 | head -15
+ps aux | grep nginx
+ss -tlnp
+ip addr show; ip route</div>
+
+      <h3 class="kb-h3">Permission dan kepemilikan</h3>
+      <div class="code"><span class="code__label">bash</span>chmod 644 index.html          # rw-r--r--
+chmod 755 assets assets/css    # rwxr-xr-x untuk direktori
+chown -R www-data:www-data /var/www/uts
+find /var/www/uts -type d -exec chmod 755 {} \;
+find /var/www/uts -type f -exec chmod 644 {} \;
+id; groups; umask</div>
+
+      <h3 class="kb-h3">Service dan log</h3>
+      <div class="code"><span class="code__label">systemd</span>sudo systemctl enable --now nginx
+sudo systemctl restart nginx
+sudo systemctl status nginx --no-pager -l
+journalctl -u nginx -n 50 --no-pager
+journalctl -xe --no-pager | tail -30
+sudo nginx -t</div>
+
+      <h3 class="kb-h3">SSH aman</h3>
+      <div class="code"><span class="code__label">~/.ssh/config — mempermudah koneksi</span>Host uts-ec2
+  HostName <span data-host>PUBLIC-IP</span>
+  User ec2-user
+  IdentityFile ~/.ssh/uts-key.pem
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+
+# lalu cukup:
+ssh uts-ec2
+scp -r assets uts-ec2:/tmp/
+rsync -avz --delete ./ uts-ec2:/var/www/uts/</div>
+
+      <p>
+        Di server, nonaktifkan login password dan root hanya jika sudah yakin kunci bekerja.
+        Di Amazon Linux, file konfigurasi ada di <code>/etc/ssh/sshd_config.d/</code>. Selalu
+        uji dengan sesi baru sebelum menutup sesi lama.
+      </p>
+      <div class="code"><span class="code__label">/etc/ssh/sshd_config.d/99-hardening.conf</span>PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+MaxAuthTries 3
+ClientAliveInterval 300
+ClientAliveCountMax 2
+
+# validasi lalu reload
+sudo sshd -t &amp;&amp; sudo systemctl reload sshd</div>
+
+      <h3 class="kb-h3" id="wsl2">WSL2 Ubuntu sebagai lab lokal</h3>
+      <p>
+        Sebelum menyentuh EC2, saya memakai WSL2 Ubuntu di laptop untuk menguji konfigurasi
+        Nginx, permission, dan struktur folder. Hasilnya sama dengan server, tetapi tidak ada
+        biaya cloud. Ingat: <strong>localhost hanya untuk latihan</strong>; yang dinilai adalah
+        deployment di EC2 dengan IP publik.
+      </p>
+
+      <div class="code"><span class="code__label">PowerShell — pasang dan cek WSL2</span>wsl --install -d Ubuntu
+wsl --set-default-version 2
+wsl -l -v
+wsl.exe -d Ubuntu -u root -- bash -lc "cat /etc/os-release | head -3"</div>
+
+      <div class="code"><span class="code__label">Ubuntu (WSL2) — Nginx + docroot</span>sudo apt update &amp;&amp; sudo apt upgrade -y
+sudo apt install -y nginx curl git
+sudo systemctl enable --now nginx
+systemctl is-active nginx
+ss -tlnp | grep ':80'
+
+# salin situs dari Windows (path otomatis ter-mount di /mnt/c)
+sudo mkdir -p /var/www/uts-lab
+sudo cp -r "/mnt/c/laragon/www/UTS Ujian Tengah Semester EC2 Amazon Linux/index.html" /var/www/uts-lab/
+sudo cp -r "/mnt/c/laragon/www/UTS Ujian Tengah Semester EC2 Amazon Linux/assets" /var/www/uts-lab/
+sudo chown -R www-data:www-data /var/www/uts-lab
+curl -I http://localhost/</div>
+
+      <div class="callout">
+        <strong>Jika <code>systemctl</code> gagal di WSL2:</strong> tambahkan
+        <code>[boot]</code> + <code>systemd=true</code> di <code>/etc/wsl.conf</code>, lalu
+        jalankan <code>wsl --shutdown</code> dari PowerShell dan buka lagi. Setelah itu
+        <code>systemctl status nginx</code> harus berfungsi.
+      </div>
+
+      <div class="code"><span class="code__label">PowerShell (admin) — akses WSL dari perangkat lain di LAN</span># cari IP Windows
+ipconfig
+
+# teruskan port 8080 Windows -> port 80 WSL
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 `
+  connectport=80 connectaddress=127.0.0.1
+
+# izinkan di firewall
+New-NetFirewallRule -DisplayName "WSL UTS 8080" -Direction Inbound `
+  -Protocol TCP -LocalPort 8080 -Action Allow
+
+# uji dari HP: http://<IP-WINDOWS>:8080
+# hapus aturan bila sudah tidak dipakai:
+netsh interface portproxy delete v4tov4 listenport=8080 listenaddress=0.0.0.0</div>
+
+      <div class="callout callout--warn">
+        <strong>Jangan tertukar.</strong> URL <code>http://localhost</code> atau
+        <code>http://192.168.x.x</code> adalah lab lokal. Untuk pengumpulan, gunakan
+        <code>http://&lt;PUBLIC-IP-EC2&gt;</code> dan buktikan dari jaringan seluler.
+      </div>
+    </section>
+
+    <!-- ============ 7. WEB SERVER ============ -->
+    <section class="kb-section" id="webserver">
+      <p class="kb-kicker">06 &middot; Referensi</p>
+      <h2>Nginx dan Apache2</h2>
+      <p>
+        Dua web server yang dipakai di lab. Nginx lebih sering menjadi reverse proxy; Apache2
+        mudah untuk hosting file statis dengan <code>.htaccess</code>.
+      </p>
+
+      <h3 class="kb-h3">Nginx — situs statis + reverse proxy</h3>
+      <div class="code"><span class="code__label">/etc/nginx/conf.d/uts.conf</span>server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+
+    root /var/www/uts;
+    index index.html;
+
+    access_log /var/log/nginx/uts-access.log;
+    error_log  /var/log/nginx/uts-error.log;
+
+    # keamanan dasar
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # kompresi
+    gzip on;
+    gzip_types text/plain text/css application/javascript application/json image/svg+xml;
+    gzip_min_length 1024;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~* \.(css|js|jpg|jpeg|png|svg|webp|ico|woff2?)$ {
+        expires 7d;
+        add_header Cache-Control "public, max-age=604800";
+    }
+
+    # contoh reverse proxy ke Next.js
+    # location /app/ {
+    #     proxy_pass http://127.0.0.1:3000/;
+    #     proxy_http_version 1.1;
+    #     proxy_set_header Host $host;
+    #     proxy_set_header X-Real-IP $remote_addr;
+    #     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    #     proxy_set_header X-Forwarded-Proto $scheme;
+    # }
+}</div>
+      <div class="code"><span class="code__label">aktifkan dan uji</span>sudo nginx -t
+sudo systemctl reload nginx
+curl -I http://127.0.0.1/
+curl -I http://<span data-host>PUBLIC-IP</span>/</div>
+
+      <h3 class="kb-h3">Apache2 — virtual host</h3>
+      <div class="code"><span class="code__label">/etc/apache2/sites-available/uts.conf</span>&lt;VirtualHost *:80&gt;
+    ServerName domain-anda.com
+    ServerAlias www.domain-anda.com
+    DocumentRoot /var/www/uts
+
+    &lt;Directory /var/www/uts&gt;
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/uts-error.log
+    CustomLog ${APACHE_LOG_DIR}/uts-access.log combined
+&lt;/VirtualHost&gt;</div>
+      <div class="code"><span class="code__label">perintah Apache2 (Debian/Ubuntu)</span>sudo a2enmod rewrite headers expires deflate
+sudo a2ensite uts.conf
+sudo a2dissite 000-default.conf
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+sudo tail -f /var/log/apache2/uts-error.log</div>
+
+      <h3 class="kb-h3">Perbedaan yang sering membingungkan</h3>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Hal</th><th>Nginx</th><th>Apache2</th></tr></thead>
+          <tbody>
+            <tr><td>Konfigurasi situs</td><td><code>/etc/nginx/conf.d/*.conf</code></td><td><code>/etc/apache2/sites-available/</code></td></tr>
+            <tr><td>Docroot umum</td><td><code>/usr/share/nginx/html</code> atau <code>/var/www</code></td><td><code>/var/www/html</code> atau <code>/var/www</code></td></tr>
+            <tr><td>User service</td><td><code>nginx</code></td><td><code>www-data</code> (Debian) / <code>apache</code> (RHEL)</td></tr>
+            <tr><td>Uji konfigurasi</td><td><code>nginx -t</code></td><td><code>apache2ctl configtest</code></td></tr>
+            <tr><td>Log</td><td><code>/var/log/nginx/</code></td><td><code>/var/log/apache2/</code> atau <code>/var/log/httpd/</code></td></tr>
+            <tr><td>Reverse proxy</td><td><code>proxy_pass</code></td><td><code>ProxyPass</code> + <code>mod_proxy</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 8. DOCKER ============ -->
+    <section class="kb-section" id="docker">
+      <p class="kb-kicker">07 &middot; Container</p>
+      <h2>Docker: dari Dockerfile sampai Compose</h2>
+      <p>
+        Container membuat aplikasi dan dependensinya identik di laptop, WSL2, dan EC2.
+        Ini yang membuat deployment bisa diulang tanpa “di komputer saya jalan”.
+      </p>
+
+      <h3 class="kb-h3">Perintah harian</h3>
+      <div class="code"><span class="code__label">docker</span>docker version
+docker info
+docker images
+docker ps -a
+docker build -t maf/uts-web:1.0 .
+docker run -d --name uts-web -p 8080:80 --restart unless-stopped maf/uts-web:1.0
+docker logs -f --tail 100 uts-web
+docker exec -it uts-web sh
+docker stats --no-stream
+docker stop uts-web &amp;&amp; docker rm uts-web
+docker system df
+docker system prune -af --volumes</div>
+
+      <h3 class="kb-h3">Dockerfile untuk situs statis (Nginx)</h3>
+      <div class="code"><span class="code__label">Dockerfile</span>FROM nginx:1.27-alpine
+
+RUN rm -rf /usr/share/nginx/html/*
+COPY index.html /usr/share/nginx/html/index.html
+COPY assets /usr/share/nginx/html/assets
+
+RUN printf 'server {\n\
+  listen 80;\n\
+  root /usr/share/nginx/html;\n\
+  index index.html;\n\
+  location / { try_files $uri $uri/ /index.html; }\n\
+  location = /healthz { return 200 "ok\n"; add_header Content-Type text/plain; }\n\
+}\n' &gt; /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+  CMD wget -qO- http://127.0.0.1/healthz || exit 1</div>
+
+      <h3 class="kb-h3">Dockerfile multi-stage untuk Next.js</h3>
+      <div class="code"><span class="code__label">app/Dockerfile</span>FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN addgroup -S nodejs &amp;&amp; adduser -S nextjs -G nodejs
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+USER nextjs
+EXPOSE 3000
+CMD ["node", "server.js"]</div>
+      <p>
+        Agar <code>standalone</code> dihasilkan, tambahkan
+        <code>output: "standalone"</code> di <code>next.config.ts</code>.
+      </p>
+
+      <h3 class="kb-h3">Docker Compose (aplikasi + database)</h3>
+      <div class="code"><span class="code__label">docker-compose.yml</span>services:
+  web:
+    build: ./app
+    image: maf/uts-web:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      DATABASE_URL: postgres://ec2lab:ec2labpass@db:5432/ec2lab
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ec2lab
+      POSTGRES_PASSWORD: ec2labpass
+      POSTGRES_DB: ec2lab
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ec2lab -d ec2lab"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:</div>
+      <div class="callout">
+        <strong>Jangan publish port database.</strong> Cukup jaringan internal Compose.
+        Hanya reverse proxy yang boleh mendengar di <code>0.0.0.0:80</code>.
+      </div>
+    </section>
+
+    <!-- ============ 9. KUBERNETES ============ -->
+    <section class="kb-section" id="kubernetes">
+      <p class="kb-kicker">08 &middot; Orkestrasi</p>
+      <h2>Kubernetes, Helm, dan K3s</h2>
+      <p>
+        Kubernetes mengelola container agar tetap berjalan sesuai keinginan (replicas),
+        mendistribusikan trafik, dan melakukan rollout bertahap. Untuk lab satu VM,
+        K3s cukup dan jauh lebih ringan daripada cluster penuh.
+      </p>
+
+      <h3 class="kb-h3">Object model minimum</h3>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Object</th><th>Fungsi</th><th>Catatan</th></tr></thead>
+          <tbody>
+            <tr><td>Pod</td><td>Unit terkecil berisi satu/beberapa container</td><td>Jangan dibuat langsung; gunakan Deployment</td></tr>
+            <tr><td>Deployment</td><td>Mengelola ReplicaSet dan rollout</td><td><code>kubectl rollout undo</code> untuk rollback</td></tr>
+            <tr><td>Service</td><td>Alamat stabil + load balancing internal</td><td>ClusterIP, NodePort, LoadBalancer</td></tr>
+            <tr><td>Ingress</td><td>Routing HTTP dari luar ke Service</td><td>Butuh ingress controller</td></tr>
+            <tr><td>ConfigMap / Secret</td><td>Konfigurasi dan kredensial</td><td>Secret bukan enkripsi otomatis</td></tr>
+            <tr><td>PersistentVolumeClaim</td><td>Penyimpanan persisten</td><td>Butuh StorageClass</td></tr>
+            <tr><td>Namespace</td><td>Pemisahan logis resource</td><td>Gunakan per environment</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="kb-h3">Deployment + Service + Ingress</h3>
+      <div class="code"><span class="code__label">k8s/deployment.yaml</span>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uts-web
+  labels: { app: uts-web }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: uts-web }
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxUnavailable: 0, maxSurge: 1 }
+  template:
+    metadata:
+      labels: { app: uts-web }
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/aryafatthurahman1/uts-web:latest
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet: { path: /api/health, port: 3000 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /api/health, port: 3000 }
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits:   { cpu: "500m", memory: "512Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uts-web
+spec:
+  selector: { app: uts-web }
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: uts-web
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: domain-anda.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: uts-web
+                port:
+                  number: 80</div>
+
+      <div class="code"><span class="code__label">kubectl</span>kubectl apply -f k8s/
+kubectl get pods -o wide
+kubectl get svc,ingress
+kubectl logs deploy/uts-web --tail=100
+kubectl describe pod &lt;POD&gt;
+kubectl rollout status deploy/uts-web
+kubectl rollout undo deploy/uts-web
+kubectl exec -it deploy/uts-web -- sh
+kubectl port-forward svc/uts-web 8080:80</div>
+
+      <h3 class="kb-h3">Helm chart ringkas</h3>
+      <div class="code"><span class="code__label">helm</span>helm create uts-web
+helm lint ./helm/uts-web
+helm template uts-web ./helm/uts-web -f values-prod.yaml
+helm upgrade --install uts-web ./helm/uts-web -n uts --create-namespace
+helm status uts-web -n uts
+helm history uts-web -n uts
+helm rollback uts-web 1 -n uts
+helm uninstall uts-web -n uts</div>
+      <p>
+        Struktur chart: <code>Chart.yaml</code>, <code>values.yaml</code>,
+        <code>templates/deployment.yaml</code>, <code>templates/service.yaml</code>,
+        <code>templates/ingress.yaml</code>, <code>templates/_helpers.tpl</code>. Nilai yang
+        berbeda antar lingkungan cukup di <code>values-dev.yaml</code> dan
+        <code>values-prod.yaml</code>.
+      </p>
+
+      <h3 class="kb-h3">K3s di satu VM</h3>
+      <div class="code"><span class="code__label">Ubuntu/Amazon Linux — K3s</span>curl -sfL https://get.k3s.io | sh -
+sudo systemctl status k3s --no-pager
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $USER:$USER ~/.kube/config
+export KUBECONFIG=~/.kube/config
+kubectl get nodes
+kubectl get pods -A
+
+# buka port 80/443 lewat Security Group, lalu:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml</div>
+      <div class="callout callout--warn">
+        <strong>Batas biaya.</strong> EKS control plane menagih per jam. Untuk UTS, K3s di
+        EC2 atau <code>k3d</code> di laptop lebih hemat. Selalu hapus cluster setelah demo.
+      </div>
+    </section>
+
+    <!-- ============ 10. TERRAFORM ============ -->
+    <section class="kb-section" id="terraform">
+      <p class="kb-kicker">09 &middot; Infrastructure as Code</p>
+      <h2>Terraform untuk EC2 + Security Group + Elastic IP</h2>
+      <p>
+        Tujuan IaC: infrastruktur bisa dibuat ulang dengan satu perintah, versinya tercatat di
+        Git, dan perubahan bisa direview lewat <code>plan</code>.
+      </p>
+
+      <h3 class="kb-h3">Alur kerja</h3>
+      <div class="code"><span class="code__label">terraform workflow</span>terraform init
+terraform fmt -recursive
+terraform validate
+terraform plan -out=tfplan
+terraform apply tfplan
+terraform output
+terraform state list
+terraform plan -destroy
+terraform destroy</div>
+
+      <h3 class="kb-h3">Contoh konfigurasi</h3>
+      <div class="code"><span class="code__label">main.tf</span>terraform {
+  required_version = "&gt;= 1.6"
+  required_providers {
+    aws = { source = "hashicorp/aws", version = "~&gt; 5.0" }
+  }
+}
+
+provider "aws" { region = var.region }
+
+variable "region"      { default = "ap-southeast-1" }
+variable "instance_type" { default = "t3.micro" }
+variable "key_name"    { type = string }
+variable "admin_cidr"  { type = string }
+
+data "aws_ami" "al2023" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name   = "name"
+    values = ["al2023-ami-2023.*-x86_64"]
+  }
+}
+
+resource "aws_security_group" "web" {
+  name        = "uts-web-sg"
+  description = "SSH admin, HTTP/HTTPS publik"
+
+  ingress {
+    description = "SSH dari IP admin"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.admin_cidr]
+  }
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = { Name = "uts-web-sg", Project = "uts-cloud" }
+}
+
+resource "aws_instance" "web" {
+  ami                    = data.aws_ami.al2023.id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = [aws_security_group.web.id]
+
+  user_data = &lt;&lt;-EOF
+#!/bin/bash
+dnf update -y
+dnf install -y nginx
+systemctl enable --now nginx
+echo "&lt;h1&gt;UTS Cloud - 2023230006&lt;/h1&gt;" &gt; /usr/share/nginx/html/index.html
+EOF
+
+  tags = { Name = "uts-cloud-portfolio", Project = "uts-cloud" }
+}
+
+resource "aws_eip" "web" {
+  instance = aws_instance.web.id
+  domain   = "vpc"
+  tags     = { Name = "uts-web-eip" }
+}
+
+output "public_ip"  { value = aws_eip.web.public_ip }
+output "public_dns" { value = aws_instance.web.public_dns }</div>
+
+      <div class="callout">
+        <strong>State berisi data sensitif.</strong> Untuk lab, state lokal boleh. Untuk tim,
+        gunakan backend S3 + DynamoDB lock, dan jangan commit <code>terraform.tfstate</code>.
+      </div>
+    </section>
+
+    <!-- ============ 11. CI/CD ============ -->
+    <section class="kb-section" id="cicd">
+      <p class="kb-kicker">10 &middot; Otomasi</p>
+      <h2>CI/CD dengan GitHub Actions</h2>
+      <p>
+        Pipeline minimum: lint → test → build → deploy. Setiap langkah harus bisa diulang dan
+        gagal dengan pesan yang jelas. Secret disimpan di repository secrets, bukan di YAML.
+      </p>
+
+      <h3 class="kb-h3">Workflow build + deploy ke EC2</h3>
+      <div class="code"><span class="code__label">.github/workflows/deploy-ec2.yml</span>name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ec2
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Install
+        working-directory: app
+        run: npm ci
+      - name: Typecheck
+        working-directory: app
+        run: npm run typecheck
+      - name: Build
+        working-directory: app
+        run: npm run build
+        env:
+          DATABASE_URL: postgres://placeholder
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Siapkan SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" &gt; ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.EC2_HOST }}" &gt;&gt; ~/.ssh/known_hosts
+      - name: Sinkronkan situs statis
+        run: |
+          rsync -avz --delete \
+            --exclude '.git' --exclude 'node_modules' \
+            -e "ssh -o StrictHostKeyChecking=yes" \
+            ./index.html ./assets ./knowledge.html ./login.html ./dashboard.html \
+            "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/uts/"
+      - name: Smoke test
+        run: curl -fsS "http://${{ secrets.EC2_HOST }}/" | grep -qi "Muhammad Arya"</div>
+
+      <h3 class="kb-h3">Aturan praktis</h3>
+      <ul class="kb-list">
+        <li>Bedakan <em>CI</em> (validasi tiap commit) dan <em>CD</em> (rilis ke lingkungan).</li>
+        <li>Gunakan environment protection untuk production agar ada approval.</li>
+        <li>Simpan kunci deploy khusus, bukan kunci pribadi; batasi izin di server.</li>
+        <li>Selalu ada langkah smoke test setelah deploy.</li>
+        <li>Rollback harus direncanakan: image tag sebelumnya atau symlink release.</li>
+      </ul>
+
+      <h3 class="kb-h3">Pola deploy atomik dengan symlink</h3>
+      <div class="code"><span class="code__label">di server</span>RELEASE=/var/www/releases/$(date +%Y%m%d%H%M%S)
+mkdir -p "$RELEASE"
+rsync -a --delete /tmp/upload/ "$RELEASE/"
+ln -sfn "$RELEASE" /var/www/uts-current
+sudo nginx -t &amp;&amp; sudo systemctl reload nginx
+ls -1dt /var/www/releases/* | tail -n +6 | xargs -r rm -rf</div>
+      <p>
+        Dengan symlink, perpindahan versi hanya mengganti satu tautan. Jika halaman baru rusak,
+        kembalikan symlink ke release sebelumnya tanpa menyalin ulang file.
+      </p>
+    </section>
+
+    <!-- ============ 12. NEXT.JS ============ -->
+    <section class="kb-section" id="nextjs">
+      <p class="kb-kicker">11 &middot; Studi kasus</p>
+      <h2>Next.js + Docker + Nginx di EC2</h2>
+      <p>
+        Folder <code>app/</code> berisi aplikasi Next.js untuk lab: login, dashboard, guestbook,
+        API health check, dan konfigurasi pipeline. Berikut alur deploy yang saya siapkan.
+      </p>
+
+      <h3 class="kb-h3">1. Build lokal</h3>
+      <div class="code"><span class="code__label">bash</span>cd app
+npm ci
+npm run typecheck
+npm run build
+npm run start            # default http://0.0.0.0:3000
+curl -s http://127.0.0.1:3000/api/health</div>
+
+      <h3 class="kb-h3">2. Build image dan jalankan</h3>
+      <div class="code"><span class="code__label">bash</span>docker build -t maf/uts-app:1.0 ./app
+docker run -d --name uts-app --env-file app/.env -p 127.0.0.1:3000:3000 maf/uts-app:1.0
+docker logs -f --tail 100 uts-app
+curl -s http://127.0.0.1:3000/api/health | jq .</div>
+
+      <h3 class="kb-h3">3. Nginx reverse proxy + header</h3>
+      <div class="code"><span class="code__label">/etc/nginx/conf.d/uts-app.conf</span>upstream uts_app {
+    server 127.0.0.1:3000;
+    keepalive 32;
+}
+
+server {
+    listen 80;
+    server_name domain-anda.com;
+
+    client_max_body_size 8m;
+
+    location /_next/static/ {
+        proxy_pass http://uts_app;
+        proxy_cache_valid 200 7d;
+        add_header Cache-Control "public, max-age=604800, immutable";
+    }
+
+    location / {
+        proxy_pass http://uts_app;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 60s;
+    }
+}</div>
+
+      <h3 class="kb-h3">4. Variabel lingkungan penting</h3>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Variabel</th><th>Contoh</th><th>Catatan</th></tr></thead>
+          <tbody>
+            <tr><td><code>NODE_ENV</code></td><td><code>production</code></td><td>Mengaktifkan optimasi produksi</td></tr>
+            <tr><td><code>PORT</code></td><td><code>3000</code></td><td>Port internal, tidak dibuka di SG</td></tr>
+            <tr><td><code>DATABASE_URL</code></td><td><code>postgres://user:pass@host:5432/db</code></td><td>Rahasia, jangan commit</td></tr>
+            <tr><td><code>NEXT_PUBLIC_SITE_URL</code></td><td><code>http://IP-PUBLIK</code></td><td>Metadata dan canonical URL</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Health check bukan formalitas.</strong> Endpoint <code>/api/health</code>
+        sebaiknya mengecek dependensi (database) dan mengembalikan status 503 jika tidak siap,
+        supaya load balancer tidak mengirim trafik ke instance yang rusak.
+      </div>
+    </section>
+
+    <!-- ============ 13. OBSERVABILITY ============ -->
+    <section class="kb-section" id="observability">
+      <p class="kb-kicker">12 &middot; Operasi</p>
+      <h2>Observability: metrik, log, dan alert</h2>
+      <p>
+        Tiga pertanyaan yang harus bisa dijawab cepat: apakah layanan hidup, apakah lambat,
+        dan apa yang berubah sebelum masalah muncul.
+      </p>
+
+      <div class="grid-3">
+        <div class="tile">
+          <p class="tile__title">Metrik</p>
+          <p class="tile__sub">Angka deret waktu</p>
+          <ul class="kb-list">
+            <li>CPU, memori, disk, network</li>
+            <li>Request rate, error rate, latency</li>
+            <li>Jumlah koneksi dan queue</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <p class="tile__title">Log</p>
+          <p class="tile__sub">Kejadian per request</p>
+          <ul class="kb-list">
+            <li>Access log dan error log</li>
+            <li>Log aplikasi terstruktur (JSON)</li>
+            <li>Korelasi dengan request ID</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <p class="tile__title">Trace</p>
+          <p class="tile__sub">Perjalanan satu request</p>
+          <ul class="kb-list">
+            <li>Span antar service</li>
+            <li>OpenTelemetry</li>
+            <li>Menemukan bottleneck</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="kb-h3">Perintah diagnosa cepat</h3>
+      <div class="code"><span class="code__label">server</span>uptime
+free -h
+df -h
+sudo ss -s
+sudo ss -tlnp | grep ':80'
+curl -o /dev/null -s -w 'status=%{http_code} time=%{time_total}s\n' http://127.0.0.1/
+sudo tail -n 50 /var/log/nginx/error.log
+sudo journalctl -u nginx --since '30 min ago' --no-pager</div>
+
+      <h3 class="kb-h3">CloudWatch alarm sederhana (AWS CLI)</h3>
+      <div class="code"><span class="code__label">bash</span>aws cloudwatch put-metric-alarm \
+  --alarm-name "uts-ec2-cpu-high" \
+  --metric-name CPUUtilization \
+  --namespace AWS/EC2 \
+  --statistic Average \
+  --period 300 \
+  --threshold 80 \
+  --comparison-operator GreaterThanThreshold \
+  --evaluation-periods 2 \
+  --dimensions Name=InstanceId,Value=i-xxxxxxxxxxxxxxxxx \
+  --alarm-actions arn:aws:sns:ap-southeast-1:123456789012:alert-topic</div>
+
+      <h3 class="kb-h3">SLO sederhana untuk tugas</h3>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>SLI</th><th>Target</th><th>Cara ukur</th></tr></thead>
+          <tbody>
+            <tr><td>Ketersediaan halaman utama</td><td>99% per minggu</td><td>Smoke test tiap 5 menit</td></tr>
+            <tr><td>Latency p95</td><td>&lt; 800 ms</td><td>Access log Nginx</td></tr>
+            <tr><td>Error rate 5xx</td><td>&lt; 0,5%</td><td>Hitung status dari access log</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 14. KEAMANAN ============ -->
+    <section class="kb-section" id="keamanan">
+      <p class="kb-kicker">13 &middot; Keamanan &amp; biaya</p>
+      <h2>Checklist keamanan dan kontrol biaya</h2>
+
+      <h3 class="kb-h3">Sebelum merekam video</h3>
+      <ul class="kb-list">
+        <li>Pastikan tidak ada <code>.pem</code>, <code>.ppk</code>, password, atau Access Key yang terlihat di layar.</li>
+        <li>Tutup tab AWS console yang menampilkan Access Key atau halaman IAM user.</li>
+        <li>Gunakan akun demo untuk login di portal, bukan kredensial asli.</li>
+        <li>Pastikan SSH hanya terbuka untuk IP admin, bukan <code>0.0.0.0/0</code>.</li>
+        <li>Hapus komentar dan file yang memuat token dari repository.</li>
+      </ul>
+
+      <h3 class="kb-h3">Sesudah penilaian</h3>
+      <ul class="kb-list">
+        <li>Stop atau terminate instance EC2.</li>
+        <li>Lepaskan Elastic IP agar tidak ditagih saat menganggur.</li>
+        <li>Hapus volume EBS dan snapshot yang tidak terpakai.</li>
+        <li>Hapus load balancer, NAT Gateway, dan cluster EKS jika dibuat.</li>
+        <li>Periksa Billing → Cost Explorer dan aktifkan budget alert.</li>
+      </ul>
+
+      <h3 class="kb-h3">Tabel keputusan cepat</h3>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Situasi</th><th>Tindakan</th></tr></thead>
+          <tbody>
+            <tr><td>Butuh akses publik sementara</td><td>Buka 80/443; SSH tetap /32</td></tr>
+            <tr><td>Tidak perlu SSH dari mana-mana</td><td>Gunakan SSM Session Manager</td></tr>
+            <tr><td>Database di EC2 yang sama</td><td>Bind ke <code>127.0.0.1</code>, jangan buka port</td></tr>
+            <tr><td>Butuh HTTPS</td><td>Certbot/Let's Encrypt atau ACM + ALB</td></tr>
+            <tr><td>Traffic naik sementara</td><td>Naikkan instance type, bukan langsung auto scaling</td></tr>
+            <tr><td>Selesai demo</td><td>Stop → snapshot jika perlu → terminate</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 15. TROUBLESHOOTING ============ -->
+    <section class="kb-section" id="troubleshooting">
+      <p class="kb-kicker">14 &middot; Runbook</p>
+      <h2>Troubleshooting deployment</h2>
+      <p>
+        Urutan diagnosa yang saya pakai: DNS → jaringan → port → service → konfigurasi →
+        aplikasi. Jangan mengubah konfigurasi sebelum tahu lapisan mana yang gagal.
+      </p>
+
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Gejala</th><th>Penyebab umum</th><th>Perbaikan</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Browser <em>connection timed out</em></td>
+              <td>Port 80 belum dibuka atau IP salah</td>
+              <td>Periksa inbound rule Security Group dan Elastic IP</td>
+            </tr>
+            <tr>
+              <td><em>Connection refused</em></td>
+              <td>Tidak ada service mendengar di port</td>
+              <td><code>ss -tlnp | grep :80</code>, start Nginx/Apache</td>
+            </tr>
+            <tr>
+              <td>Halaman default web server</td>
+              <td>Docroot masih default</td>
+              <td>Perbaiki <code>root</code>/<code>DocumentRoot</code>, reload service</td>
+            </tr>
+            <tr>
+              <td>CSS/JS 404, halaman tanpa gaya</td>
+              <td>Folder <code>assets/</code> tidak terunggah atau path salah</td>
+              <td>Cek <code>curl -I /assets/css/style.css</code>, unggah ulang</td>
+            </tr>
+            <tr>
+              <td>403 Forbidden</td>
+              <td>Permission atau index tidak ada</td>
+              <td><code>chmod 755</code> direktori, <code>644</code> file, cek SELinux</td>
+            </tr>
+            <tr>
+              <td>502 Bad Gateway</td>
+              <td>Aplikasi upstream mati atau port salah</td>
+              <td><code>curl 127.0.0.1:3000</code>, cek log aplikasi</td>
+            </tr>
+            <tr>
+              <td>504 Gateway Timeout</td>
+              <td>Upstream lambat atau hang</td>
+              <td>Naikkan <code>proxy_read_timeout</code>, cek query/CPU</td>
+            </tr>
+            <tr>
+              <td>SSH <em>permission denied (publickey)</em></td>
+              <td>User salah atau key tidak cocok</td>
+              <td>Amazon Linux <code>ec2-user</code>, Ubuntu <code>ubuntu</code>; cek permission 400</td>
+            </tr>
+            <tr>
+              <td>SSH timeout</td>
+              <td>Port 22 tertutup atau IP berubah</td>
+              <td>Update inbound rule /32 dengan IP saat ini</td>
+            </tr>
+            <tr>
+              <td>Disk penuh</td>
+              <td>Log membengkak</td>
+              <td><code>df -h</code>, <code>du -sh /var/log/*</code>, rotasi log</td>
+            </tr>
+            <tr>
+              <td>Domain tidak terbuka</td>
+              <td>A record belum propagasi</td>
+              <td><code>nslookup</code>, tunggu TTL, cek nama record</td>
+            </tr>
+            <tr>
+              <td>HTTPS gagal</td>
+              <td>Port 443 tertutup / challenge gagal</td>
+              <td>Buka 443, pastikan domain mengarah ke server, ulangi Certbot</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="kb-h3">Perintah diagnosa bertingkat</h3>
+      <div class="code"><span class="code__label">dari luar server</span># 1. DNS
+nslookup domain-anda.com
+dig +short domain-anda.com
+
+# 2. TCP
+nc -vz domain-anda.com 80
+curl -v --max-time 10 http://domain-anda.com/
+
+# 3. HTTP
+curl -I http://domain-anda.com/
+curl -s -o /dev/null -w '%{http_code}\n' http://domain-anda.com/assets/css/style.css</div>
+
+      <div class="code"><span class="code__label">dari dalam server</span># 4. Service
+sudo systemctl status nginx --no-pager
+sudo nginx -t
+
+# 5. Listener dan firewall OS
+sudo ss -tlnp | grep -E ':80|:443|:3000'
+sudo iptables -L -n | head -30
+# Ubuntu: sudo ufw status verbose
+
+# 6. Log
+sudo tail -n 80 /var/log/nginx/error.log
+sudo journalctl -u nginx --since '10 min ago' --no-pager</div>
+
+      <div class="callout callout--warn">
+        <strong>Jangan menyalin perintah tanpa membaca.</strong> Perintah
+        <code>rm -rf</code>, <code>chmod 777</code>, dan pembukaan port ke
+        <code>0.0.0.0/0</code> untuk database adalah tiga kesalahan yang paling sering
+        merusak lab.
+      </div>
+    </section>
+
+    <!-- ============ 16. SUMBER ============ -->
+    <section class="kb-section" id="sumber">
+      <p class="kb-kicker">15 &middot; Rujukan</p>
+      <h2>Sumber referensi</h2>
+      <p>
+        Dokumentasi resmi yang saya gunakan untuk memverifikasi perintah dan konsep di
+        halaman ini. Selalu cek versi terbaru karena API cloud sering berubah.
+      </p>
+
+      <div class="kb-split">
+        <div>
+          <h3 class="kb-h4">AWS</h3>
+          <ul class="kb-list">
+            <li><a href="https://docs.aws.amazon.com/ec2/" target="_blank" rel="noopener">Amazon EC2 User Guide</a></li>
+            <li><a href="https://docs.aws.amazon.com/vpc/" target="_blank" rel="noopener">Amazon VPC User Guide</a></li>
+            <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/" target="_blank" rel="noopener">IAM User Guide</a></li>
+            <li><a href="https://docs.aws.amazon.com/wellarchitected/" target="_blank" rel="noopener">Well-Architected Framework</a></li>
+            <li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/" target="_blank" rel="noopener">CloudWatch User Guide</a></li>
+          </ul>
+
+          <h3 class="kb-h4">Linux &amp; web server</h3>
+          <ul class="kb-list">
+            <li><a href="https://nginx.org/en/docs/" target="_blank" rel="noopener">Nginx documentation</a></li>
+            <li><a href="https://httpd.apache.org/docs/" target="_blank" rel="noopener">Apache HTTP Server docs</a></li>
+            <li><a href="https://www.freedesktop.org/software/systemd/man/" target="_blank" rel="noopener">systemd manual</a></li>
+            <li><a href="https://www.ssh.com/academy/ssh/config" target="_blank" rel="noopener">SSH config reference</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="kb-h4">Container &amp; orkestrasi</h3>
+          <ul class="kb-list">
+            <li><a href="https://docs.docker.com/" target="_blank" rel="noopener">Docker documentation</a></li>
+            <li><a href="https://kubernetes.io/docs/" target="_blank" rel="noopener">Kubernetes documentation</a></li>
+            <li><a href="https://helm.sh/docs/" target="_blank" rel="noopener">Helm documentation</a></li>
+            <li><a href="https://docs.k3s.io/" target="_blank" rel="noopener">K3s documentation</a></li>
+          </ul>
+
+          <h3 class="kb-h4">Otomasi &amp; aplikasi</h3>
+          <ul class="kb-list">
+            <li><a href="https://developer.hashicorp.com/terraform/docs" target="_blank" rel="noopener">Terraform documentation</a></li>
+            <li><a href="https://docs.github.com/actions" target="_blank" rel="noopener">GitHub Actions docs</a></li>
+            <li><a href="https://nextjs.org/docs" target="_blank" rel="noopener">Next.js documentation</a></li>
+            <li><a href="https://roadmap.sh/devops" target="_blank" rel="noopener">roadmap.sh — DevOps</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Catatan akademik.</strong> Seluruh konfigurasi di halaman ini ditulis ulang
+        dan disesuaikan dengan kebutuhan UTS. Sumber eksternal dipakai sebagai rujukan, bukan
+        disalin mentah. Jika ada perbedaan versi, dokumentasi resmi yang berlaku.
+      </div>
+
+      <p style="margin-top:18px">
+        <a class="btn btn--primary" href="dashboard.html">Buka workspace</a>
+        <a class="btn btn--ghost" href="index.html#cloud">Kembali ke ringkasan Cloud</a>
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>
+      <strong>Muhammad Arya Fatthurahman</strong> &middot; NIM 2023230006 &middot; Kelas TIFM<br>
+      S1 Teknologi Informasi, Universitas Darma Persada &middot; UTS Cloud Computing <span data-year>2026</span>
+    </p>
+    <p class="footer__meta">
+      Host: <span data-host>—</span> &middot; Knowledge Base v1.0
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+---
+# Ansible Playbook: Deploy Static Website to AWS EC2 with Apache2
+# Referensi: builder.aws.com "Deploying an Apache Web Server on AWS EC2 using SSH"
+# Tugas UTS Cloud Computing - Muhammad Arya Fatthurahman - NIM 2023230006 - TIFM
+
+- name: Install Apache2 & Deploy Static Website to AWS EC2
+  hosts: web
+  become: yes
+  vars:
+    app_dir: /var/www/html
+    site_files: "{{ playbook_dir }}/site"
+
+  tasks:
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Start and enable Apache2
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Remove default index.html
+      file:
+        path: "{{ app_dir }}/index.html"
+        state: absent
+
+    - name: Deploy website files to Apache DocumentRoot
+      copy:
+        src: "{{ site_files }}/"
+        dest: "{{ app_dir }}/"
+        owner: www-data
+        group: www-data
+        mode: "0644"
+        directory_mode: "0755"
+
+    - name: Set ownership of web root
+      file:
+        path: "{{ app_dir }}"
+        owner: www-data
+        group: www-data
+        recurse: yes
+        state: directory
+
+    - name: Reload Apache2
+      service:
+        name: apache2
+        state: reloaded
+
+    - name: Verify Apache2 status
+      command: systemctl is-active apache2
+      register: apache_status
+      changed_when: false
+
+    - name: Show deployment result
+      debug:
+        msg: "Website deployed! Apache2 status: {{ apache_status.stdout }}. Access via http://{{ ansible_host }}"

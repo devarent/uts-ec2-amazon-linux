@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Masuk ke workspace UTS Cloud Computing - Muhammad Arya Fatthurahman (NIM 2023230006).">
+  <meta name="author" content="Muhammad Arya Fatthurahman">
+  <title>Masuk Workspace — UTS Cloud Computing 2023230006</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+
+<main class="login-wrap">
+  <div class="login-card">
+    <div class="login-card__logo">MAF</div>
+
+    <h1>Masuk ke workspace</h1>
+    <p class="login-card__lead">
+      Workspace UTS Cloud Computing &mdash; checklist EC2, konfigurasi database, pipeline,
+      dan guestbook. Portal ini berjalan statis di <strong data-host>host publik</strong>.
+    </p>
+
+    <div class="form-msg" id="loginMsg" role="status" aria-live="polite"></div>
+
+    <form id="loginForm" novalidate>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" id="loginEmail" name="email" autocomplete="username"
+               placeholder="nama@kampus.ac.id" required>
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <input type="password" id="loginPassword" name="password" autocomplete="current-password"
+               placeholder="••••••••" required>
+      </label>
+
+      <button type="submit" class="btn btn--primary btn--block">Masuk ke workspace</button>
+    </form>
+
+    <button type="button" class="btn btn--ghost btn--block btn--sm" id="fillDemo" style="margin-top:10px">
+      Isi akun demo otomatis
+    </button>
+
+    <div class="login-note">
+      <strong>Akun demo (untuk penilaian):</strong><br>
+      Email: <code>arya@unsada.ac.id</code><br>
+      Password: <code>uts2026</code><br>
+      <span style="display:block;margin-top:6px">
+        Sesi disimpan di <code>localStorage</code> browser ini. Tidak ada password yang dikirim
+        atau disimpan di server; ini gerbang demonstrasi, bukan sistem autentikasi produksi.
+      </span>
+    </div>
+
+    <p class="login-alt">
+      <a href="index.html">Kembali ke portofolio</a> &middot;
+      <a href="knowledge.html">Knowledge base</a>
+    </p>
+  </div>
+</main>
+
+<footer class="footer" style="padding-block:16px">
+  <div class="container footer__inner">
+    <p style="font-size:13px">
+      Muhammad Arya Fatthurahman &middot; NIM 2023230006 &middot; TIFM &middot;
+      S1 Teknologi Informasi UNSADA
+    </p>
+    <p class="footer__meta" style="font-size:12px">
+      Host: <span data-host>—</span> &middot; <span data-protocol>—</span>
+    </p>
+  </div>
+</footer>
+
+<!-- Toast container (untuk ui.js) -->
+<div class="toast-wrap" aria-live="polite"></div>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/portal.js"></script>
+</body>
+</html>

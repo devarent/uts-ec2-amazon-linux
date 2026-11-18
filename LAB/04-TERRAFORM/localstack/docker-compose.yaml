@@ -1,0 +1,19 @@
+# LocalStack — simulasi API AWS di komputer (port 4566)
+# Jalankan: docker compose up -d
+services:
+  localstack:
+    image: localstack/localstack:3.7
+    container_name: localstack-aws
+    environment:
+      - SERVICES=ec2,s3,iam,sts,vpc,apigateway,cloudformation,logs,secretsmanager
+      - DEBUG=0
+      - AWS_DEFAULT_REGION=us-east-1
+    ports:
+      - "4566:4566"
+    volumes:
+      - "./volume:/var/lib/localstack"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5

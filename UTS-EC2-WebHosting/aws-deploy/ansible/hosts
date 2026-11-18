@@ -1,0 +1,9 @@
+# Ansible Inventory untuk UTS Cloud Computing
+# Ganti IP di bawah dengan Public IP (Elastic IP) dari Terraform output
+# Cek dengan: terraform output public_ip
+
+[web]
+# 54.210.xx.xx ansible_user=ubuntu ansible_ssh_private_key_file=./keys/uts-ec2-aryaf.pem
+
+# Contoh lengkap:
+# 18.141.xxx.xxx ansible_user=ubuntu ansible_ssh_private_key_file=/path/to/uts-ec2-aryaf.pem

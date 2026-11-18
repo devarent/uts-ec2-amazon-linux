@@ -1,0 +1,38 @@
+# =====================================================================
+#  Netplan untuk UBUNTU SERVER 24.04 (VM-2 / fallback VM-1)
+#  Salin ke: /etc/netplan/01-lab.yaml
+#  Perintah : sudo netplan apply
+# =====================================================================
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # --- Adapter 1: NAT (internet / "public") ---
+    enp0s3:
+      dhcp4: true
+    # --- Adapter 2: Host-Only "VPC private" (IP statis) ---
+    enp0s8:
+      dhcp4: false
+      addresses:
+        - 192.168.56.20/24        # VM-2 -> 192.168.56.20 | VM-1 -> 192.168.56.10
+      # tidak perlu gateway & DNS: ini jaringan internal
+
+# Verifikasi setelah apply:
+#   ip -br addr
+#   ping -c 3 192.168.56.1      # host
+#   ping -c 3 8.8.8.8           # internet (via NAT)
+
+# =====================================================================
+#  AMAZON LINUX 2023 (AL2023) - NetworkManager, BUKAN netplan
+# =====================================================================
+# AL2023 default pakai NetworkManager. Untuk IP statis Host-Only:
+#
+#   sudo nmcli connection show                     # cari nama koneksi
+#   sudo nmcli connection add type ethernet ifname enp0s8 con-name lab-internal \
+#        ipv4.method manual ipv4.addresses 192.168.56.10/24
+#   sudo nmcli connection up lab-internal
+#   ip -br addr                                   # harus muncul 192.168.56.10
+#
+# Jika ingin mengubah adapter yang sudah ada (bukan menambah baru):
+#   sudo nmcli connection modify <nama-koneksi> ipv4.method manual ipv4.addresses 192.168.56.10/24
+#   sudo nmcli connection up <nama-koneksi>

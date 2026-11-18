@@ -1,0 +1,4706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- BUILD: single-file (hosting) — dibuat oleh skrip/build-hosting-single-file.js -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Website pribadi Muhammad Arya Fatthurahman - NIM 2023230006 - Teknologi Informasi, Universitas Darma Persada (UNSADA). Website statis yang di-deploy melalui web server pada lab AWS EC2.">
+  <meta name="author" content="Muhammad Arya Fatthurahman">
+  <title>Muhammad Arya Fatthurahman — NIM 2023230006 — Portofolio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxNCIgZmlsbD0iIzFkNGVkOCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkeT0iLjM1ZW0iIHRleHQtYW5jaG9yPSJtaWRkbGUiCiAgICAgICAgZm9udC1mYW1pbHk9IlNlZ29lIFVJLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCIKICAgICAgICBmaWxsPSIjZmZmZmZmIj5NQUY8L3RleHQ+Cjwvc3ZnPgo=">
+  <style>
+/* ============================================================
+   Website Pribadi - Muhammad Arya Fatthurahman (NIM 2023230006)
+   Tugas UTS Cloud Computing - AWS EC2 + Apache2
+   Styling: minimalist, responsif, tanpa framework eksternal
+   ============================================================ */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  --bg:            #ffffff;
+  --bg-alt:        #f8fafc;
+  --bg-alt-2:      #f1f5f9;
+  --text:          #0f172a;
+  --text-soft:     #475569;
+  --text-muted:    #64748b;
+  --accent:        #3b82f6;
+  --accent-dark:   #1d4ed8;
+  --accent-light:  #60a5fa;
+  --accent-soft:   #dbeafe;
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  --success:       #10b981;
+  --success-soft:  #d1fae5;
+  --warning:       #f59e0b;
+  --warning-soft:  #fef3c7;
+  --error:         #ef4444;
+  --error-soft:    #fee2e2;
+  --border:        #e2e8f0;
+  --border-light:  #f1f5f9;
+  --white:         #ffffff;
+  --radius:        20px;
+  --radius-sm:     12px;
+  --radius-lg:     24px;
+  --shadow:        0 4px 12px rgba(15, 23, 42, .06);
+  --shadow-md:     0 12px 32px rgba(15, 23, 42, .1);
+  --shadow-lg:     0 24px 64px rgba(15, 23, 42, .12);
+  --shadow-accent: 0 8px 24px rgba(59, 130, 246, .25);
+  --container:     1200px;
+  --transition:    .25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: .15s ease;
+}
+
+/* ---------- 2. Reset ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: var(--accent); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--accent-dark); text-decoration: underline; }
+ul { list-style: none; }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- 3. Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 66px;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; color: var(--text); }
+.brand:hover { text-decoration: none; color: var(--text); }
+
+.brand__mark {
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .5px;
+}
+
+.brand__text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand__text strong { font-size: 15px; white-space: nowrap; }
+.brand__text small { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+
+.nav { display: flex; align-items: center; gap: 4px; }
+.nav a {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  font-size: 14.5px;
+  font-weight: 500;
+}
+.nav a:hover { background: var(--accent-soft); color: var(--accent-dark); text-decoration: none; }
+
+.nav__cta {
+  background: var(--accent) !important;
+  color: var(--white) !important;
+  margin-left: 6px;
+}
+.nav__cta:hover { background: var(--accent-dark) !important; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 42px; height: 38px;
+  padding: 9px 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ---------- 4. Hero ---------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 100px 0 120px;
+  background:
+    radial-gradient(800px 500px at 80% 10%, rgba(59, 130, 246, .35), transparent 70%),
+    radial-gradient(600px 400px at 20% 90%, rgba(139, 92, 246, .25), transparent 65%),
+    linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e293b 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  color: #f8fafc;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, .03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(90deg, transparent, #000 48%, #000);
+  animation: gridMove 20s linear infinite;
+}
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(48px, 48px); }
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-bottom: 18px;
+  background: rgba(96, 165, 250, .12);
+  color: #bfdbfe;
+  border: 1px solid rgba(147, 197, 253, .25);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hero__title {
+  font-size: clamp(32px, 5.2vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -.5px;
+  margin-bottom: 18px;
+  color: #fff;
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-bottom: 18px;
+  font-size: 14.5px;
+  color: #cbd5e1;
+}
+.hero__meta strong { color: #fff; }
+
+.hero__desc {
+  max-width: 60ch;
+  color: #cbd5e1;
+  margin-bottom: 26px;
+}
+
+.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+  opacity: 0;
+  transition: var(--transition);
+}
+.btn:hover::before { opacity: 1; }
+.btn:hover { text-decoration: none; transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn--primary {
+  background: var(--accent-gradient);
+  color: var(--white);
+  box-shadow: var(--shadow-accent);
+}
+.btn--primary:hover {
+  box-shadow: 0 12px 32px rgba(59, 130, 246, .35);
+}
+
+.btn--ghost {
+  background: var(--white);
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.hero .btn--ghost {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .2);
+  color: #e2e8f0;
+  backdrop-filter: blur(10px);
+}
+.hero .btn--ghost:hover {
+  background: rgba(255, 255, 255, .15);
+  border-color: rgba(255, 255, 255, .4);
+  color: #fff;
+}
+
+.host-badge {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  max-width: 560px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  font-size: 13.5px;
+  color: var(--text-soft);
+}
+.host-badge__dot {
+  flex: 0 0 auto;
+  width: 9px; height: 9px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, .16);
+}
+
+.photo-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform: rotate(2deg);
+  transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.photo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, .1) 0%, transparent 50%);
+  opacity: 0;
+  transition: var(--transition);
+}
+.photo-card:hover::before { opacity: 1; }
+.photo-card:hover {
+  transform: rotate(0) translateY(-8px) scale(1.02);
+  box-shadow: 0 32px 80px rgba(15, 23, 42, .2);
+  border-color: var(--accent-light);
+}
+.photo-card img {
+  width: 100%;
+  aspect-ratio: 8 / 11;
+  object-fit: cover;
+  object-position: center top;
+  background: var(--bg-alt);
+  transition: transform .4s ease;
+}
+.photo-card:hover img { transform: scale(1.05); }
+.photo-card__info {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--white) 0%, var(--bg-alt) 100%);
+  position: relative;
+  z-index: 1;
+}
+.photo-card__info strong { font-size: 16px; color: var(--text); }
+.photo-card__info span { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+/* ---------- 5. Section umum ---------- */
+.section { padding: 90px 0; background: #fff; position: relative; }
+.section--alt { background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg-alt-2) 100%); border-block: 1px solid var(--border); }
+
+.section__title {
+  font-size: clamp(26px, 3.5vw, 36px);
+  letter-spacing: -.4px;
+  margin-bottom: 14px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section__title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin-top: 14px;
+  background: var(--accent-gradient);
+  border-radius: 999px;
+}
+.section__lead { color: var(--text-soft); margin-bottom: 40px; max-width: 70ch; font-size: 17px; line-height: 1.7; }
+
+/* ---------- 6. About ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 40px;
+  align-items: start;
+}
+.about__text p { margin-bottom: 16px; color: var(--text-soft); }
+.about__text strong { color: var(--text); }
+
+.about__card,
+.host-panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.about__card h3,
+.host-panel h3 {
+  font-size: 16px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.about__card h3.mt { margin-top: 22px; }
+
+.info-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 14px;
+}
+.info-list li:last-child { border-bottom: 0; }
+.info-list span { color: var(--text-muted); }
+.info-list strong { text-align: right; }
+
+.info-list--2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+.skill-card:hover .chip { border-color: #c7d7ff; background: var(--accent-soft); color: var(--accent-dark); }
+
+/* ---------- 7. Skills ---------- */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.skill-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--accent-light); }
+.skill-card h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--bg-alt);
+}
+
+.bar { margin-bottom: 16px; }
+.bar:last-child { margin-bottom: 0; }
+.bar__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.bar__track {
+  height: 8px;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.bar__track span {
+  display: block;
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: 999px;
+  position: relative;
+  transition: width 1s ease;
+}
+.bar__track span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ---------- 8. Portfolio ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, .05) 0%, transparent 50%);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover::before { opacity: 1; }
+.card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--accent-light); }
+.card--accent { border-color: var(--accent); background: linear-gradient(180deg, var(--accent-soft), #fff 55%); }
+
+.card__tag {
+  align-self: flex-start;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.card h3 { font-size: 17px; margin-bottom: 10px; }
+.card p { font-size: 14.5px; color: var(--text-soft); margin-bottom: 14px; }
+
+.card__list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13.5px;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+.card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.card__foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); font-size: 14px; font-weight: 600; }
+
+/* ---------- 9. Timeline ---------- */
+.timeline { position: relative; padding-left: 26px; }
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px; top: 6px; bottom: 6px;
+  width: 2px;
+  background: var(--border);
+}
+
+.tl-item { position: relative; margin-bottom: 26px; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: -25px; top: 6px;
+  width: 14px; height: 14px;
+  background: var(--white);
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+}
+.tl-item__when {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 2px 10px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.tl-item__body {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.tl-item__body h3 { font-size: 16px; margin-bottom: 6px; }
+.tl-item__body p { font-size: 14.5px; color: var(--text-soft); }
+
+/* ---------- 10. Sertifikasi ---------- */
+.certs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.cert {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.cert h3 {
+  font-size: 15px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.cert li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 6px;
+  font-size: 13.5px;
+  color: var(--text-soft);
+}
+.cert li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---------- 11. Kontak ---------- */
+.contacts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 32px;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.contact-card::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.contact-card:hover::before { transform: scaleX(1); }
+.contact-card:hover { border-color: var(--accent-light); transform: translateY(-3px); text-decoration: none; box-shadow: var(--shadow-md); }
+.contact-card__icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  background: var(--accent-gradient);
+  color: var(--white);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, .25);
+}
+.contact-card div { display: flex; flex-direction: column; min-width: 0; }
+.contact-card strong { font-size: 14px; color: var(--text); }
+.contact-card span { font-size: 12px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- 12. Footer ---------- */
+.footer {
+  padding: 48px 0;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  color: #cbd5e1;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, .3), transparent);
+}
+.footer__inner { text-align: center; position: relative; z-index: 1; }
+.footer strong { color: var(--white); font-weight: 700; }
+.footer__small { margin-top: 12px; font-size: 13px; color: #94a3b8; }
+.footer a { color: #93c5fd; transition: var(--transition-fast); }
+.footer a:hover { color: var(--accent-light); text-decoration: underline; }
+
+/* ---------- 12b. Cloud & DevOps ---------- */
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 40px;
+  padding: 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.subnav a {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+.subnav a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.cd-h3 {
+  font-size: clamp(20px, 2.4vw, 25px);
+  letter-spacing: -.2px;
+  margin: 54px 0 8px;
+  padding-top: 8px;
+}
+.cd-h3:first-of-type { margin-top: 0; }
+.cd-h3::before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 3px;
+  margin-bottom: 12px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.cd-lead { color: var(--text-soft); margin-bottom: 26px; max-width: 78ch; }
+
+/* Roadmap */
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.rm-step {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all .3s ease;
+}
+.rm-step:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: var(--accent-light); }
+.rm-step--accent { border-color: var(--accent); background: linear-gradient(180deg, var(--accent-soft), #fff 60%); }
+
+.rm-step__no {
+  display: inline-grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  margin-bottom: 14px;
+  background: var(--accent-gradient);
+  color: var(--white);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  box-shadow: var(--shadow-accent);
+}
+.rm-step h4 { font-size: 16px; margin-bottom: 10px; color: var(--text); }
+.rm-step p { font-size: 14px; color: var(--text-soft); margin-bottom: 14px; line-height: 1.6; }
+.rm-step .chip-row { gap: 6px; }
+.rm-step .chip { font-size: 12px; padding: 4px 10px; background: var(--white); }
+
+.rm-list { counter-reset: rm; margin-top: 4px; }
+.rm-list li {
+  position: relative;
+  counter-increment: rm;
+  padding: 6px 0 6px 30px;
+  font-size: 13.5px;
+  color: var(--text-soft);
+  border-bottom: 1px dashed var(--border);
+}
+.rm-list li:last-child { border-bottom: 0; }
+.rm-list li::before {
+  content: counter(rm);
+  position: absolute;
+  left: 0; top: 7px;
+  display: grid;
+  place-items: center;
+  width: 20px; height: 20px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Arsitektur */
+.arch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 24px;
+  align-items: start;
+}
+.arch {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.arch__box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.arch__box strong { font-size: 14px; }
+.arch__box span { font-size: 12.5px; color: var(--text-muted); }
+.arch__box--ext { background: #111827; border-color: #111827; }
+.arch__box--ext strong { color: var(--white); }
+.arch__box--ext span { color: #94a3b8; }
+.arch__box--core { background: var(--accent-soft); border-color: #c7d7ff; }
+.arch__box--core strong { color: var(--accent-dark); }
+.arch__box--sm { flex: 1; font-size: 12.5px; }
+.arch__row { display: flex; gap: 10px; }
+.arch__arrow {
+  text-align: center;
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1.1;
+  padding: 4px 0;
+}
+.arch__side {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.arch__tag {
+  padding: 3px 10px;
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.arch__notes {
+  padding: 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.arch__notes h4 {
+  font-size: 15px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.arch__notes h4.mt { margin-top: 22px; }
+.arch__notes code {
+  padding: 1px 5px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 12.5px;
+}
+
+/* Tabel */
+.table-wrap { overflow-x: auto; }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.table th,
+.table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.table th {
+  background: var(--bg-alt);
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: var(--text-muted);
+}
+.table td:first-child { font-weight: 600; white-space: nowrap; }
+.table tr:last-child td { border-bottom: 0; }
+
+/* Pipeline */
+.pipe { counter-reset: pipe; display: grid; gap: 16px; }
+.pipe__step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  padding: 20px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.pipe__no {
+  display: grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  background: var(--accent-soft);
+  border: 1px solid #c7d7ff;
+  color: var(--accent-dark);
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 14px;
+}
+.pipe__step h4 { font-size: 15.5px; margin-bottom: 6px; }
+.pipe__step p { font-size: 14px; color: var(--text-soft); margin-bottom: 12px; }
+
+/* Code block */
+.code {
+  margin: 0;
+  padding: 14px 16px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.code code {
+  font-family: "Cascadia Code", Consolas, "SFMono-Regular", Menlo, monospace;
+  color: #e2e8f0;
+  white-space: pre;
+}
+.pipe__step .code { margin-top: 4px; }
+
+/* Accordion */
+.accordion { display: grid; gap: 12px; }
+.accordion details {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.accordion summary {
+  padding: 14px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: var(--transition);
+}
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 24px; height: 24px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+.accordion details[open] summary { color: var(--accent-dark); border-bottom: 1px solid var(--border); }
+.accordion details[open] summary::after { content: "\2212"; }
+.accordion summary:hover { background: var(--bg-alt); }
+.acc__list { padding: 16px 20px 18px; }
+.acc__list li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 9px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+.acc__list li:last-child { margin-bottom: 0; }
+.acc__list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Lab steps */
+.steps { display: grid; gap: 16px; }
+.step {
+  padding: 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.step--accent { border-color: var(--accent); background: linear-gradient(180deg, var(--accent-soft), #fff 50%); }
+.step__no {
+  display: inline-grid;
+  place-items: center;
+  width: 30px; height: 30px;
+  margin-bottom: 10px;
+  background: var(--accent);
+  color: var(--white);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.step h4 { font-size: 15.5px; margin-bottom: 8px; }
+.step h4 code {
+  padding: 1px 6px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.step p { font-size: 14px; color: var(--text-soft); margin-bottom: 10px; }
+.step .code { margin-bottom: 10px; }
+.step__list { margin-bottom: 10px; }
+.step__list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+  font-size: 13.5px;
+  color: var(--text-soft);
+}
+.step__list li::before {
+  content: "\203A";
+  position: absolute;
+  left: 4px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.step__note {
+  padding: 9px 12px;
+  margin: 0 !important;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: 13px !important;
+  color: var(--accent-dark) !important;
+}
+.step code {
+  padding: 1px 5px;
+  background: rgba(15, 23, 42, .06);
+  border-radius: 4px;
+  font-size: .94em;
+}
+
+.lab-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+/* ---------- 13. Responsive ---------- */
+@media (max-width: 980px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero__photo { max-width: 320px; }
+  .about { grid-template-columns: 1fr; }
+  .skills, .cards, .certs { grid-template-columns: repeat(2, 1fr); }
+  .contacts { grid-template-columns: repeat(2, 1fr); }
+  .roadmap, .arch-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1080px) {
+  .nav { gap: 0; }
+  .nav a { padding: 7px 9px; font-size: 13.5px; }
+  .brand__text strong { font-size: 14px; }
+}
+
+/* Navbar sekarang berisi 9 item (termasuk Knowledge & Masuk).
+   Sebelum ruang habis, ubah menjadi menu dropdown agar tidak overflow. */
+@media (max-width: 1000px) {
+  .nav-toggle { display: flex; }
+
+  .nav {
+    position: absolute;
+    top: 66px; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 10px 20px 18px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    display: none;
+  }
+  .nav.is-open { display: flex; }
+  .nav a { padding: 11px 12px; font-size: 14.5px; }
+  .nav__cta { margin-left: 0; text-align: center; }
+
+  .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+@media (max-width: 880px) {
+  .nav-toggle { display: flex; }
+
+  .nav {
+    position: absolute;
+    top: 66px; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 10px 20px 18px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    display: none;
+  }
+  .nav.is-open { display: flex; }
+  .nav a { padding: 11px 12px; }
+  .nav__cta { margin-left: 0; text-align: center; }
+
+  .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .hero { padding: 48px 0 60px; }
+  .section { padding: 56px 0; }
+  .skills, .cards, .certs, .contacts, .info-list--2col { grid-template-columns: 1fr; }
+  .brand__text strong { font-size: 14px; }
+  .pipe__step { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+  .pipe__no { width: 30px; height: 30px; font-size: 13px; }
+  .arch__row { flex-direction: column; }
+  .cd-h3 { margin-top: 42px; }
+  .code { font-size: 12px; }
+  .accordion summary { font-size: 14px; padding: 13px 15px; }
+  .acc__list { padding: 14px 16px 16px; }
+  .lab-links .btn { width: 100%; text-align: center; }
+}
+
+@media (max-width: 420px) {
+  .container { padding: 0 18px; }
+  .hero__meta { flex-direction: column; gap: 4px; }
+  .btn { width: 100%; text-align: center; }
+}
+
+/* Cegah blok kode panjang melebarkan grid/flex (overflow di dalam .code saja) */
+.pipe,
+.steps,
+.pipe__step,
+.step,
+.pipe__step > div,
+.step > * { min-width: 0; }
+.code { max-width: 100%; }
+
+/* ---------- 15. Mobile hardening ---------- */
+@media (max-width: 560px) {
+  .brand { min-width: 0; gap: 10px; }
+  .brand__text { min-width: 0; }
+  .brand__text strong,
+  .brand__text small {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .host-badge { max-width: 100%; }
+  .host-badge a { overflow-wrap: anywhere; }
+  .host-panel { min-width: 0; }
+  .info-list code { overflow-wrap: anywhere; }
+}
+
+/* ---------- 14. Print ---------- */
+@media print {
+  .header, .hero__actions { display: none; }
+  body { font-size: 12pt; }
+}
+
+/* ---------- UI polish & accessibility ---------- */
+.header {
+  background: rgba(255, 255, 255, .9);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, .04);
+}
+.brand__mark {
+  background: linear-gradient(145deg, #2563eb, #0f3ea8);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, .22);
+}
+.nav a { transition: background-color .18s ease, color .18s ease, transform .18s ease; }
+.nav a:hover { transform: translateY(-1px); }
+.nav .nav__cta { box-shadow: 0 5px 14px rgba(37, 99, 235, .18); }
+.about__card,
+.host-panel,
+.skill-card,
+.card,
+.cert,
+.contact-card {
+  border-color: #e5eaf2;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, .045);
+}
+.about__card,
+.host-panel,
+.skill-card,
+.card,
+.cert,
+.contact-card,
+.photo-card { transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.skill-card:hover,
+.card:hover,
+.cert:hover,
+.contact-card:hover {
+  border-color: #c5d6fa;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, .09);
+}
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, .55);
+  outline-offset: 3px;
+}
+
+@media (max-width: 880px) {
+  .hero { padding: 58px 0 64px; }
+  .hero::before { background-position: center; }
+  .hero__grid { gap: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ---------- 17. UI/UX refresh ---------- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--accent-gradient);
+  z-index: 1000;
+  transition: width .12s linear;
+}
+
+.back-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--white);
+  color: var(--accent-dark);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: var(--transition);
+}
+.back-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.back-top:hover { border-color: var(--accent-light); box-shadow: var(--shadow-accent); }
+
+.nav a.is-active { background: var(--accent-soft); color: var(--accent-dark); }
+
+.hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 2px 0 22px;
+}
+.hero__stat strong {
+  display: block;
+  font-size: 26px;
+  line-height: 1.15;
+  letter-spacing: -.4px;
+  color: #fff;
+}
+.hero__stat span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  color: #93a6c8;
+}
+.hero__stat + .hero__stat {
+  padding-left: 26px;
+  border-left: 1px solid rgba(255, 255, 255, .14);
+}
+
+.contact-card__icon svg { width: 22px; height: 22px; display: block; }
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: 36px;
+  text-align: left;
+  padding-bottom: 24px;
+}
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 10px;
+}
+.footer__mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--accent-gradient);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: .5px;
+}
+.footer__small { font-size: 13px; color: #94a3b8; }
+.footer__col h4 {
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+.footer__col a {
+  display: block;
+  padding: 3px 0;
+  color: #cbd5e1;
+  transition: var(--transition-fast);
+}
+.footer__col a:hover { color: #fff; text-decoration: none; transform: translateX(3px); }
+.footer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 1px solid rgba(148, 163, 184, .18);
+  font-size: 13px;
+  color: #94a3b8;
+}
+.footer__bar strong { color: #f1f5f9; }
+.footer__to-top { color: #93c5fd; white-space: nowrap; transition: var(--transition-fast); }
+.footer__to-top:hover { color: #fff; text-decoration: none; }
+
+:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, .55);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (max-width: 720px) {
+  .footer__grid { grid-template-columns: 1fr; gap: 20px; }
+  .footer__bar { flex-direction: column; align-items: flex-start; }
+  .hero__stats { gap: 10px 18px; }
+  .hero__stat + .hero__stat { padding-left: 18px; }
+  .back-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- 18. Modern UI patterns (badge, tooltip, toast, modal) ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  border: 1px solid transparent;
+}
+.badge--blue    { background: #e0efff; color: #1d4ed8; border-color: #bfdbfe; }
+.badge--violet  { background: #ede9fe; color: #6d28d9; border-color: #ddd6fe; }
+.badge--orange  { background: #ffedd5; color: #c2410c; border-color: #fed7aa; }
+.badge--green   { background: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+.badge--cyan    { background: #cffafe; color: #0e7490; border-color: #a5f3fc; }
+.badge--pink    { background: #fce7f3; color: #be185d; border-color: #fbcfe8; }
+.badge--outline { background: transparent; color: var(--text-soft); border-color: var(--border); }
+
+/* Gradient ring pada kartu saat hover */
+.card { isolation: isolate; }
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: var(--accent-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card:hover::after { opacity: 1; }
+
+/* Tooltip CSS-only */
+[data-tip] { position: relative; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 9px);
+  transform: translate(-50%, 4px);
+  padding: 6px 11px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 80;
+  box-shadow: var(--shadow-md);
+}
+[data-tip]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 3px);
+  transform: translate(-50%, 4px);
+  border: 5px solid transparent;
+  border-top-color: #0f172a;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 80;
+}
+[data-tip]:hover::after,
+[data-tip]:hover::before,
+[data-tip]:focus-visible::after,
+[data-tip]:focus-visible::before { opacity: 1; transform: translate(-50%, 0); }
+
+/* Toast */
+.toast-wrap {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(430px, calc(100vw - 32px));
+}
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 12px 15px;
+  border-radius: 14px;
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-left: 3px solid #3b82f6;
+  box-shadow: var(--shadow-lg);
+  font-size: 13.5px;
+  line-height: 1.5;
+  animation: toastIn .28s cubic-bezier(.2, .9, .3, 1.15);
+}
+.toast--ok   { border-left-color: #10b981; }
+.toast--warn { border-left-color: #f59e0b; }
+.toast--error { border-left-color: #ef4444; }
+.toast__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .09);
+  font-size: 12px;
+  font-weight: 700;
+}
+.toast--ok .toast__icon { color: #34d399; }
+.toast--info .toast__icon { color: #60a5fa; }
+.toast--warn .toast__icon { color: #fbbf24; }
+.toast--error .toast__icon { color: #f87171; }
+.toast.is-leaving { opacity: 0; transform: translateY(8px); transition: .2s ease; }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(16px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Modal + backdrop blur */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, .55);
+  backdrop-filter: blur(6px);
+  animation: fadeIn .2s ease;
+}
+.modal__dialog {
+  position: relative;
+  width: min(460px, 100%);
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  box-shadow: var(--shadow-lg);
+  animation: dialogIn .26s cubic-bezier(.2, .9, .3, 1.1);
+}
+.modal__dialog h3 { font-size: 17px; margin-bottom: 8px; letter-spacing: -.2px; }
+.modal__dialog p { color: var(--text-soft); font-size: 14px; margin-bottom: 18px; }
+.modal__actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+.btn--danger {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+.btn--danger:hover { background: #fecaca; color: #7f1d1d; border-color: #fca5a5; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dialogIn {
+  from { opacity: 0; transform: translateY(14px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 560px) {
+  .toast-wrap { bottom: 14px; }
+  .modal__dialog { padding: 18px 16px 14px; }
+}
+.badge--red    { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+
+/* ============================================================
+   portal.css — Knowledge Base, Login, dan Workspace UTS
+   Dipakai oleh: knowledge.html, login.html, dashboard.html
+   Melengkapi assets/css/style.css (token & komponen dasar).
+   ============================================================ */
+
+/* ---------- 1. Layout aplikasi (login & dashboard) ---------- */
+.app-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, .94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.app-top__inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  padding-block: 10px;
+}
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--text);
+}
+.app-brand:hover { text-decoration: none; color: var(--accent-dark); }
+.app-brand__mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: #111827;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .5px;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.app-brand__text { display: flex; flex-direction: column; line-height: 1.25; }
+.app-brand__text strong { font-size: 14.5px; }
+.app-brand__text small { font-size: 11.5px; color: var(--text-muted); font-weight: 500; }
+.app-top__spacer { flex: 1 1 auto; }
+.app-top__links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.app-top__user {
+  font-size: 13px;
+  color: var(--text-soft);
+  padding-inline: 4px;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  padding-block: 26px 60px;
+}
+.app-side {
+  position: sticky;
+  top: 82px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+.app-side__label {
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 14px 8px 6px;
+  font-weight: 700;
+}
+.app-side__label:first-child { margin-top: 2px; }
+.app-side a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+.app-side a:hover { background: var(--bg-alt); color: var(--accent-dark); text-decoration: none; }
+.app-side a.is-active {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 700;
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.app-side__num {
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 18px;
+}
+.app-side a.is-active .app-side__num { color: var(--accent); }
+
+.app-main { min-width: 0; }
+.app-main > section { scroll-margin-top: 84px; }
+
+/* ---------- 2. Page head ---------- */
+.page-head { margin-bottom: 22px; }
+.page-head__eyebrow {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.page-head h1 { font-size: clamp(24px, 3.4vw, 32px); line-height: 1.24; margin-bottom: 8px; }
+.page-head p { color: var(--text-soft); max-width: 78ch; font-size: 14.5px; }
+
+/* ---------- 3. Cards, tiles, metrik ---------- */
+.tile {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  min-width: 0;
+  transition: all .3s ease;
+}
+.tile:hover { box-shadow: var(--shadow-md); border-color: var(--accent-light); }
+.tile + .tile { margin-top: 18px; }
+.tile--flush { padding: 0; overflow: hidden; }
+.tile__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.tile__title { font-size: 17px; font-weight: 700; margin: 0; color: var(--text); }
+.tile__sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.tile__body { font-size: 14px; color: var(--text-soft); line-height: 1.7; }
+.tile__foot {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+
+.metric {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: 14px 16px;
+}
+.metric__label {
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+.metric__value { font-size: 20px; font-weight: 800; line-height: 1.3; margin-top: 2px; }
+.metric__value--sm { font-size: 15px; overflow-wrap: anywhere; word-break: normal; }
+.metric__hint { font-size: 12px; color: var(--text-muted); }
+
+/* ---------- 4. Pills / badge ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text-soft);
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+.pill--ok { background: var(--success-soft); border-color: #86efac; color: #059669; }
+.pill--warn { background: var(--warning-soft); border-color: #fcd34d; color: #d97706; }
+.pill--info { background: var(--accent-soft); border-color: #93c5fd; color: var(--accent-dark); }
+.pill--off { background: var(--bg-alt-2); border-color: var(--border); color: var(--text-muted); }
+.pill--dark { background: var(--accent-gradient); border-color: transparent; color: #fff; }
+
+.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+/* ---------- 5. Form & tombol kecil ---------- */
+.field { display: block; margin-bottom: 16px; }
+.field > span {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: .02em;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  transition: all .2s ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, .12);
+  transform: translateY(-1px);
+}
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: var(--accent-light);
+}
+.field small { display: block; margin-top: 5px; color: var(--text-muted); font-size: 11px; line-height: 1.5; }
+
+.btn--sm { padding: 8px 14px; font-size: 13px; border-radius: var(--radius-sm); }
+.btn--block { width: 100%; justify-content: center; }
+.btn--danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; border-color: transparent; }
+.btn--danger:hover { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: #fff; box-shadow: 0 8px 20px rgba(239, 68, 68, .3); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* ---------- 6. Login ---------- */
+.login-wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px 48px;
+  background:
+    radial-gradient(1000px 500px at 15% -10%, rgba(59, 130, 246, .15) 0%, transparent 65%),
+    radial-gradient(800px 400px at 100% 0%, rgba(139, 92, 246, .12) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.login-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59, 130, 246, .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, .03) 1px, transparent 1px);
+  background-size: 52px 52px;
+  animation: gridMove 30s linear infinite;
+}
+.login-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 28px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 1;
+  animation: cardFadeIn .5s ease;
+}
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.login-card__logo {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--accent-gradient);
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-accent);
+}
+.login-card h1 { font-size: 24px; margin-bottom: 8px; color: var(--text); }
+.login-card__lead { font-size: 14px; color: var(--text-soft); margin-bottom: 24px; line-height: 1.6; }
+.login-note {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-alt);
+  border: 1px dashed var(--border);
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+.login-note code {
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--accent-dark);
+}
+.login-alt { margin-top: 18px; font-size: 13px; text-align: center; color: var(--text-muted); }
+.form-msg {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  border: 1px solid transparent;
+  display: none;
+  animation: msgSlide .3s ease;
+}
+@keyframes msgSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.form-msg.is-visible { display: block; }
+.form-msg--error { background: var(--error-soft); border-color: #fca5a5; color: #dc2626; }
+.form-msg--ok { background: var(--success-soft); border-color: #86efac; color: #059669; }
+
+/* ---------- 7. Checklist ---------- */
+.check {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+  transition: all .3s ease;
+}
+.check:hover { border-color: var(--accent-light); transform: translateX(4px); }
+.check + .check { margin-top: 12px; }
+.check input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+.check input[type="checkbox"]:hover { transform: scale(1.1); }
+.check__title { font-size: 14px; font-weight: 700; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.check__desc { font-size: 13px; color: var(--text-soft); margin-top: 4px; line-height: 1.5; }
+.check.is-done { border-color: var(--success); background: var(--success-soft); }
+.check.is-done .check__title { color: #059669; }
+.check__code {
+  margin-top: 10px;
+  font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+  font-size: 12px;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.progress-line {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--bg-alt-2);
+  overflow: hidden;
+  position: relative;
+}
+.progress-line > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent-gradient);
+  border-radius: 999px;
+  transition: width .5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.progress-line > span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* ---------- 8. Tabel ---------- */
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+table.tbl th,
+table.tbl td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+table.tbl th {
+  background: var(--bg-alt);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  font-weight: 700;
+  white-space: nowrap;
+}
+table.tbl tr:last-child td { border-bottom: 0; }
+table.tbl td code,
+p code,
+li code {
+  font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+  font-size: .88em;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ---------- 9. Blok kode ---------- */
+.code {
+  position: relative;
+  margin: 14px 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  white-space: pre;
+  tab-size: 2;
+  border: 1px solid rgba(59, 130, 246, .2);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, .15);
+}
+.code__label {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.code b { color: #93c5fd; font-weight: 600; }
+.code i { color: #86efac; font-style: normal; }
+.code::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+/* ---------- 10. Knowledge base ---------- */
+.kb-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e293b 100%);
+  color: #e5eaf3;
+  padding: 52px 0 46px;
+  position: relative;
+  overflow: hidden;
+}
+.kb-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59, 130, 246, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, .05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridMove 25s linear infinite;
+}
+.kb-hero .container { position: relative; z-index: 1; }
+.kb-hero__eyebrow {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.kb-hero h1 { font-size: clamp(28px, 4.2vw, 40px); line-height: 1.15; margin-bottom: 12px; color: #fff; }
+.kb-hero p { color: #c2cde0; max-width: 78ch; font-size: 15px; line-height: 1.7; }
+.kb-hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.kb-hero__stat {
+  border: 1px solid rgba(59, 130, 246, .3);
+  background: rgba(59, 130, 246, .1);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #d7e0ef;
+  backdrop-filter: blur(4px);
+}
+.kb-hero__stat strong { color: #fff; }
+
+.kb-layout {
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+  padding-block: 30px 64px;
+}
+.kb-toc {
+  position: sticky;
+  top: 82px;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+.kb-toc__title {
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin: 4px 8px 8px;
+}
+.kb-toc a {
+  display: block;
+  padding: 6px 9px;
+  font-size: 13px;
+  color: var(--text-soft);
+  border-radius: 6px;
+  border-left: 2px solid transparent;
+}
+.kb-toc a:hover { background: var(--bg-alt); color: var(--accent-dark); text-decoration: none; }
+.kb-toc a.is-active {
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+  font-weight: 700;
+}
+.kb-toc a.is-sub { padding-left: 20px; font-size: 12.5px; }
+
+/* Daftar isi mobile (dibuat oleh portal.js) */
+.kb-toc-mobile { display: none; }
+.kb-toc-mobile > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 13px 16px;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.kb-toc-mobile > summary::-webkit-details-marker { display: none; }
+.kb-toc-mobile > summary::after {
+  content: "+";
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 400;
+}
+.kb-toc-mobile[open] > summary::after { content: "\2212"; }
+.kb-toc-mobile__links {
+  display: grid;
+  gap: 2px;
+  padding: 0 10px 12px;
+  border-top: 1px solid var(--border);
+}
+.kb-toc-mobile__links a {
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  color: var(--text-soft);
+}
+.kb-toc-mobile__links a:hover { background: var(--bg-alt); color: var(--accent-dark); text-decoration: none; }
+
+.kb-section { padding-block: 8px 30px; border-bottom: 1px solid var(--border); scroll-margin-top: 84px; }
+.kb-section:last-child { border-bottom: 0; }
+.kb-kicker {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 18px 0 4px;
+}
+.kb-section > h2 { font-size: clamp(21px, 2.6vw, 27px); line-height: 1.25; margin-bottom: 8px; }
+.kb-section > p { color: var(--text-soft); font-size: 14.5px; max-width: 82ch; margin-bottom: 14px; }
+.kb-h3 { font-size: 17px; font-weight: 700; margin: 24px 0 8px; }
+.kb-h4 { font-size: 14.5px; font-weight: 700; margin: 18px 0 6px; }
+
+.kb-list { margin: 10px 0 14px; padding-left: 0; }
+.kb-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+.kb-list li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #93b4f5;
+}
+.kb-list--num { counter-reset: kbn; }
+.kb-list--num li { counter-increment: kbn; }
+.kb-list--num li::before {
+  content: counter(kbn);
+  left: 0;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 10.5px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+/* Accordion */
+.acc { border: 1px solid var(--border); border-radius: var(--radius); background: #fff; margin-bottom: 12px; overflow: hidden; transition: var(--transition); }
+.acc:hover { border-color: var(--accent-light); }
+.acc > summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  transition: background .2s ease;
+}
+.acc > summary::-webkit-details-marker { display: none; }
+.acc > summary::after {
+  content: "+";
+  font-size: 20px;
+  color: var(--accent);
+  font-weight: 400;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+.acc[open] > summary { background: var(--bg-alt); border-bottom: 1px solid var(--border); }
+.acc[open] > summary::after { content: "\2212"; transform: rotate(180deg); }
+.acc__body { padding: 16px 18px 18px; font-size: 14px; color: var(--text-soft); line-height: 1.7; }
+.acc__body > :first-child { margin-top: 0; }
+.acc__body p { margin-bottom: 10px; }
+.acc__body .code { margin-top: 10px; }
+
+/* Roadmap stage cards */
+.stage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0 8px; }
+.stage {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 16px 18px;
+  border-top: 3px solid var(--accent);
+  transition: all .3s ease;
+}
+.stage:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--accent-light); }
+.stage__no {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 800;
+}
+.stage h4 { font-size: 15px; margin: 4px 0 8px; color: var(--text); }
+.stage p { font-size: 13px; color: var(--text-soft); margin-bottom: 8px; line-height: 1.6; }
+.stage__meta { font-size: 11px; color: var(--text-muted); display: flex; gap: 10px; flex-wrap: wrap; }
+
+.callout {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  color: #1e3a8a;
+  margin: 16px 0;
+  line-height: 1.6;
+}
+.callout strong { color: #172554; }
+.callout--warn { border-left-color: var(--warning); background: var(--warning-soft); color: #92400e; }
+.callout--warn strong { color: #78350f; }
+
+.kb-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 12px 0; }
+
+/* Diagram alur sederhana */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0;
+}
+.flow__node {
+  border: 1px solid var(--accent-light);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all .2s ease;
+}
+.flow__node:hover { background: var(--accent); color: #fff; transform: scale(1.05); }
+.flow__arrow { color: var(--text-muted); font-size: 14px; }
+
+/* ---------- 11. Guestbook ---------- */
+.gb-form { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 10px; align-items: start; }
+.gb-list { display: grid; gap: 12px; margin-top: 16px; }
+.gb-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  padding: 14px 16px;
+  transition: all .2s ease;
+}
+.gb-item:hover { border-color: var(--accent-light); transform: translateX(4px); }
+.gb-item__meta { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; margin-bottom: 4px; }
+.gb-item__name { font-weight: 700; font-size: 14px; color: var(--text); }
+.gb-item__time { font-size: 11px; color: var(--text-muted); }
+.gb-item__msg { font-size: 13.5px; color: var(--text-soft); white-space: pre-wrap; word-break: break-word; line-height: 1.6; }
+.gb-empty { font-size: 13px; color: var(--text-muted); padding: 16px; text-align: center; border: 1px dashed var(--border); border-radius: var(--radius-sm); background: var(--bg-alt); }
+
+/* ---------- 12. Responsif ---------- */
+@media (max-width: 980px) {
+  .app-shell { grid-template-columns: minmax(0, 1fr); }
+  .app-side { position: static; max-height: none; min-width: 0; }
+  .app-main { min-width: 0; }
+  .app-side__nav { display: flex; flex-wrap: wrap; gap: 4px; padding-bottom: 4px; max-width: 100%; }
+  .app-side__label { display: none; }
+  .app-side a { white-space: nowrap; }
+  .kb-layout { grid-template-columns: minmax(0, 1fr); }
+  .kb-toc { display: none; }
+  .kb-toc-mobile {
+    display: block;
+    margin: 20px 0 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--white);
+    box-shadow: var(--shadow);
+  }
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .grid-2, .grid-3, .stage-grid, .kb-split { grid-template-columns: 1fr; }
+  .gb-form { grid-template-columns: 1fr; }
+  .app-top__user { display: none; }
+  .kb-hero { padding: 30px 0 26px; }
+  .page-head h1 { font-size: 23px; }
+  .tile { padding: 16px; }
+  .login-card { padding: 24px 20px 20px; }
+  .grid-4 { grid-template-columns: 1fr; }
+
+  /* Header portal: biarkan tombol turun ke baris baru di layar sempit */
+  .app-top__inner { flex-wrap: wrap; row-gap: 8px; }
+  .app-top__links { width: 100%; }
+  .app-top__links .btn { width: auto; flex: 1 1 auto; min-width: 0; }
+  .app-brand { min-width: 0; }
+  .app-brand__text { min-width: 0; }
+  .app-brand__text strong,
+  .app-brand__text small { white-space: normal; overflow-wrap: anywhere; }
+}
+
+@media print {
+  .app-top, .app-side, .kb-toc, .footer, .login-wrap { display: none !important; }
+  .kb-layout, .app-shell { grid-template-columns: 1fr; }
+  .acc__body { display: block !important; }
+}
+
+/* ---------- 13. Modern Tabs ---------- */
+.tech-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  background: var(--bg-alt);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.tech-tab {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.tech-tab:hover {
+  background: var(--white);
+  color: var(--text);
+  border-color: var(--border);
+}
+.tech-tab--active {
+  background: var(--white);
+  color: var(--accent-dark);
+  border-color: var(--accent-light);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, .06);
+}
+.tech-tab-content {
+  display: none;
+  animation: fadeTab .3s ease;
+}
+.tech-tab-content--active {
+  display: block;
+}
+@keyframes fadeTab {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Card gradient border */
+.card--gradient {
+  position: relative;
+  overflow: hidden;
+}
+.card--gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: var(--accent-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card--gradient:hover::before { opacity: 1; }
+
+/* Badge, tooltip, toast, modal, back-top, progress & focus-visible kini didefinisikan di
+   style.css (satu sumber, dipakai semua halaman portal). */
+
+/* ---------- UI polish for portal pages ---------- */
+.app-top {
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, .04);
+}
+.app-brand__mark,
+.login-card__logo {
+  background: linear-gradient(145deg, #2563eb, #0f3ea8);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, .2);
+}
+.app-side,
+.kb-toc {
+  border-color: #e3e9f2;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .05);
+}
+.app-side a { transition: background-color .18s ease, color .18s ease; }
+.app-side a.is-active {
+  background: linear-gradient(90deg, #eaf1ff, #f3f7ff);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.tile,
+.metric,
+.check,
+.stage,
+.acc,
+.gb-item {
+  border-color: #e3e9f2;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, .035);
+}
+.tile__head { align-items: center; }
+.metric { transition: transform .2s ease, box-shadow .2s ease; }
+.metric:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, .07);
+}
+.login-wrap {
+  background:
+    radial-gradient(800px 460px at 10% 5%, rgba(37, 99, 235, .16), transparent 60%),
+    radial-gradient(700px 420px at 100% 100%, rgba(14, 165, 233, .12), transparent 58%),
+    #f4f7fc;
+}
+.login-card {
+  position: relative;
+  overflow: hidden;
+  border-color: #e1e8f2;
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, .12);
+}
+.login-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+}
+.login-card h1 { letter-spacing: -.03em; }
+.login-note {
+  background: #f7f9fc;
+  border-style: solid;
+  border-color: #e2e8f0;
+  border-left: 3px solid #60a5fa;
+}
+.kb-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 54px 46px;
+  background:
+    radial-gradient(800px 420px at 88% 0%, rgba(37, 99, 235, .28), transparent 65%),
+    linear-gradient(135deg, #0b1220 0%, #111d35 62%, #142847 100%);
+}
+.kb-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, .045) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(90deg, transparent, #000 44%, #000);
+}
+.kb-hero__stat {
+  background: rgba(255, 255, 255, .07);
+  border-color: rgba(148, 163, 184, .24);
+  backdrop-filter: blur(8px);
+}
+.kb-layout { gap: 30px; }
+.kb-toc { scrollbar-color: #cbd5e1 transparent; scrollbar-width: thin; }
+.kb-toc a { transition: background-color .18s ease, color .18s ease; }
+.kb-section { padding-block: 14px 34px; }
+.kb-section > h2 { letter-spacing: -.025em; }
+.kb-kicker { color: #2563eb; }
+.acc > summary,
+.kb-toc-mobile > summary { transition: background-color .18s ease; }
+.acc > summary:hover,
+.kb-toc-mobile > summary:hover { background: #f5f8ff; }
+.stage,
+.callout,
+.flow__node { border-radius: 12px; }
+.table-wrap { box-shadow: 0 3px 12px rgba(15, 23, 42, .035); }
+.code { border: 1px solid #26344c; box-shadow: 0 8px 20px rgba(15, 23, 42, .08); }
+.check { transition: border-color .18s ease, background-color .18s ease; }
+.check:hover { border-color: #b8cafa; }
+
+@media (max-width: 720px) {
+  .kb-hero { padding-block: 38px 32px; }
+  .kb-layout { padding-top: 20px; }
+  .app-shell { padding-top: 18px; }
+  .app-side { padding: 10px; }
+}
+
+.kb-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+}
+.kb-quicklinks__label {
+  margin-right: 4px;
+  color: #a9bad3;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.kb-quicklinks a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 5px 11px;
+  border: 1px solid rgba(148, 163, 184, .25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+  color: #e2e8f0;
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.kb-quicklinks a:hover {
+  transform: translateY(-1px);
+  border-color: rgba(147, 197, 253, .65);
+  background: rgba(59, 130, 246, .18);
+  color: #fff;
+  text-decoration: none;
+}
+.kb-topic-search {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 14px;
+  max-width: 660px;
+  margin-top: 20px;
+}
+.kb-topic-search label {
+  color: #d3deef;
+  font-size: 12px;
+  font-weight: 600;
+}
+.kb-topic-search input {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid rgba(148, 163, 184, .35);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, .42);
+  color: #f8fafc;
+  font: inherit;
+  font-size: 13px;
+}
+.kb-topic-search input::placeholder { color: #a9bad3; }
+.kb-topic-search input:focus {
+  outline: 2px solid rgba(147, 197, 253, .45);
+  border-color: #93c5fd;
+}
+.kb-topic-search p {
+  grid-column: 2;
+  min-height: 16px;
+  color: #a9bad3;
+  font-size: 11px;
+}
+.kb-toc a[hidden],
+.kb-toc-mobile__links a[hidden] { display: none; }
+.tech-tabs {
+  display: flex;
+  gap: 4px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 5px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f1f5f9;
+  scrollbar-width: thin;
+}
+.tech-tab {
+  min-height: 38px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.tech-tab--active {
+  border-color: #bfdbfe;
+  background: #fff;
+  color: #1d4ed8;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, .08);
+}
+.tech-tab:focus-visible { outline-offset: 1px; }
+.tech-tab-content[hidden] { display: none !important; }
+
+@media (max-width: 560px) {
+  .kb-quicklinks { gap: 7px; }
+  .kb-quicklinks__label { flex-basis: 100%; }
+  .kb-topic-search { grid-template-columns: 1fr; gap: 6px; }
+  .kb-topic-search p { grid-column: 1; }
+  .tech-tabs { width: 100%; }
+  .tech-tab { flex: 1 0 auto; padding-inline: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ================= HEADER / NAVBAR ================= -->
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a href="#top" class="brand">
+      <span class="brand__mark">MAF</span>
+      <span class="brand__text">
+        <strong>Muhammad Arya Fatthurahman</strong>
+        <small>NIM 2023230006 &middot; TIFM</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#cloud">Cloud</a>
+      <a href="#portfolio">Portofolio</a>
+      <a href="#experience">Pengalaman</a>
+      <a href="#certification">Sertifikasi</a>
+      <a href="knowledge.html">Knowledge</a>
+      <a href="#contact">Kontak</a>
+      <a href="login.html" class="nav__cta" data-tip="Login workspace (akun demo)">Masuk</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <p class="eyebrow">Mahasiswa S1 Teknologi Informasi &mdash; Universitas Darma Persada (UNSADA)</p>
+      <h1 class="hero__title">Muhammad Arya<br>Fatthurahman</h1>
+      <p class="hero__meta">
+        <span>NIM: <strong>2023230006</strong></span>
+        <span>Kelas: <strong>TIFM</strong></span>
+        <span>Jurusan: <strong>Teknologi Informasi</strong></span>
+      </p>
+      <p class="hero__desc">
+        Aspiring Software Developer &amp; DevOps Engineer yang passionate pada
+        pengembangan perangkat lunak, AI/Machine Learning, dan infrastruktur cloud.
+        Berpengalaman membangun aplikasi web full-stack serta meng-automate deployment
+        di lingkungan AWS EC2.
+      </p>
+      <div class="hero__actions">
+        <a href="#portfolio" class="btn btn--primary">Lihat Portofolio</a>
+        <a href="knowledge.html" class="btn btn--ghost">Knowledge Base</a>
+        <a href="login.html" class="btn btn--ghost">Masuk Workspace</a>
+      </div>
+      <div class="hero__stats" aria-hidden="true">
+        <div class="hero__stat"><strong>6+</strong><span>Proyek</span></div>
+        <div class="hero__stat"><strong>25+</strong><span>Tools &amp; Teknologi</span></div>
+        <div class="hero__stat"><strong>AWS EC2</strong><span>Deployed</span></div>
+      </div>
+      <p class="host-badge">
+        <span class="host-badge__dot"></span>
+        <span><strong>Live:</strong> <a href="http://aryafatthurahman1.my.id" data-live-url target="_blank" rel="noopener"><span data-live-host>aryafatthurahman1.my.id</span></a>
+        &mdash; dilayani web server Nginx/Apache2. Deployment UTS di <strong>AWS EC2</strong> diakses lewat
+        <strong>Public IP</strong> (bukan localhost), sesuai <code>README.md</code>.</span>
+      </p>
+    </div>
+
+    <div class="hero__photo">
+      <div class="photo-card">
+        <img src="data:image/jpeg;base64,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"
+             alt="Foto profil Muhammad Arya Fatthurahman, NIM 2023230006"
+             width="320" height="440" loading="eager">
+        <div class="photo-card__info">
+          <strong>Muhammad Arya Fatthurahman</strong>
+          <span>2023230006 &middot; UNSADA &middot; TI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="container">
+    <h2 class="section__title">Tentang Saya</h2>
+    <div class="about">
+      <div class="about__text">
+        <p>
+          Halo! Saya <strong>Muhammad Arya Fatthurahman</strong>, mahasiswa semester 4 Program Studi
+          Teknologi Informasi di <strong>Universitas Darma Persada (UNSADA)</strong> dengan NIM
+          <strong>2023230006</strong>. Saya memiliki ketertarikan pada pengembangan web, kecerdasan buatan,
+          serta penerapan <em>cloud computing</em> untuk membangun solusi yang skalabel dan mudah dikelola.
+        </p>
+        <p>
+          Secara praktis saya telah mengerjakan beberapa proyek, mulai dari aplikasi manajemen karyawan
+          berbasis <em>Laravel</em> dengan fitur impor Excel, klasifikasi citra menggunakan
+          <em>CNN MobileNetV3</em>, perangkat IoT berbasis ESP32-C3, hingga pipeline data dan
+          monitoring infrastruktur menggunakan <em>Prometheus</em> &amp; <em>Grafana</em>.
+        </p>
+        <p>
+          Tugas besar ini merupakan bagian dari mata kuliah <strong>Cloud Computing</strong>: saya membuat
+          virtual private server pada <strong>AWS EC2</strong>, mengonfigurasi Linux serta web server
+          <strong>Apache2</strong>, lalu mendeploy website portofolio statis ini agar dapat diakses
+          publik melalui alamat <strong>Public IP</strong> instance.
+        </p>
+      </div>
+
+      <aside class="about__card">
+        <h3>Informasi Akademik</h3>
+        <ul class="info-list">
+          <li><span>Nama Lengkap</span><strong>Muhammad Arya Fatthurahman</strong></li>
+          <li><span>NIM</span><strong>2023230006</strong></li>
+          <li><span>Kelas</span><strong>TIFM</strong></li>
+          <li><span>Program Studi</span><strong>S1 Teknologi Informasi</strong></li>
+          <li><span>Universitas</span><strong>Universitas Darma Persada (UNSADA)</strong></li>
+          <li><span>Semester</span><strong>4 (Semester Genap 2025/2026)</strong></li>
+          <li><span>Lokasi</span><strong>Cakung, Jakarta Timur</strong></li>
+        </ul>
+
+        <h3 class="mt">Fokus Belajar</h3>
+        <div class="chip-row">
+          <span class="chip">Cloud Architecture</span>
+          <span class="chip">DevOps &amp; CI/CD</span>
+          <span class="chip">AI / Machine Learning</span>
+          <span class="chip">Web Engineering</span>
+          <span class="chip">Cyber Security</span>
+          <span class="chip">Data Engineering</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="section section--alt" id="skills">
+  <div class="container">
+    <h2 class="section__title">Keahlian</h2>
+    <p class="section__lead">Teknologi dan tools yang saya kuasai &mdash; dikelompokkan berdasarkan bidang keahlian.</p>
+
+    <div class="skills">
+      <article class="skill-card">
+        <h3>Bahasa &amp; Framework</h3>
+        <ul class="chip-row">
+          <li class="chip">Python</li>
+          <li class="chip">JavaScript</li>
+          <li class="chip">PHP / Laravel</li>
+          <li class="chip">C++</li>
+          <li class="chip">Dart / Flutter</li>
+          <li class="chip">C# / .NET</li>
+          <li class="chip">HTML5</li>
+          <li class="chip">CSS3</li>
+          <li class="chip">React.js</li>
+          <li class="chip">Tailwind CSS</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>AI &amp; Machine Learning</h3>
+        <ul class="chip-row">
+          <li class="chip">Machine Learning</li>
+          <li class="chip">Deep Learning</li>
+          <li class="chip">CNN / RNN</li>
+          <li class="chip">TensorFlow &amp; Keras</li>
+          <li class="chip">IBM Watson AI</li>
+          <li class="chip">NLP / BERT</li>
+          <li class="chip">Neo4j Graph Data Science</li>
+          <li class="chip">Quantum Machine Learning</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Cloud &amp; DevOps</h3>
+        <ul class="chip-row">
+          <li class="chip">AWS (EC2, RDS, S3, Lambda)</li>
+          <li class="chip">Docker</li>
+          <li class="chip">Kubernetes</li>
+          <li class="chip">Terraform</li>
+          <li class="chip">Ansible</li>
+          <li class="chip">Linux (Ubuntu/RHEL/Kali)</li>
+          <li class="chip">Git &amp; GitHub</li>
+          <li class="chip">CI/CD &amp; GitHub Actions</li>
+          <li class="chip">Prometheus &amp; Grafana</li>
+          <li class="chip">Google Cloud Platform</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Database &amp; Tools</h3>
+        <ul class="chip-row">
+          <li class="chip">MySQL</li>
+          <li class="chip">PostgreSQL</li>
+          <li class="chip">SQL Server</li>
+          <li class="chip">MongoDB</li>
+          <li class="chip">Apache2 / Nginx</li>
+          <li class="chip">VS Code</li>
+          <li class="chip">Postman</li>
+          <li class="chip">Linux Terminal</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Security &amp; Networking</h3>
+        <ul class="chip-row">
+          <li class="chip">Fortinet FortiGate</li>
+          <li class="chip">Ethical Hacking</li>
+          <li class="chip">Cisco Networking</li>
+          <li class="chip">Network Automation</li>
+          <li class="chip">Cyber Security Risk</li>
+          <li class="chip">Quantum-Safe Encryption</li>
+        </ul>
+      </article>
+
+      <article class="skill-card skill-card--progress">
+        <h3>Level Penguasaan</h3>
+        <div class="bar">
+          <div class="bar__meta"><span>Web &amp; Backend (Laravel/Python)</span><span>90%</span></div>
+          <div class="bar__track"><span style="width:90%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>Cloud &amp; DevOps</span><span>85%</span></div>
+          <div class="bar__track"><span style="width:85%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>AI / Machine Learning</span><span>80%</span></div>
+          <div class="bar__track"><span style="width:80%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>Networking &amp; Security</span><span>75%</span></div>
+          <div class="bar__track"><span style="width:75%"></span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOUD & DEVOPS ================= -->
+<section class="section section--alt" id="cloud">
+  <div class="container">
+    <h2 class="section__title">Cloud &amp; DevOps Journey</h2>
+    <p class="section__lead">
+      Ringkasan perjalanan belajar saya dari <em>localhost</em> menuju infrastruktur cloud:
+      Linux &rarr; Git &rarr; Cloud Fundamentals &rarr; AWS &rarr; Docker &rarr; Kubernetes
+      &rarr; Terraform &rarr; CI/CD &rarr; Monitoring. Semua materi ini saya praktikkan langsung
+      pada lab <strong>WSL2 Ubuntu</strong>, <strong>VirtualBox</strong>, dan <strong>AWS EC2</strong>.
+    </p>
+
+    <nav class="subnav" aria-label="Sub-navigasi Cloud dan DevOps">
+      <a href="#roadmap">Roadmap</a>
+      <a href="#architecture">Arsitektur AWS</a>
+      <a href="#pipeline">Pipeline Deploy</a>
+      <a href="#knowledge">Konsep Kunci</a>
+      <a href="#lab">Lab WSL2 + PuTTY</a>
+      <a href="knowledge.html">Knowledge Base &nearr;</a>
+    </nav>
+
+    <!-- ---------- A. ROADMAP ---------- -->
+    <h3 class="cd-h3" id="roadmap">Roadmap Belajar Cloud &amp; DevOps</h3>
+    <p class="cd-lead">
+      Urutan belajar yang saya pakai agar tidak kewalahan: kuasai dasar dulu, baru naik ke
+      orkestrasi dan otomasi. Setiap tahap punya <em>output</em> yang bisa dilihat, bukan hanya teori.
+    </p>
+
+    <div class="roadmap">
+      <article class="rm-step">
+        <span class="rm-step__no">01</span>
+        <h4>Linux &amp; Terminal</h4>
+        <p>Dasar sebelum menyentuh cloud: navigasi filesystem, permission, user &amp; group, service, dan membaca log.</p>
+        <div class="chip-row">
+          <span class="chip">bash</span><span class="chip">chmod / chown</span>
+          <span class="chip">systemctl</span><span class="chip">journalctl</span>
+          <span class="chip">ssh / scp</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">02</span>
+        <h4>Git &amp; GitHub</h4>
+        <p>Version control adalah pintu masuk CI/CD. Semua konfigurasi server sebaiknya lahir dari repository.</p>
+        <div class="chip-row">
+          <span class="chip">branch &amp; merge</span><span class="chip">pull request</span>
+          <span class="chip">.gitignore</span><span class="chip">secret management</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">03</span>
+        <h4>Cloud Fundamentals</h4>
+        <p>Pahami model layanan dan konsep ketersediaan sebelum memilih produk AWS tertentu.</p>
+        <div class="chip-row">
+          <span class="chip">IaaS / PaaS / SaaS</span><span class="chip">Region &amp; AZ</span>
+          <span class="chip">Scalability &amp; Elasticity</span><span class="chip">High Availability</span>
+          <span class="chip">Fault Tolerance</span><span class="chip">IAM</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">04</span>
+        <h4>AWS Core Services</h4>
+        <p>Fokus pada layanan yang benar-benar dipakai tugas: compute, network, storage, identity.</p>
+        <div class="chip-row">
+          <span class="chip">EC2</span><span class="chip">VPC</span><span class="chip">Security Group</span>
+          <span class="chip">IAM</span><span class="chip">S3</span><span class="chip">RDS</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">05</span>
+        <h4>Docker</h4>
+        <p>Membungkus aplikasi + dependency agar identik di laptop, VM lab, dan EC2. Ini yang membuat deploy bisa diulang.</p>
+        <div class="chip-row">
+          <span class="chip">image &amp; container</span><span class="chip">Dockerfile</span>
+          <span class="chip">port mapping</span><span class="chip">volume</span>
+          <span class="chip">network</span><span class="chip">docker compose</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">06</span>
+        <h4>Kubernetes</h4>
+        <p>Setelah paham container, baru masuk orkestrasi: menjaga replika tetap hidup dan melayani trafik.</p>
+        <div class="chip-row">
+          <span class="chip">Pod</span><span class="chip">Deployment</span>
+          <span class="chip">ReplicaSet</span><span class="chip">Service</span>
+          <span class="chip">Namespace</span><span class="chip">ConfigMap &amp; Secret</span>
+          <span class="chip">minikube / kind</span><span class="chip">Helm</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">07</span>
+        <h4>Terraform (IaC)</h4>
+        <p>Infrastruktur ditulis sebagai kode, sehingga bisa di-<em>review</em>, diulang, dan dihapus tanpa klik manual.</p>
+        <div class="chip-row">
+          <span class="chip">provider</span><span class="chip">resource</span>
+          <span class="chip">variable &amp; output</span><span class="chip">data source</span>
+          <span class="chip">state</span><span class="chip">module</span>
+          <span class="chip">init / plan / apply / destroy</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">08</span>
+        <h4>CI/CD</h4>
+        <p>Alur <strong>Code &rarr; Build &rarr; Test &rarr; Package &rarr; Deploy &rarr; Monitor</strong> dijalankan otomatis setiap push.</p>
+        <div class="chip-row">
+          <span class="chip">GitHub Actions</span><span class="chip">CodePipeline</span>
+          <span class="chip">CodeBuild</span><span class="chip">CodeDeploy</span>
+          <span class="chip">GitLab CI</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">09</span>
+        <h4>Monitoring &amp; Observability</h4>
+        <p>Deploy bukan garis akhir. Tiga pilar observability: <em>logs</em>, <em>metrics</em>, <em>traces</em>.</p>
+        <div class="chip-row">
+          <span class="chip">Prometheus</span><span class="chip">Grafana</span>
+          <span class="chip">CloudWatch</span><span class="chip">Sentry</span>
+          <span class="chip">health check</span><span class="chip">alerting</span>
+        </div>
+      </article>
+
+      <article class="rm-step rm-step--accent">
+        <span class="rm-step__no">10</span>
+        <h4>Proyek Nyata</h4>
+        <p>Teori baru menempel kalau dipakai. Lima proyek bertingkat yang saya targetkan:</p>
+        <ol class="rm-list">
+          <li>Web app sederhana di Docker pada AWS EC2</li>
+          <li>Pipeline CI/CD otomatis (GitHub Actions)</li>
+          <li>Infrastruktur AWS dengan Terraform</li>
+          <li>Deployment Kubernetes + Helm chart</li>
+          <li>Sistem monitoring, logging, dan alerting</li>
+        </ol>
+      </article>
+    </div>
+
+    <!-- ---------- B. ARSITEKTUR AWS ---------- -->
+    <h3 class="cd-h3" id="architecture">Arsitektur AWS yang Saya Pakai</h3>
+    <p class="cd-lead">
+      Untuk UTS ini arsitekturnya sengaja dibuat sederhana agar mudah dijelaskan, tetapi
+      pemisahan <em>network</em>, <em>compute</em>, dan <em>storage</em> tetap mengikuti praktik yang benar.
+    </p>
+
+    <div class="arch-grid">
+      <div class="arch">
+        <div class="arch__box arch__box--ext">
+          <strong>Pengguna / Browser</strong>
+          <span>http://&lt;PUBLIC-IP&gt;</span>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__box">
+          <strong>Security Group</strong>
+          <span>Inbound: 22 (SSH, IP saya) &middot; 80 (HTTP, 0.0.0.0/0)</span>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__box arch__box--core">
+          <strong>Amazon EC2 &mdash; Ubuntu / Amazon Linux 2023</strong>
+          <span>t3.micro &middot; Elastic IP tetap</span>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__row">
+          <div class="arch__box arch__box--sm">
+            <strong>Apache2 / Nginx</strong>
+            <span>port 80</span>
+          </div>
+          <div class="arch__box arch__box--sm">
+            <strong>Docker (opsional)</strong>
+            <span>app:3000</span>
+          </div>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__box">
+          <strong>/var/www/html</strong>
+          <span>index.html + assets/ (HTML, CSS, JS)</span>
+        </div>
+
+        <div class="arch__side">
+          <span class="arch__tag">IAM Role</span>
+          <span class="arch__tag">CloudWatch</span>
+          <span class="arch__tag">ECR / GHCR</span>
+          <span class="arch__tag">Route 53</span>
+          <span class="arch__tag">CloudFront</span>
+        </div>
+      </div>
+
+      <aside class="arch__notes">
+        <h4>Keputusan desain</h4>
+        <ul class="card__list">
+          <li><strong>SSH tidak dibuka ke semua orang.</strong> Rule port 22 dibatasi ke IP publik saya (<code>/32</code>), HTTP 80 dibuka untuk publik.</li>
+          <li><strong>Tidak ada Access Key di dalam instance.</strong> Semua akses AWS memakai <em>IAM Role</em> yang menempel ke EC2.</li>
+          <li><strong>Elastic IP</strong> dipakai agar alamat tidak berubah saat instance di-stop/start.</li>
+          <li><strong>Database di private subnet</strong> (untuk RDS), hanya bisa diakses dari Security Group aplikasi.</li>
+          <li><strong>Hemat biaya:</strong> instance di-<em>stop</em> setelah penilaian, lalu <code>terraform destroy</code> agar tidak ada tagihan berjalan.</li>
+        </ul>
+
+        <h4 class="mt">Layanan AWS &amp; fungsinya</h4>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr><th>Layanan</th><th>Fungsi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>EC2</td><td>Virtual machine untuk web server</td></tr>
+              <tr><td>VPC</td><td>Jaringan privat terisolasi</td></tr>
+              <tr><td>Security Group</td><td>Firewall tingkat instance</td></tr>
+              <tr><td>IAM</td><td>Identitas &amp; hak akses (least privilege)</td></tr>
+              <tr><td>S3</td><td>Penyimpanan objek (aset / backup)</td></tr>
+              <tr><td>RDS</td><td>Database terkelola (PostgreSQL/MySQL)</td></tr>
+              <tr><td>Route 53</td><td>DNS &amp; routing domain</td></tr>
+              <tr><td>CloudFront</td><td>CDN &amp; cache di edge location</td></tr>
+              <tr><td>CloudWatch</td><td>Log, metrik, dan alarm</td></tr>
+              <tr><td>ECR</td><td>Registry image Docker privat</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ---------- C. PIPELINE ---------- -->
+    <h3 class="cd-h3" id="pipeline">Pipeline dari Laptop ke EC2</h3>
+    <p class="cd-lead">
+      Alur ini yang saya siapkan untuk pengembangan berikutnya: begitu <code>git push</code>,
+      image dibangun otomatis, dikirim ke container registry, lalu EC2 menarik versi terbaru.
+    </p>
+
+    <ol class="pipe">
+      <li class="pipe__step">
+        <span class="pipe__no">1</span>
+        <div>
+          <h4>Build lokal &amp; containerisasi</h4>
+          <p>Aplikasi diuji di <code>localhost</code> dulu, lalu dibungkus Docker dengan <em>multi-stage build</em> agar image kecil dan tidak membawa devDependency.</p>
+          <pre class="code"><code>FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+EXPOSE 3000
+CMD ["node", "server.js"]</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">2</span>
+        <div>
+          <h4>Jalankan bersama reverse proxy</h4>
+          <p>Nginx menerima trafik port 80 dan meneruskannya ke container aplikasi. Konfigurasi ini juga siap dipasangi TLS.</p>
+          <pre class="code"><code>services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">3</span>
+        <div>
+          <h4>Otomasi dengan GitHub Actions</h4>
+          <p>Setiap push ke <code>main</code>: build image, push ke registry, lalu jalankan perintah deploy lewat SSH (atau SSM tanpa membuka port 22).</p>
+          <pre class="code"><code>- name: Deploy ke EC2
+  uses: appleboy/ssh-action@v1
+  with:
+    host: ${{ secrets.EC2_HOST }}
+    username: ubuntu
+    key: ${{ secrets.EC2_SSH_KEY }}
+    script: |
+      cd ~/app
+      docker compose pull
+      docker compose up -d --remove-orphans
+      curl -fsS http://localhost/health || exit 1</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">4</span>
+        <div>
+          <h4>Infrastruktur sebagai kode</h4>
+          <p>EC2, Security Group, Key Pair, dan Elastic IP dibuat ulang kapan saja dengan Terraform &mdash; tidak ada lagi konfigurasi yang hanya "ada di kepala".</p>
+          <pre class="code"><code>terraform init
+terraform plan -out tfplan
+terraform apply tfplan
+terraform output public_ip
+
+# setelah dinilai
+terraform destroy</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">5</span>
+        <div>
+          <h4>Monitoring, rollback, dan pembersihan</h4>
+          <p>Health check menentukan deploy berhasil atau tidak. Jika gagal, container lama dikembalikan; image lama dibersihkan agar disk tidak penuh.</p>
+          <pre class="code"><code>docker compose ps
+docker compose logs --tail=50 app
+docker compose down &amp;&amp; docker compose up -d
+docker image prune -af --filter "until=24h"
+docker system df</code></pre>
+        </div>
+      </li>
+    </ol>
+
+    <!-- ---------- D. KONSEP KUNCI ---------- -->
+    <h3 class="cd-h3" id="knowledge">Konsep Kunci &mdash; Catatan Belajar</h3>
+    <p class="cd-lead">
+      Rangkuman pertanyaan yang paling sering muncul saat merancang sistem di AWS.
+      Klik tiap bagian untuk membuka jawabannya.
+    </p>
+
+    <div class="accordion">
+      <details open>
+        <summary>1. Network &amp; Security Architecture</summary>
+        <ul class="acc__list">
+          <li><strong>Secret di dev vs produksi:</strong> di laptop boleh <code>.env</code>; di produksi pakai SSM Parameter Store / Secrets Manager, disuntikkan oleh platform (ECS) &mdash; jangan pernah commit kunci.</li>
+          <li><strong>VPC isolation:</strong> resource backend di <em>private subnet</em> tanpa public IP, sehingga tidak bisa dirutekan dari internet.</li>
+          <li><strong>Publik vs privat:</strong> DevTools hanya melihat request sampai API Gateway; isi VPC tidak terlihat dari browser.</li>
+          <li><strong>IAM Policy vs Role:</strong> policy adalah dokumen aturan, role adalah "topi" yang dipakai service untuk mendapatkan kredensial sementara.</li>
+          <li><strong>Cognito:</strong> <em>User Pool</em> = database pengguna + autentikasi (mengeluarkan JWT); <em>Identity Pool</em> = menukar token menjadi kredensial IAM sementara.</li>
+          <li><strong>WAF &amp; Shield:</strong> WAF memeriksa isi request (SQLi/XSS/bot), Shield menahan banjir trafik DDoS.</li>
+          <li><strong>KMS:</strong> enkripsi <em>at rest</em> &mdash; data di disk selalu teracak, kunci dikelola KMS.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>2. Compute &amp; Microservices</summary>
+        <ul class="acc__list">
+          <li><strong>EC2 vs Fargate:</strong> EC2 seperti punya mobil sendiri (rawat + bayar saat diam); serverless seperti naik taksi (bayar sesuai pakai).</li>
+          <li><strong>Route publik vs terproteksi:</strong> <code>GET /products</code> boleh tanpa token; <code>POST /orders</code> wajib authorizer sehingga request tidak valid ditolak 401 sebelum masuk VPC.</li>
+          <li><strong>API Gateway vs ALB:</strong> API Gateway di edge (auth, quota, validasi); ALB di dalam VPC (distribusi trafik &amp; health check container).</li>
+          <li><strong>ECR &amp; ECS:</strong> build image &rarr; push ke ECR &rarr; ECS menarik image dan menjalankan task.</li>
+          <li><strong>Lambda cold start:</strong> inisialisasi runtime membuat request pertama lambat; solusinya <em>Provisioned Concurrency</em>.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>3. Database &amp; Caching</summary>
+        <ul class="acc__list">
+          <li><strong>RDS vs DynamoDB:</strong> RDS untuk transaksi relasional &amp; ACID; DynamoDB untuk lookup key-value berskala besar.</li>
+          <li><strong>Cache HTTP vs in-memory:</strong> cache di edge menyimpan respons final (read-only, publik); Redis menyimpan objek yang bisa berubah (session, counter stok).</li>
+          <li><strong>Pencarian:</strong> <code>LIKE '%kata%'</code> tidak tahan typo dan berat di jutaan baris &mdash; gunakan OpenSearch untuk fuzzy match &amp; ranking relevansi.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>4. Messaging &amp; Event-Driven</summary>
+        <ul class="acc__list">
+          <li><strong>SNS + SQS:</strong> service pemesan cukup memublikasikan event lalu langsung membalas sukses; email &amp; cart diproses asinkron.</li>
+          <li><strong>SNS/SQS vs Kafka vs EventBridge:</strong> SQS untuk antrean tugas sekali pakai, Kafka untuk stream yang bisa diputar ulang, EventBridge untuk routing berbasis isi event.</li>
+          <li><strong>Standard vs FIFO:</strong> Standard = throughput besar, <em>at-least-once</em>; FIFO = urutan ketat &amp; tepat sekali, throughput terbatas.</li>
+          <li><strong>Step Functions:</strong> mengorkestrasi langkah multi-service dengan retry dan <em>compensation</em> (Saga Pattern).</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>5. Storage, Frontend &amp; Delivery</summary>
+        <ul class="acc__list">
+          <li><strong>Rendering:</strong> SSR butuh compute (Lambda/ECS), bukan S3. SSG &amp; CSR bisa sepenuhnya statis di S3; ISR adalah gabungan cache + rebuild di belakang.</li>
+          <li><strong>Storage class:</strong> Standard untuk data panas, IA untuk arsip jarang dibuka, Glacier untuk retensi jangka panjang.</li>
+          <li><strong>CloudFront:</strong> menaruh salinan aset di edge location sehingga latensi turun drastis untuk pengguna jauh dari region asal.</li>
+          <li><strong>Route 53:</strong> bisa latency-based maupun failover, bukan sekadar memetakan nama ke satu IP.</li>
+          <li><strong>VPC Endpoint:</strong> resource privat mencapai S3/DynamoDB lewat jalur privat, tanpa NAT Gateway dan tanpa internet publik.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>6. DevOps, Observability &amp; Architecture</summary>
+        <ul class="acc__list">
+          <li><strong>Tiga pilar observability:</strong> logs (apa yang terjadi), metrics (seberapa parah), traces (di hop mana bermasalah).</li>
+          <li><strong>Grafana vs Sentry:</strong> Grafana menjawab "sistem sedang rusak"; Sentry menjawab "baris kode mana penyebabnya".</li>
+          <li><strong>Terraform vs CDK:</strong> Terraform deklaratif &amp; multi-cloud (HCL); CDK memakai bahasa pemrograman lalu menghasilkan CloudFormation.</li>
+          <li><strong>CodePipeline:</strong> Source &rarr; Build (CodeBuild + test + push image) &rarr; Deploy (CodeDeploy rolling update tanpa downtime).</li>
+          <li><strong>Multi-AZ vs Multi-Region:</strong> Multi-AZ wajib untuk ketahanan satu data center; Multi-Region untuk bencana skala besar dan jauh lebih kompleks.</li>
+          <li><strong>Well-Architected:</strong> Security, Reliability, Performance Efficiency, Cost Optimization, Operational Excellence, Sustainability.</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- ---------- E. LAB WSL2 + PUTTY ---------- -->
+    <h3 class="cd-h3" id="lab">Lab: WSL2 Ubuntu + PuTTY ke AWS EC2</h3>
+    <p class="cd-lead">
+      Inilah jalur yang saya pakai untuk menghubungkan laptop Windows ke instance EC2:
+      <strong>WSL2 Ubuntu</strong> untuk semua perintah Linux, dan <strong>PuTTY</strong> sebagai
+      terminal SSH alternatif yang bisa dipakai saat presentasi.
+    </p>
+
+    <div class="steps">
+      <article class="step">
+        <span class="step__no">1</span>
+        <h4>Install WSL2 + Ubuntu</h4>
+        <p>Jalankan di PowerShell (Administrator), lalu reboot bila diminta.</p>
+        <pre class="code"><code>wsl --install -d Ubuntu
+wsl --set-default-version 2
+wsl -l -v</code></pre>
+        <p class="step__note">Setelah reboot, Ubuntu akan meminta username &amp; password Linux (bebas, bukan password AWS).</p>
+      </article>
+
+      <article class="step">
+        <span class="step__no">2</span>
+        <h4>Siapkan tools di dalam Ubuntu</h4>
+        <p>Semua perintah berikut dijalankan di terminal Ubuntu (WSL2).</p>
+        <pre class="code"><code>sudo apt update &amp;&amp; sudo apt upgrade -y
+sudo apt install -y curl git unzip openssh-client apache2
+
+# verifikasi
+lsb_release -ds
+git --version
+apache2 -v</code></pre>
+      </article>
+
+      <article class="step">
+        <span class="step__no">3</span>
+        <h4>Convert key pair <code>.pem</code> ke <code>.ppk</code></h4>
+        <p>AWS memberikan file <code>.pem</code>, sedangkan PuTTY memakai format <code>.ppk</code>.</p>
+        <ol class="step__list">
+          <li>Buka <strong>PuTTYgen</strong> &rarr; <em>Load</em> &rarr; pilih file <code>.pem</code> (ubah filter ke <em>All Files</em>).</li>
+          <li>Klik <strong>Save private key</strong> &rarr; simpan sebagai <code>uts-cloud-key.ppk</code>.</li>
+          <li>Jangan pernah membagikan file ini. Simpan di folder pribadi, bukan di repository.</li>
+        </ol>
+      </article>
+
+      <article class="step">
+        <span class="step__no">4</span>
+        <h4>Konfigurasi sesi PuTTY</h4>
+        <ol class="step__list">
+          <li><em>Host Name</em>: <code>ubuntu@&lt;PUBLIC-IP&gt;</code> (atau <code>ec2-user@</code> untuk Amazon Linux).</li>
+          <li><em>Port</em>: <code>22</code> &middot; <em>Connection type</em>: <code>SSH</code>.</li>
+          <li><em>Connection &rarr; SSH &rarr; Auth &rarr; Credentials</em>: pilih file <code>.ppk</code> tadi.</li>
+          <li>Kembali ke <em>Session</em>, isi <em>Saved Sessions</em> dengan <code>UTS-EC2</code>, lalu klik <strong>Save</strong>.</li>
+          <li>Klik <strong>Open</strong> &rarr; jawab <em>yes</em> pada prompt host key.</li>
+        </ol>
+        <p class="step__note">Alternatif dari WSL2 (tanpa PuTTY): <code>ssh -i uts-cloud-key.pem ubuntu@&lt;PUBLIC-IP&gt;</code> dengan <code>chmod 400 uts-cloud-key.pem</code>.</p>
+      </article>
+
+      <article class="step">
+        <span class="step__no">5</span>
+        <h4>Pasang web server di EC2</h4>
+        <p>Dari dalam sesi SSH, siapkan Apache2 (atau Nginx, pilih salah satu).</p>
+        <pre class="code"><code>sudo apt update &amp;&amp; sudo apt install -y apache2
+sudo systemctl enable --now apache2
+sudo systemctl status apache2 --no-pager
+
+# buka firewall OS jika aktif
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp</code></pre>
+      </article>
+
+      <article class="step">
+        <span class="step__no">6</span>
+        <h4>Deploy website ke document root</h4>
+        <pre class="code"><code># dari laptop / WSL2
+scp -i uts-cloud-key.pem -r index.html assets ubuntu@&lt;PUBLIC-IP&gt;:~/
+
+# dari dalam EC2
+sudo rm -f /var/www/html/index.html
+sudo cp -r ~/index.html ~/assets /var/www/html/
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+curl -I http://localhost</code></pre>
+      </article>
+
+      <article class="step">
+        <span class="step__no">7</span>
+        <h4>Verifikasi lewat Public IP</h4>
+        <p>Buka browser (bukan <code>localhost</code>) dan pastikan halaman tampil lengkap dengan foto &amp; CSS.</p>
+        <pre class="code"><code># uji dari laptop
+curl -I http://&lt;PUBLIC-IP&gt;
+curl -o NUL -w "%{http_code}\n" http://&lt;PUBLIC-IP&gt;/assets/css/style.css</code></pre>
+        <p class="step__note">Jika CSS 404, berarti folder <code>assets</code> belum ikut ter-copy ke <code>/var/www/html</code>.</p>
+      </article>
+
+      <article class="step step--accent">
+        <span class="step__no">8</span>
+        <h4>Naik level: Docker, Terraform, Helm</h4>
+        <p>Setelah situs statis berjalan, lab dilanjutkan ke containerisasi dan orkestrasi.</p>
+        <pre class="code"><code># Docker
+docker build -t web-uts:v1 .
+docker run -d -p 8080:80 web-uts:v1
+
+# Terraform
+terraform init &amp;&amp; terraform plan &amp;&amp; terraform apply
+
+# Kubernetes + Helm
+kind create cluster --name uts
+helm upgrade --install web ./helm/nextjs-app --set image.tag=latest
+kubectl get pods,svc,ingress</code></pre>
+      </article>
+    </div>
+
+    <div class="lab-links">
+      <a class="btn btn--primary" href="index.html#lab">Panduan lengkap WSL2 + PuTTY</a>
+      <a class="btn btn--ghost" href="index.html#architecture">README tugas</a>
+      <a class="btn btn--ghost" href="index.html#cloud">Naskah video</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <h2 class="section__title">Portofolio &amp; Proyek</h2>
+    <p class="section__lead">Beberapa project yang pernah saya kerjakan, dari aplikasi web, AI, IoT, hingga infrastruktur cloud.</p>
+
+    <div class="cards">
+      <article class="card">
+        <span class="badge badge--blue">Full-stack &middot; Laravel</span>
+        <h3>Sistem Manajemen Karyawan (HRIS)</h3>
+        <p>Aplikasi web manajemen SDM dengan fitur impor Excel, absensi, penilaian kinerja, dan perhitungan gaji terintegrasi menggunakan MySQL.</p>
+        <ul class="card__list">
+          <li>Arsitektur MVC pada Laravel 10</li>
+          <li>Modul import data massal (PhpSpreadsheet)</li>
+          <li>Validasi input &amp; audit log</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--violet">AI &middot; Deep Learning</span>
+        <h3>Klasifikasi Ras Kelinci dengan CNN</h3>
+        <p>Model convolutional neural network MobileNetV3 untuk klasifikasi ras kelinci dari citra, dibangun dengan teknik transfer learning.</p>
+        <ul class="card__list">
+          <li>Python, TensorFlow &amp; Keras</li>
+          <li>Augmentasi data &amp; tuning hyperparameter</li>
+          <li>Evaluasi akurasi &amp; confusion matrix</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card card--accent">
+        <span class="badge badge--orange">Cloud &middot; AWS EC2</span>
+        <h3>Deployment Website di AWS EC2</h3>
+        <p>Tugas UTS Cloud Computing: membuat instance EC2 Ubuntu, mengatur Security Group (SSH 22 &amp; HTTP 80), memasang Apache2, dan mendeploy website statis melalui Public IP.</p>
+        <ul class="card__list">
+          <li>Konfigurasi EC2, Key Pair &amp; Security Group</li>
+          <li>Manajemen user, permission, dan web server</li>
+          <li>Website statis HTML/CSS responsif</li>
+        </ul>
+        <div class="card__foot"><a href="#contact">Didemonstrasikan pada video UTS &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--green">IoT &middot; Embedded</span>
+        <h3>ESP32-C3 Alarm Clock</h3>
+        <p>Jam alarm berbasis mikrokontroler ESP32-C3 dengan konektivitas Wi-Fi, tampilan digital, dan penjadwalan alarm yang dapat dikonfigurasi.</p>
+        <ul class="card__list">
+          <li>Arduino IDE &amp; C++</li>
+          <li>Integrasi Wi-Fi &amp; NTP time sync</li>
+          <li>Desain PCB sederhana</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--cyan">Data Engineering</span>
+        <h3>Pipeline Data &amp; Lakehouse</h3>
+        <p>Pipeline ingestion data batch &amp; streaming menuju lakehouse, diproses dengan Airflow dan Spark, termasuk konfigurasi Terraform.</p>
+        <ul class="card__list">
+          <li>Databricks / Snowflake / Lakeflow Spark</li>
+          <li>Airflow &amp; Kafka streaming</li>
+          <li>Terraform untuk provision infrastructure</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--pink">Monitoring &amp; Automation</span>
+        <h3>Observability Infrastructure</h3>
+        <p>Setup Prometheus untuk scraping metrik, Grafana untuk visualisasi dashboard, serta Ansible untuk otomasi konfigurasi server.</p>
+        <ul class="card__list">
+          <li>Prometheus &amp; Grafana dashboard</li>
+          <li>Ansible playbooks</li>
+          <li>Alerting &amp; health check</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PENGALAMAN & PENDIDIKAN ================= -->
+<section class="section section--alt" id="experience">
+  <div class="container">
+    <h2 class="section__title">Pendidikan &amp; Pengalaman</h2>
+
+    <div class="timeline">
+      <article class="tl-item">
+        <div class="tl-item__when">2026</div>
+        <div class="tl-item__body">
+          <h3>Artificial Intelligence &mdash; Darma Persada (HIMIFDA)</h3>
+          <p>Mengikuti kegiatan AI di lingkup HIMIFDA dan Sekolah Pascasarjana UNSADA sebagai peserta.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2026</div>
+        <div class="tl-item__body">
+          <h3>Webinar Nasional Keamanan Digital</h3>
+          <p>Partisipasi dalam webinar nasional bertema <em>Digital Security</em> yang membahas respons insiden dan praktik hardening pada server.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2025 &mdash; 2026</div>
+        <div class="tl-item__body">
+          <h3>Kerja Praktik &mdash; Sistem Manajemen Karyawan</h3>
+          <p>Mengembangkan aplikasi web manajemen karyawan berbasis Laravel + MySQL di sebuah perusahaan, mulai dari analisis kebutuhan, perancangan database, implementasi, hingga pengujian.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2023 &mdash; Sekarang</div>
+        <div class="tl-item__body">
+          <h3>S1 Teknologi Informasi &mdash; Universitas Darma Persada (UNSADA)</h3>
+          <p>NIM 2023230006, Kelas TIFM. Mata kuliah relevan: Basis Data, Pemrograman Web, Artificial Intelligence &amp; Machine Learning, Data Mining, Mobile Computing, Sistem Informasi Enterprise.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERTIFIKASI ================= -->
+<section class="section" id="certification">
+  <div class="container">
+    <h2 class="section__title">Sertifikasi Profesional</h2>
+    <p class="section__lead">Sertifikasi yang saya miliki dari penyelenggara cloud, jaringan, dan data engineering.</p>
+
+    <div class="certs">
+      <article class="cert">
+        <h3>Cisco</h3>
+        <ul>
+          <li>Ethical Hacker (Jun 2025)</li>
+          <li>Managing Cisco Network Operating Systems (Okt 2025)</li>
+          <li>Automate AI Solutions on Cisco Infrastructure</li>
+          <li>Network Technician Career Path</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>IBM</h3>
+        <ul>
+          <li>Containers &amp; Kubernetes Essentials</li>
+          <li>Quantum Machine Learning (Feb 2026)</li>
+          <li>Quantum-Safe Encryption Essentials</li>
+          <li>Beyond the Basics: Istio &amp; IBM Cloud K8s</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Google Cloud</h3>
+        <ul>
+          <li>Site Reliability Engineering (Feb 2026)</li>
+          <li>Cybersecurity: Cloud Security Risk Management</li>
+          <li>Transformer Models and BERT Model</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Fortinet</h3>
+        <ul>
+          <li>Fortinet Certified Associate Cybersecurity</li>
+          <li>FortiGate 7.6 Operator (Jun 2025)</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>The Linux Foundation</h3>
+        <ul>
+          <li>LFS158: Introduction to Kubernetes</li>
+          <li>LFQ102: Quantum Computing Essentials</li>
+          <li>LFEL1001: EU Cyber Resilience Act (CRA)</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Databricks &amp; Neo4j</h3>
+        <ul>
+          <li>Data Ingestion with Lakeflow Connect</li>
+          <li>Build Data Pipelines with Lakeflow Spark</li>
+          <li>Neo4j Graph Data Science Certification</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KONTAK ================= -->
+<section class="section section--alt" id="contact">
+  <div class="container">
+    <h2 class="section__title">Kontak</h2>
+    <p class="section__lead">Silakan hubungi saya untuk diskusi, kolaborasi proyek, atau peluang magang.</p>
+
+    <div class="contacts">
+      <a class="contact-card" href="mailto:aryafatthurahman4@gmail.com">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
+        </span>
+        <div>
+          <strong>Email</strong>
+          <span>aryafatthurahman4@gmail.com</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://wa.me/628517445861" target="_blank" rel="noopener">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.6 2 2.2 6.4 2.2 11.8c0 2.1.6 4.2 1.7 5.9L2.2 22l4.5-1.7a9.7 9.7 0 0 0 5.3 1.6h.1c5.4 0 9.8-4.4 9.8-9.9 0-2.6-1-5.1-2.9-6.9A9.6 9.6 0 0 0 12.04 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-2.6 1 1-2.5-.2-.3a7.9 7.9 0 0 1-1.3-4.3c0-4.5 3.6-8.1 8-8.1a8 8 0 0 1 5.7 2.3 8 8 0 0 1 2.3 5.8c0 4.5-3.7 8.3-8.5 8.3zm4.5-5.8c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.2-.2.3-.6.8-.8 1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.6.1-.2 0-.4 0-.6-.1-.2-.5-1.3-.8-1.8-.2-.4-.4-.4-.6-.4h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.7-.1 1.8-.7 2.1-1.4.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.5-.4z"/></svg>
+        </span>
+        <div>
+          <strong>WhatsApp</strong>
+          <span>+62 851-7445-861</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.6.5.8 5.6.8 12.1c0 5.1 3.3 9.4 7.7 10.8.5.1.7-.2.7-.5v-2c-3.1.7-3.8-1.4-3.8-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.2 1 .1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.3-5.1-5.5 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.4.1-3 0 0 .9-.3 3 1.1a10.3 10.3 0 0 1 5.5 0c2.1-1.4 3-1.1 3-1.1.6 1.6.2 2.7.1 3 .7.8 1.1 1.8 1.1 3 0 4.3-2.6 5.2-5.1 5.5.4.4.8 1.1.8 2.2v3c0 .3.2.6.7.5 4.4-1.5 7.7-5.8 7.7-10.8C23.2 5.6 18.4.5 12 .5z"/></svg>
+        </span>
+        <div>
+          <strong>GitHub</strong>
+          <span>github.com/AryaFatthurahman1</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/muhammad-arya-fatthurahman" target="_blank" rel="noopener">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.49 2.49 0 1 1 0 4.98 2.49 2.49 0 0 1 0-4.98zM.4 8.9h4.6V24H.4zM8.9 8.9h4.4v2.1h.1c.6-1.1 2.1-2.3 4.3-2.3 4.6 0 5.4 3 5.4 6.9V24h-4.6v-6.5c0-1.6 0-3.6-2.2-3.6-2.2 0-2.6 1.7-2.6 3.5V24H8.9z"/></svg>
+        </span>
+        <div>
+          <strong>LinkedIn</strong>
+          <span>/in/muhammad-arya-fatthurahman</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="host-panel">
+      <h3>Arsitektur Lab &amp; Deployment</h3>
+      <ul class="info-list info-list--2col">
+        <li><span>Komputer Target</span><strong>Amazon Linux 2023 / Ubuntu 24.04 (VMware / VirtualBox)</strong></li>
+        <li><span>Web Server</span><strong>httpd / apache2 &mdash; DocumentRoot <code>/var/www/html</code></strong></li>
+        <li><span>Container</span><strong>Docker &mdash; <code>nginx:8080</code></strong></li>
+        <li><span>Orchestrator</span><strong>Kubernetes (kind / k3s) &mdash; NodePort <code>30080</code></strong></li>
+        <li><span>IaC</span><strong>Terraform &mdash; LocalStack / AWS asli / VM lokal</strong></li>
+        <li><span>Akses Lab</span><strong><code>http://192.168.56.10</code> &middot; SSH <code>ec2-user@192.168.56.10</code></strong></li>
+        <li><span>Deployment UTS</span><strong>AWS EC2 (Ubuntu/Amazon Linux) + Apache2 melalui Public IP</strong></li>
+        <li><span>Website Live</span><strong><a href="http://aryafatthurahman1.my.id" data-live-url target="_blank" rel="noopener"><span data-live-host>aryafatthurahman1.my.id</span></a></strong></li>
+        <li><span>Portal</span><strong><a href="knowledge.html">Knowledge Base</a> &middot; <a href="login.html">Login workspace</a></strong></li>
+        <li><span>Akses SSH</span><strong>WSL2 Ubuntu &amp; PuTTY &mdash; <code>ubuntu@&lt;PUBLIC-IP&gt;</code></strong></li>
+        <li><span>Dokumentasi</span><strong><code>WSL2-PUTTY-GUIDE.md</code>, <code>LAB/00-PANDUAN-UTAMA.md</code>, <code>README.md</code></strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="footer">
+  <div class="container footer__inner">
+    <div class="footer__grid">
+      <div class="footer__col">
+        <p class="footer__brand"><span class="footer__mark">MAF</span> Muhammad Arya Fatthurahman</p>
+        <p class="footer__small">NIM 2023230006 &middot; Kelas TIFM<br>S1 Teknologi Informasi, Universitas Darma Persada (UNSADA)</p>
+      </div>
+      <div class="footer__col">
+        <h4>Navigasi</h4>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#portfolio">Portofolio</a>
+        <a href="#experience">Pengalaman</a>
+        <a href="#certification">Sertifikasi</a>
+      </div>
+      <div class="footer__col">
+        <h4>Portal</h4>
+        <a href="knowledge.html">Knowledge Base</a>
+        <a href="login.html">Masuk Workspace</a>
+        <a href="http://aryafatthurahman1.my.id" data-live-url target="_blank" rel="noopener">Live: <span data-live-host>aryafatthurahman1.my.id</span></a>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <p>&copy; <span id="year">2026</span> <strong>Muhammad Arya Fatthurahman</strong> &mdash; Tugas UTS Cloud Computing (AWS EC2)</p>
+      <a class="footer__to-top" href="#top">Kembali ke atas &#8593;</a>
+    </div>
+  </div>
+</footer>
+<button type="button" class="back-top" id="backTop" data-tip="Kembali ke atas" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   Script minimal untuk website portofolio
+   - Mobile navigation toggle
+   - Menandai link navigasi yang sedang aktif (scroll spy)
+   - Tahun footer otomatis
+   ============================================================ */
+(function () {
+  'use strict';
+
+  /* ---- 1. Menu mobile (hamburger) ---- */
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Tutup menu ketika salah satu link di-klik
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ---- 2. Scroll spy: tandai section yang sedang terlihat ---- */
+  var sections = Array.prototype.slice.call(
+    document.querySelectorAll('section[id]')
+  );
+  var navLinks = Array.prototype.slice.call(
+    document.querySelectorAll('.nav a[href^="#"]')
+  );
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = '#' + entry.target.id;
+        navLinks.forEach(function (link) {
+          link.classList.toggle('is-active', link.getAttribute('href') === id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
+  /* ---- 2b. Progress bar scroll + tombol kembali ke atas ---- */
+  var progress = document.getElementById('progress');
+  var backTop = document.getElementById('backTop');
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var max = Math.max(doc.scrollHeight - doc.clientHeight, 1);
+    var ratio = Math.min(Math.max((doc.scrollTop || document.body.scrollTop) / max, 0), 1);
+    if (progress) progress.style.width = (ratio * 100).toFixed(2) + '%';
+    if (backTop) backTop.classList.toggle('is-visible', (doc.scrollTop || 0) > 480);
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      onScroll();
+      ticking = false;
+    });
+  }, { passive: true });
+  onScroll();
+
+  if (backTop) {
+    backTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ---- 3. Tahun footer otomatis ---- */
+  var year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
+
+  /* ---- 4. Sinkronkan alamat publik yang sedang dipakai ---- */
+  var host = location.host || '';
+  var isLocal = /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(host);
+
+  var liveHost = isLocal ? 'aryafatthurahman1.my.id' : host;
+  var liveUrl = isLocal
+    ? 'http://aryafatthurahman1.my.id'
+    : location.origin + location.pathname.replace(/[^/]*$/, '');
+
+  document.querySelectorAll('[data-live-host]').forEach(function (el) {
+    el.textContent = liveHost;
+  });
+
+  document.querySelectorAll('[data-live-url]').forEach(function (el) {
+    el.href = liveUrl;
+  });
+})();
+
+/* ============================================================
+   ui.js — komponen UI bersama (toast + modal confirm)
+   ------------------------------------------------------------
+   Dipakai semua halaman portal UTS. Tidak butuh dependency;
+   pola mirip Shadcn/HeroUI tetapi ditulis langsung dengan
+   HTML + CSS + JS vanilla.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var MAF = (window.MAF = window.MAF || {});
+
+  /* ---------- Toast ---------- */
+  function ensureWrap() {
+    var wrap = document.querySelector('.toast-wrap');
+    if (wrap) return wrap;
+    wrap = document.createElement('div');
+    wrap.className = 'toast-wrap';
+    wrap.setAttribute('aria-live', 'polite');
+    document.body.appendChild(wrap);
+    return wrap;
+  }
+
+  var ICONS = {
+    ok: '✓',
+    info: 'i',
+    warn: '!',
+    error: '×'
+  };
+
+  function toast(message, type) {
+    type = type || 'info';
+    var wrap = ensureWrap();
+
+    var node = document.createElement('div');
+    node.className = 'toast toast--' + type;
+    node.innerHTML =
+      '<span class="toast__icon" aria-hidden="true">' + (ICONS[type] || ICONS.info) + '</span>' +
+      '<span class="toast__body"></span>';
+    node.querySelector('.toast__body').textContent = String(message);
+
+    wrap.appendChild(node);
+
+    window.setTimeout(function () {
+      node.classList.add('is-leaving');
+      window.setTimeout(function () {
+        if (node.parentNode) node.parentNode.removeChild(node);
+      }, 220);
+    }, 4200);
+
+    return node;
+  }
+
+  MAF.toast = toast;
+
+  /* ---------- Modal confirm ---------- */
+  function confirmDialog(options) {
+    options = options || {};
+    var title = options.title || 'Konfirmasi';
+    var message = options.message || '';
+    var confirmLabel = options.confirmLabel || 'Ya, lanjutkan';
+    var cancelLabel = options.cancelLabel || 'Batal';
+    var danger = options.danger === true;
+
+    return new Promise(function (resolve) {
+      var modal = document.createElement('div');
+      modal.className = 'modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'modal-title');
+
+      modal.innerHTML =
+        '<div class="modal__backdrop" data-modal-close></div>' +
+        '<div class="modal__dialog">' +
+          '<h3 id="modal-title"></h3>' +
+          '<p></p>' +
+          '<div class="modal__actions">' +
+            '<button type="button" class="btn btn--ghost btn--sm" data-modal-cancel></button>' +
+            '<button type="button" class="btn btn--sm ' + (danger ? 'btn--danger' : 'btn--primary') + '" data-modal-confirm></button>' +
+          '</div>' +
+        '</div>';
+
+      modal.querySelector('#modal-title').textContent = title;
+      modal.querySelector('p').textContent = message;
+      modal.querySelector('[data-modal-cancel]').textContent = cancelLabel;
+      modal.querySelector('[data-modal-confirm]').textContent = confirmLabel;
+
+      var previousFocus = document.activeElement;
+      document.body.appendChild(modal);
+      document.body.style.overflow = 'hidden';
+
+      var confirmBtn = modal.querySelector('[data-modal-confirm]');
+      confirmBtn.focus();
+
+      function close(result) {
+        document.removeEventListener('keydown', onKey, true);
+        if (modal.parentNode) modal.parentNode.removeChild(modal);
+        document.body.style.overflow = '';
+        if (previousFocus && previousFocus.focus) previousFocus.focus();
+        resolve(result);
+      }
+
+      function onKey(event) {
+        if (event.key === 'Escape') {
+          event.stopPropagation();
+          close(false);
+        }
+      }
+
+      modal.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.closest('[data-modal-close]')) close(false);
+        else if (target.closest('[data-modal-cancel]')) close(false);
+        else if (target.closest('[data-modal-confirm]')) close(true);
+      });
+      document.addEventListener('keydown', onKey, true);
+    });
+  }
+
+  MAF.confirm = confirmDialog;
+})();
+
+/* ============================================================
+   portal.js — logika Knowledge Base, Login, dan Workspace UTS
+   ------------------------------------------------------------
+   Semua data disimpan di localStorage browser sehingga portal
+   tetap berjalan pada hosting statis (cPanel / AWS EC2 + Nginx)
+   tanpa backend Node.js. Tidak ada password yang dikirim ke
+   mana pun; ini gerbang demo untuk kebutuhan presentasi UTS.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var KEY_SESSION = 'maf.session';
+  var KEY_CHECK = 'maf.checklist.v1';
+  var KEY_DB = 'maf.database.v1';
+  var KEY_PIPE = 'maf.pipeline.v1';
+  var KEY_GB = 'maf.guestbook.v1';
+
+  /* ---------- 1. Konteks runtime (host publik) ---------- */
+  var MAF = (window.MAF = window.MAF || {});
+  MAF.host = location.host || 'localhost';
+  MAF.origin = location.origin || (location.protocol + '//' + location.host);
+  MAF.protocol = location.protocol;
+  MAF.isSecure = location.protocol === 'https:';
+  MAF.isLocal = /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(location.host);
+  MAF.demo = {
+    email: 'arya@unsada.ac.id',
+    password: 'uts2026',
+    name: 'Muhammad Arya Fatthurahman',
+    nim: '2023230006'
+  };
+
+  /* ---------- 2. Helper storage (aman jika diblokir) ---------- */
+  function read(key, fallback) {
+    try {
+      var raw = localStorage.getItem(key);
+      if (!raw) return fallback;
+      return JSON.parse(raw);
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function write(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function drop(key) {
+    try { localStorage.removeItem(key); } catch (e) { /* ignore */ }
+  }
+
+  function esc(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function fmtTime(iso) {
+    try {
+      return new Date(iso).toLocaleString('id-ID', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    } catch (e) {
+      return iso;
+    }
+  }
+
+  /* ---------- 3. Sesi demo ---------- */
+  function getSession() {
+    var s = read(KEY_SESSION, null);
+    if (!s || !s.email || !s.at) return null;
+    return s;
+  }
+
+  function setSession(user) {
+    write(KEY_SESSION, user);
+    return user;
+  }
+
+  function clearSession() { drop(KEY_SESSION); }
+
+  MAF.session = { get: getSession, set: setSession, clear: clearSession };
+
+  /* ---------- 4. Tampilkan host publik di mana pun ---------- */
+  function paintHost() {
+    var hostEls = document.querySelectorAll('[data-host]');
+    for (var i = 0; i < hostEls.length; i++) hostEls[i].textContent = MAF.host;
+
+    var originEls = document.querySelectorAll('[data-origin]');
+    for (var j = 0; j < originEls.length; j++) originEls[j].textContent = MAF.origin;
+
+    var protoEls = document.querySelectorAll('[data-protocol]');
+    for (var k = 0; k < protoEls.length; k++) {
+      protoEls[k].textContent = MAF.protocol.replace(':', '').toUpperCase();
+    }
+
+    var schemeEls = document.querySelectorAll('[data-scheme]');
+    for (var m = 0; m < schemeEls.length; m++) schemeEls[m].textContent = MAF.protocol + '//';
+
+    var envEls = document.querySelectorAll('[data-env]');
+    for (var n = 0; n < envEls.length; n++) {
+      envEls[n].textContent = MAF.isLocal ? 'Lokal (uji)' : 'Publik';
+      envEls[n].className = 'pill ' + (MAF.isLocal ? 'pill--warn' : 'pill--ok');
+    }
+  }
+
+  /* ---------- 5. Login page ---------- */
+  function initLogin() {
+    var form = document.getElementById('loginForm');
+    if (!form) return;
+
+    var msg = document.getElementById('loginMsg');
+    var email = document.getElementById('loginEmail');
+    var pass = document.getElementById('loginPassword');
+
+    var current = getSession();
+    if (current) {
+      showMsg('ok', 'Sesi aktif sebagai ' + current.name + '. Lanjut ke workspace…');
+      window.setTimeout(function () { location.replace('dashboard.html'); }, 900);
+      return;
+    }
+
+    function showMsg(type, text) {
+      if (!msg) return;
+      msg.className = 'form-msg is-visible ' + (type === 'ok' ? 'form-msg--ok' : 'form-msg--error');
+      msg.textContent = text;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var e = (email.value || '').trim().toLowerCase();
+      var p = pass.value || '';
+
+      if (!e || !p) {
+        showMsg('error', 'Email dan password wajib diisi.');
+        return;
+      }
+
+      if (e !== MAF.demo.email || p !== MAF.demo.password) {
+        showMsg('error', 'Kredensial tidak cocok. Gunakan akun demo yang tertera di bawah kartu login.');
+        return;
+      }
+
+      setSession({
+        name: MAF.demo.name,
+        nim: MAF.demo.nim,
+        email: MAF.demo.email,
+        role: 'Mahasiswa S1 Teknologi Informasi',
+        at: new Date().toISOString()
+      });
+
+      showMsg('ok', 'Berhasil masuk. Mengalihkan ke workspace…');
+      window.setTimeout(function () { location.replace('dashboard.html'); }, 650);
+    });
+
+    var fill = document.getElementById('fillDemo');
+    if (fill) {
+      fill.addEventListener('click', function () {
+        email.value = MAF.demo.email;
+        pass.value = MAF.demo.password;
+        showMsg('ok', 'Akun demo terisi. Tekan "Masuk ke workspace".');
+      });
+    }
+  }
+
+  /* ---------- 6. Dashboard guard + identitas ---------- */
+  function initGuard() {
+    var shell = document.querySelector('[data-guard]');
+    if (!shell) return;
+
+    var session = getSession();
+    if (!session) {
+      location.replace('login.html?next=dashboard.html');
+      return;
+    }
+
+    var names = document.querySelectorAll('[data-user-name]');
+    for (var i = 0; i < names.length; i++) names[i].textContent = session.name;
+
+    var nims = document.querySelectorAll('[data-user-nim]');
+    for (var j = 0; j < nims.length; j++) nims[j].textContent = session.nim;
+
+    var mails = document.querySelectorAll('[data-user-email]');
+    for (var k = 0; k < mails.length; k++) mails[k].textContent = session.email;
+
+    var times = document.querySelectorAll('[data-session-time]');
+    for (var m = 0; m < times.length; m++) times[m].textContent = fmtTime(session.at);
+
+    var outs = document.querySelectorAll('[data-logout]');
+    for (var n = 0; n < outs.length; n++) {
+      outs[n].addEventListener('click', function (event) {
+        event.preventDefault();
+        clearSession();
+        location.replace('login.html');
+      });
+    }
+  }
+
+  /* ---------- 7. Checklist EC2 (9 langkah) ---------- */
+  var CHECKLIST = [
+    'Pilih region dan buat key pair (.pem)',
+    'Launch EC2 instance (Amazon Linux 2023 / Ubuntu)',
+    'Atur Security Group: SSH /32, HTTP 80, HTTPS 443',
+    'Hubungkan via SSH atau PuTTY, lalu perbarui paket',
+    'Install web server (Nginx/Apache2) dan aktifkan service',
+    'Unggah index.html + assets/ ke docroot',
+    'Pasang Elastic IP dan arahkan domain (A record)',
+    'Uji akses dari jaringan publik (bukan localhost)',
+    'Ambil screenshot + rekam video, lalu stop/terminate resource'
+  ];
+
+  function initChecklist() {
+    var wrap = document.getElementById('ec2Checklist');
+    if (!wrap) return;
+
+    var state = read(KEY_CHECK, null);
+    if (!state || typeof state !== 'object') {
+      state = {};
+      for (var i = 0; i < CHECKLIST.length; i++) state['s' + (i + 1)] = false;
+      write(KEY_CHECK, state);
+    }
+
+    var bar = document.getElementById('checkProgress');
+    var label = document.getElementById('checkCount');
+    var celebrated = false;
+
+    function renderProgress() {
+      var done = 0;
+      for (var i = 0; i < CHECKLIST.length; i++) if (state['s' + (i + 1)]) done++;
+      var pct = Math.round((done / CHECKLIST.length) * 100);
+      if (bar) bar.style.width = pct + '%';
+      if (label) label.textContent = done + ' / ' + CHECKLIST.length + ' langkah selesai (' + pct + '%)';
+
+      if (done === CHECKLIST.length && !celebrated && window.MAF && window.MAF.toast) {
+        celebrated = true;
+        MAF.toast('Checklist EC2 lengkap 9/9. Verifikasi dari HP, lalu rekam video UTS.', 'ok');
+      } else if (done < CHECKLIST.length) {
+        celebrated = false;
+      }
+    }
+
+    wrap.innerHTML = '';
+    CHECKLIST.forEach(function (text, index) {
+      var id = 's' + (index + 1);
+      var row = document.createElement('label');
+      row.className = 'check' + (state[id] ? ' is-done' : '');
+      row.innerHTML =
+        '<input type="checkbox" data-check="' + id + '"' + (state[id] ? ' checked' : '') + '>' +
+        '<span>' +
+          '<span class="check__title">' + String(index + 1).padStart(2, '0') + '. ' + esc(text) +
+            ' <span class="pill pill--off" data-tag="' + id + '">' + (state[id] ? 'selesai' : 'belum') + '</span>' +
+          '</span>' +
+        '</span>';
+
+      var box = row.querySelector('input');
+      box.addEventListener('change', function () {
+        state[id] = box.checked;
+        write(KEY_CHECK, state);
+        row.classList.toggle('is-done', box.checked);
+        var tag = row.querySelector('[data-tag]');
+        if (tag) {
+          tag.textContent = box.checked ? 'selesai' : 'belum';
+          tag.className = 'pill ' + (box.checked ? 'pill--ok' : 'pill--off');
+        }
+        renderProgress();
+      });
+
+      wrap.appendChild(row);
+    });
+
+    var reset = document.getElementById('checkReset');
+    if (reset) {
+      reset.addEventListener('click', function () {
+        for (var i = 0; i < CHECKLIST.length; i++) state['s' + (i + 1)] = false;
+        write(KEY_CHECK, state);
+        initChecklist();
+        if (window.MAF && window.MAF.toast) MAF.toast('Checklist EC2 direset ke kondisi awal.', 'info');
+      });
+    }
+
+    renderProgress();
+  }
+
+  /* ---------- 8. Database workspace ---------- */
+  var DB_DEFAULT = {
+    engine: 'postgresql',
+    host: '127.0.0.1',
+    port: '5433',
+    name: 'ec2lab',
+    user: 'ec2lab',
+    ssl: 'disable'
+  };
+
+  function initDatabase() {
+    var form = document.getElementById('dbForm');
+    if (!form) return;
+
+    var saved = read(KEY_DB, null) || DB_DEFAULT;
+    var f = {
+      engine: document.getElementById('dbEngine'),
+      host: document.getElementById('dbHost'),
+      port: document.getElementById('dbPort'),
+      name: document.getElementById('dbName'),
+      user: document.getElementById('dbUser'),
+      ssl: document.getElementById('dbSsl')
+    };
+    Object.keys(f).forEach(function (key) {
+      if (f[key] && saved[key] != null) f[key].value = saved[key];
+    });
+
+    var out = document.getElementById('dbDsn');
+    var msg = document.getElementById('dbMsg');
+
+    function paint() {
+      var engine = f.engine ? f.engine.value : 'postgresql';
+      var prefix = engine === 'mysql' ? 'mysql' : engine === 'mariadb' ? 'mariadb' : 'postgresql';
+      var dsn = prefix + '://' + (f.user ? f.user.value : '') + ':••••••' +
+        '@' + (f.host ? f.host.value : '') + ':' + (f.port ? f.port.value : '') +
+        '/' + (f.name ? f.name.value : '') +
+        (f.ssl && f.ssl.value !== 'disable' ? '?sslmode=' + f.ssl.value : '');
+      if (out) out.textContent = dsn;
+    }
+
+    function save() {
+      var data = {};
+      Object.keys(f).forEach(function (key) { data[key] = f[key] ? f[key].value : ''; });
+      write(KEY_DB, data);
+      paint();
+    }
+
+    Object.keys(f).forEach(function (key) {
+      if (f[key]) f[key].addEventListener('input', save);
+      if (f[key]) f[key].addEventListener('change', save);
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      save();
+      if (msg) {
+        msg.className = 'form-msg is-visible form-msg--ok';
+        msg.textContent = 'Konfigurasi disimpan di browser ini. Portal statis tidak membuka koneksi database nyata — ' +
+          'nilai ini dipakai sebagai catatan lab dan aman untuk presentasi.';
+      }
+    });
+
+    var test = document.getElementById('dbTest');
+    if (test) {
+      test.addEventListener('click', function () {
+        if (!msg) return;
+        msg.className = 'form-msg is-visible form-msg--ok';
+        msg.textContent = 'Cek format lolos: ' +
+          (f.host && f.host.value ? f.host.value : '(host kosong)') + ':' +
+          (f.port && f.port.value ? f.port.value : '(port kosong)') +
+          ' · ' + (f.engine ? f.engine.value.toUpperCase() : '') +
+          '. Koneksi TCP sebenarnya hanya bisa diuji dari dalam EC2/VPC.';
+      });
+    }
+
+    paint();
+  }
+
+  /* ---------- 9. Pipeline configurator + diagram ---------- */
+  var PIPE_DEFAULT = {
+    proxy: 'nginx',
+    tls: 'letsencrypt',
+    iac: 'terraform',
+    cicd: 'github-actions',
+    target: 'ec2',
+    domain: ''
+  };
+
+  function initPipeline() {
+    var form = document.getElementById('pipeForm');
+    if (!form) return;
+
+    var saved = read(KEY_PIPE, null) || PIPE_DEFAULT;
+    var ids = ['proxy', 'tls', 'iac', 'cicd', 'target', 'domain'];
+    var fields = {};
+    ids.forEach(function (id) {
+      fields[id] = document.getElementById('pipe' + id.charAt(0).toUpperCase() + id.slice(1));
+      if (fields[id] && saved[id] != null) fields[id].value = saved[id];
+    });
+
+    var flow = document.getElementById('pipeFlow');
+    var summary = document.getElementById('pipeSummary');
+
+    var labels = {
+      nginx: 'Nginx', apache: 'Apache2',
+      letsencrypt: "Let's Encrypt", http: 'HTTP only',
+      terraform: 'Terraform', opentofu: 'OpenTofu', manual: 'Manual (Console)',
+      'github-actions': 'GitHub Actions', codepipeline: 'CodePipeline', gitlab: 'GitLab CI', jenkins: 'Jenkins',
+      ec2: 'EC2 tunggal', eks: 'Amazon EKS'
+    };
+
+    function paint() {
+      var v = {};
+      ids.forEach(function (id) { v[id] = fields[id] ? fields[id].value : PIPE_DEFAULT[id]; });
+      var nodes = [
+        'Git push',
+        labels[v.cicd] || v.cicd,
+        'Docker image',
+        labels[v.iac] || v.iac,
+        labels[v.target] || v.target,
+        labels[v.proxy] || v.proxy,
+        labels[v.tls] || v.tls,
+        'Publik'
+      ];
+      if (flow) {
+        flow.innerHTML = nodes.map(function (node) {
+          return '<span class="flow__node">' + esc(node) + '</span>';
+        }).join('<span class="flow__arrow">→</span>');
+      }
+      if (summary) {
+        summary.textContent = 'Alur: push ke branch utama → build & test → image → ' +
+          (labels[v.iac] || v.iac) + ' menyiapkan ' + (labels[v.target] || v.target) +
+          ' → ' + (labels[v.proxy] || v.proxy) + ' sebagai reverse proxy → TLS ' +
+          (labels[v.tls] || v.tls) + ' → domain ' + (v.domain || '<domain>') + '.';
+      }
+    }
+
+    function save() {
+      var data = {};
+      ids.forEach(function (id) { data[id] = fields[id] ? fields[id].value : ''; });
+      write(KEY_PIPE, data);
+      paint();
+    }
+
+    ids.forEach(function (id) {
+      if (!fields[id]) return;
+      fields[id].addEventListener('change', save);
+      fields[id].addEventListener('input', save);
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      save();
+      var msg = document.getElementById('pipeMsg');
+      if (msg) {
+        msg.className = 'form-msg is-visible form-msg--ok';
+        msg.textContent = 'Rancangan pipeline disimpan. Diagram di atas mengikuti pilihan Anda.';
+      }
+    });
+
+    paint();
+  }
+
+  /* ---------- 10. Guestbook ---------- */
+  var GB_SEED = [
+    { name: 'Dosen Cloud Computing', msg: 'Deploy berhasil diakses lewat IP publik. Dokumentasi langkahnya rapi.', at: '2026-11-15T09:20:00+07:00' },
+    { name: 'Rekan TIFM', msg: 'Checklist EC2-nya membantu, terutama bagian Security Group dan Elastic IP.', at: '2026-11-15T13:05:00+07:00' },
+    { name: 'Muhammad Arya F.', msg: 'Catatan pribadi: selalu terminate instance setelah selesai agar tidak kena biaya.', at: '2026-11-16T07:45:00+07:00' }
+  ];
+
+  function initGuestbook() {
+    var list = document.getElementById('gbList');
+    var form = document.getElementById('gbForm');
+    if (!list || !form) return;
+
+    var items = read(KEY_GB, null);
+    if (!Array.isArray(items)) {
+      items = GB_SEED.slice();
+      write(KEY_GB, items);
+    }
+
+    function paint() {
+      if (!items.length) {
+        list.innerHTML = '<p class="gb-empty">Belum ada pesan. Jadilah yang pertama menulis di guestbook.</p>';
+        return;
+      }
+      list.innerHTML = items.slice().reverse().map(function (item) {
+        return '<article class="gb-item">' +
+          '<div class="gb-item__meta">' +
+            '<span class="gb-item__name">' + esc(item.name) + '</span>' +
+            '<span class="gb-item__time">' + esc(fmtTime(item.at)) + '</span>' +
+          '</div>' +
+          '<p class="gb-item__msg">' + esc(item.msg) + '</p>' +
+        '</article>';
+      }).join('');
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var nameEl = document.getElementById('gbName');
+      var msgEl = document.getElementById('gbMessage');
+      var name = (nameEl && nameEl.value || '').trim();
+      var msg = (msgEl && msgEl.value || '').trim();
+      if (!name || !msg) return;
+
+      items.push({ name: name.slice(0, 60), msg: msg.slice(0, 600), at: new Date().toISOString() });
+      write(KEY_GB, items);
+      if (msgEl) msgEl.value = '';
+      paint();
+      if (window.MAF && window.MAF.toast) {
+        MAF.toast('Pesan tersimpan di guestbook (localStorage browser ini).', 'ok');
+      }
+    });
+
+    var reset = document.getElementById('gbReset');
+    if (reset) {
+      reset.addEventListener('click', function () {
+        items = GB_SEED.slice();
+        write(KEY_GB, items);
+        paint();
+        if (window.MAF && window.MAF.toast) MAF.toast('Guestbook dikembalikan ke contoh awal.', 'info');
+      });
+    }
+
+    paint();
+  }
+
+  /* ---------- 11. TOC knowledge base (scroll spy) ---------- */
+  function initKbToc() {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.kb-toc a[href^="#"]'));
+    if (!links.length) return;
+
+    /* Daftar isi versi mobile: dropdown agar tidak perlu scroll horizontal */
+    var layout = document.querySelector('.kb-layout');
+    if (layout && !document.querySelector('.kb-toc-mobile')) {
+      var mobile = document.createElement('details');
+      mobile.className = 'kb-toc-mobile';
+
+      var summary = document.createElement('summary');
+      summary.textContent = 'Daftar isi — ' + links.length + ' bagian';
+
+      var box = document.createElement('div');
+      box.className = 'kb-toc-mobile__links';
+
+      links.forEach(function (link) {
+        var clone = link.cloneNode(true);
+        clone.classList.remove('is-active');
+        clone.addEventListener('click', function () { mobile.removeAttribute('open'); });
+        box.appendChild(clone);
+      });
+
+      mobile.appendChild(summary);
+      mobile.appendChild(box);
+
+      var wrapper = document.createElement('div');
+      wrapper.className = 'container';
+      wrapper.appendChild(mobile);
+      layout.parentNode.insertBefore(wrapper, layout);
+    }
+
+    if (!('IntersectionObserver' in window)) return;
+
+    var sections = links.map(function (link) {
+      return document.getElementById(link.getAttribute('href').slice(1));
+    }).filter(Boolean);
+
+    if (!document.querySelector('.kb-toc a.is-active') && links.length) {
+      links[0].classList.add('is-active');
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (link) {
+          link.classList.toggle('is-active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
+  function initKbSearch() {
+    var search = document.getElementById('kbTopicSearch');
+    var status = document.getElementById('kbSearchStatus');
+    if (!search || !status) return;
+
+    var links = Array.prototype.slice.call(document.querySelectorAll(
+      '.kb-toc a[href^="#"], .kb-toc-mobile__links a[href^="#"]'
+    ));
+
+    function filterLinks() {
+      var query = (search.value || '').trim().toLowerCase();
+      var matches = {};
+
+      links.forEach(function (link) {
+        var match = !query || (link.textContent || '').trim().toLowerCase().indexOf(query) !== -1;
+        link.hidden = !match;
+        if (match) matches[link.getAttribute('href')] = true;
+      });
+
+      var count = Object.keys(matches).length;
+      status.textContent = !query
+        ? ''
+        : count
+          ? count + ' topik ditemukan'
+          : 'Tidak ada topik yang cocok. Coba Docker, Terraform, Helm, atau CI/CD.';
+    }
+
+    search.addEventListener('input', filterLinks);
+  }
+
+  /* ---------- 12. Tombol salin blok kode ---------- */
+  function initCopy() {
+    var buttons = document.querySelectorAll('[data-copy]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function (event) {
+        var btn = event.currentTarget;
+        var sel = btn.getAttribute('data-copy');
+        var target = sel ? document.querySelector(sel) : btn.parentElement.querySelector('code, pre, .code');
+        if (!target) return;
+        var text = target.textContent || '';
+        var done = function () {
+          var original = btn.textContent;
+          btn.textContent = 'Tersalin ✓';
+          window.setTimeout(function () { btn.textContent = original; }, 1400);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { /* ignore */ });
+        }
+      });
+    }
+  }
+
+  /* ---------- 13. Jam & tahun ---------- */
+  function initMisc() {
+    var years = document.querySelectorAll('[data-year]');
+    for (var i = 0; i < years.length; i++) years[i].textContent = new Date().getFullYear();
+
+    var clock = document.querySelectorAll('[data-clock]');
+    if (clock.length) {
+      var tick = function () {
+        var now = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        for (var j = 0; j < clock.length; j++) clock[j].textContent = now;
+      };
+      tick();
+      window.setInterval(tick, 1000);
+    }
+  }
+
+  /* ---------- 14. Boot ---------- */
+  function boot() {
+    paintHost();
+    initLogin();
+    initGuard();
+    initChecklist();
+    initDatabase();
+    initPipeline();
+    initGuestbook();
+    initKbToc();
+    initKbSearch();
+    initCopy();
+    initMisc();
+    initTechTabs();
+    initBackToTop();
+    initProgressBar();
+  }
+
+  /* ---------- 15. Tech Tabs ---------- */
+  function initTechTabs() {
+    var tabs = document.querySelectorAll('.tech-tab');
+    var contents = document.querySelectorAll('.tech-tab-content');
+    if (!tabs.length) return;
+
+    function activate(tab, moveFocus) {
+      var targetTab = tab.getAttribute('data-tab');
+
+      tabs.forEach(function (item) {
+        var active = item === tab;
+        item.classList.toggle('tech-tab--active', active);
+        item.setAttribute('aria-selected', active ? 'true' : 'false');
+        item.setAttribute('tabindex', active ? '0' : '-1');
+      });
+
+      contents.forEach(function (content) {
+        var active = content.id === 'tab-' + targetTab;
+        content.hidden = !active;
+        content.classList.toggle('tech-tab-content--active', active);
+      });
+
+      if (moveFocus) tab.focus();
+    }
+
+    tabs.forEach(function (tab, index) {
+      tab.addEventListener('click', function () { activate(tab, false); });
+      tab.addEventListener('keydown', function (event) {
+        var next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+
+        event.preventDefault();
+        activate(tabs[next], true);
+      });
+    });
+  }
+
+  /* ---------- 16. Back to Top ---------- */
+  function initBackToTop() {
+    var backTop = document.querySelector('.back-top');
+    if (!backTop) return;
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 300) {
+        backTop.classList.add('is-visible');
+      } else {
+        backTop.classList.remove('is-visible');
+      }
+    });
+
+    backTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ---------- 17. Reading progress ---------- */
+  function initProgressBar() {
+    var progress = document.querySelector('.progress');
+    if (!progress) return;
+
+    function update() {
+      var documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var ratio = documentHeight > 0 ? window.scrollY / documentHeight : 0;
+      progress.style.width = (Math.min(1, Math.max(0, ratio)) * 100).toFixed(2) + '%';
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+
+</body>
+</html>

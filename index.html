@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio Muhammad Arya Fatthurahman — NIM 2023230006. Proyek Tugas Sesi #8 (1), UTS Cloud Computing: website personal statis yang dideploy ke AWS EC2.">
+  <meta name="author" content="Muhammad Arya Fatthurahman">
+  <title>Muhammad Arya Fatthurahman — Portofolio UTS Cloud Computing · Sesi #8 (1)</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ================= HEADER / NAVBAR ================= -->
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a href="#top" class="brand">
+      <span class="brand__mark">MAF</span>
+      <span class="brand__text">
+        <strong>Muhammad Arya Fatthurahman</strong>
+        <small>NIM 2023230006 &middot; TIFM</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#cloud">Cloud</a>
+      <a href="#portfolio">Portofolio</a>
+      <a href="#experience">Pengalaman</a>
+      <a href="#certification">Sertifikasi</a>
+      <a href="knowledge.html">Knowledge</a>
+      <a href="#contact">Kontak</a>
+      <a href="login.html" class="nav__cta" data-tip="Login workspace (akun demo)">Masuk</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <p class="assignment-mark">
+        <strong>Tugas &mdash; Sesi #8 (1) &mdash; UTS</strong>
+        <span>Cloud Computing &middot; AWS EC2 &middot; Website Personal</span>
+      </p>
+      <p class="eyebrow">Mahasiswa S1 Teknologi Informasi &mdash; Universitas Darma Persada (UNSADA)</p>
+      <h1 class="hero__title">Muhammad Arya<br>Fatthurahman</h1>
+      <p class="hero__meta">
+        <span>NIM: <strong>2023230006</strong></span>
+        <span>Kelas: <strong>TIFM</strong></span>
+        <span>Jurusan: <strong>Teknologi Informasi</strong></span>
+      </p>
+      <p class="hero__desc">
+        Aspiring Software Developer &amp; DevOps Engineer yang passionate pada
+        pengembangan perangkat lunak, AI/Machine Learning, dan infrastruktur cloud.
+        Berpengalaman membangun aplikasi web full-stack serta meng-automate deployment
+        di lingkungan AWS EC2.
+      </p>
+      <div class="hero__actions">
+        <a href="#portfolio" class="btn btn--primary">Lihat Portofolio</a>
+        <a href="knowledge.html" class="btn btn--ghost">Knowledge Base</a>
+        <a href="login.html" class="btn btn--ghost">Masuk Workspace</a>
+      </div>
+      <div class="hero__stats" aria-hidden="true">
+        <div class="hero__stat"><strong>6+</strong><span>Proyek</span></div>
+        <div class="hero__stat"><strong>25+</strong><span>Tools &amp; Teknologi</span></div>
+        <div class="hero__stat"><strong>AWS EC2</strong><span>Deployed</span></div>
+      </div>
+      <p class="host-badge">
+        <span class="host-badge__dot"></span>
+        <span><strong>Alamat yang sedang dibuka:</strong> <a href="http://aryafatthurahman1.my.id" data-live-url target="_blank" rel="noopener"><span data-live-host>aryafatthurahman1.my.id</span></a>
+        &mdash; profil ini dilayani web server Nginx/Apache2. Untuk demonstrasi UTS, akses website melalui <strong>Public IP EC2</strong>; alamat <code>192.168.x.x</code> atau <code>10.x.x.x</code> adalah alamat privat jaringan lokal.</span>
+      </p>
+    </div>
+
+    <div class="hero__photo">
+      <div class="photo-card">
+        <img src="assets/img/foto-profil.jpg"
+             alt="Foto profil Muhammad Arya Fatthurahman, NIM 2023230006"
+             width="320" height="440" loading="eager">
+        <div class="photo-card__info">
+          <strong>Muhammad Arya Fatthurahman</strong>
+          <span>2023230006 &middot; UNSADA &middot; TI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="container">
+    <h2 class="section__title">Tentang Saya</h2>
+    <div class="about">
+      <div class="about__text">
+        <p>
+          Halo! Saya <strong>Muhammad Arya Fatthurahman</strong>, mahasiswa semester 4 Program Studi
+          Teknologi Informasi di <strong>Universitas Darma Persada (UNSADA)</strong> dengan NIM
+          <strong>2023230006</strong>. Saya memiliki ketertarikan pada pengembangan web, kecerdasan buatan,
+          serta penerapan <em>cloud computing</em> untuk membangun solusi yang skalabel dan mudah dikelola.
+        </p>
+        <p>
+          Secara praktis saya telah mengerjakan beberapa proyek, mulai dari aplikasi manajemen karyawan
+          berbasis <em>Laravel</em> dengan fitur impor Excel, klasifikasi citra menggunakan
+          <em>CNN MobileNetV3</em>, perangkat IoT berbasis ESP32-C3, hingga pipeline data dan
+          monitoring infrastruktur menggunakan <em>Prometheus</em> &amp; <em>Grafana</em>.
+        </p>
+        <p>
+          Tugas besar ini merupakan bagian dari mata kuliah <strong>Cloud Computing</strong>: saya membuat
+          virtual private server pada <strong>AWS EC2</strong>, mengonfigurasi Linux serta web server
+          <strong>Apache2</strong>, lalu mendeploy website portofolio statis ini agar dapat diakses
+          publik melalui alamat <strong>Public IP</strong> instance.
+        </p>
+      </div>
+
+      <aside class="about__card">
+        <h3>Informasi Akademik</h3>
+        <ul class="info-list">
+          <li><span>Nama Lengkap</span><strong>Muhammad Arya Fatthurahman</strong></li>
+          <li><span>NIM</span><strong>2023230006</strong></li>
+          <li><span>Kelas</span><strong>TIFM</strong></li>
+          <li><span>Tugas</span><strong>UTS Cloud Computing &middot; Sesi #8 (1)</strong></li>
+          <li><span>Batas Pengumpulan</span><strong>19 November 2026 &middot; 23.59 WIB</strong></li>
+          <li><span>Program Studi</span><strong>S1 Teknologi Informasi</strong></li>
+          <li><span>Universitas</span><strong>Universitas Darma Persada (UNSADA)</strong></li>
+          <li><span>Semester</span><strong>4 (Semester Genap 2025/2026)</strong></li>
+          <li><span>Lokasi</span><strong>Cakung, Jakarta Timur</strong></li>
+        </ul>
+
+        <h3 class="mt">Fokus Belajar</h3>
+        <div class="chip-row">
+          <span class="chip">Cloud Architecture</span>
+          <span class="chip">DevOps &amp; CI/CD</span>
+          <span class="chip">AI / Machine Learning</span>
+          <span class="chip">Web Engineering</span>
+          <span class="chip">Cyber Security</span>
+          <span class="chip">Data Engineering</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="section section--alt" id="skills">
+  <div class="container">
+    <h2 class="section__title">Keahlian</h2>
+    <p class="section__lead">Teknologi dan tools yang saya kuasai &mdash; dikelompokkan berdasarkan bidang keahlian.</p>
+
+    <div class="skills">
+      <article class="skill-card">
+        <h3>Bahasa &amp; Framework</h3>
+        <ul class="chip-row">
+          <li class="chip">Python</li>
+          <li class="chip">JavaScript</li>
+          <li class="chip">PHP / Laravel</li>
+          <li class="chip">C++</li>
+          <li class="chip">Dart / Flutter</li>
+          <li class="chip">C# / .NET</li>
+          <li class="chip">HTML5</li>
+          <li class="chip">CSS3</li>
+          <li class="chip">React.js</li>
+          <li class="chip">Tailwind CSS</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>AI &amp; Machine Learning</h3>
+        <ul class="chip-row">
+          <li class="chip">Machine Learning</li>
+          <li class="chip">Deep Learning</li>
+          <li class="chip">CNN / RNN</li>
+          <li class="chip">TensorFlow &amp; Keras</li>
+          <li class="chip">IBM Watson AI</li>
+          <li class="chip">NLP / BERT</li>
+          <li class="chip">Neo4j Graph Data Science</li>
+          <li class="chip">Quantum Machine Learning</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Cloud &amp; DevOps</h3>
+        <ul class="chip-row">
+          <li class="chip">AWS (EC2, RDS, S3, Lambda)</li>
+          <li class="chip">Docker</li>
+          <li class="chip">Kubernetes</li>
+          <li class="chip">Terraform</li>
+          <li class="chip">Ansible</li>
+          <li class="chip">Linux (Ubuntu/RHEL/Kali)</li>
+          <li class="chip">Git &amp; GitHub</li>
+          <li class="chip">CI/CD &amp; GitHub Actions</li>
+          <li class="chip">Prometheus &amp; Grafana</li>
+          <li class="chip">Google Cloud Platform</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Database &amp; Tools</h3>
+        <ul class="chip-row">
+          <li class="chip">MySQL</li>
+          <li class="chip">PostgreSQL</li>
+          <li class="chip">SQL Server</li>
+          <li class="chip">MongoDB</li>
+          <li class="chip">Apache2 / Nginx</li>
+          <li class="chip">VS Code</li>
+          <li class="chip">Postman</li>
+          <li class="chip">Linux Terminal</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Security &amp; Networking</h3>
+        <ul class="chip-row">
+          <li class="chip">Fortinet FortiGate</li>
+          <li class="chip">Ethical Hacking</li>
+          <li class="chip">Cisco Networking</li>
+          <li class="chip">Network Automation</li>
+          <li class="chip">Cyber Security Risk</li>
+          <li class="chip">Quantum-Safe Encryption</li>
+        </ul>
+      </article>
+
+      <article class="skill-card skill-card--progress">
+        <h3>Level Penguasaan</h3>
+        <div class="bar">
+          <div class="bar__meta"><span>Web &amp; Backend (Laravel/Python)</span><span>90%</span></div>
+          <div class="bar__track"><span style="width:90%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>Cloud &amp; DevOps</span><span>85%</span></div>
+          <div class="bar__track"><span style="width:85%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>AI / Machine Learning</span><span>80%</span></div>
+          <div class="bar__track"><span style="width:80%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>Networking &amp; Security</span><span>75%</span></div>
+          <div class="bar__track"><span style="width:75%"></span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOUD & DEVOPS ================= -->
+<section class="section section--alt" id="cloud">
+  <div class="container">
+    <h2 class="section__title">Cloud &amp; DevOps Journey</h2>
+    <p class="section__lead">
+      Ringkasan perjalanan belajar saya dari <em>localhost</em> menuju infrastruktur cloud:
+      Linux &rarr; Git &rarr; Cloud Fundamentals &rarr; AWS &rarr; Docker &rarr; Kubernetes
+      &rarr; Terraform &rarr; CI/CD &rarr; Monitoring. Semua materi ini saya praktikkan langsung
+      pada lab <strong>WSL2 Ubuntu</strong>, <strong>VirtualBox</strong>, dan <strong>AWS EC2</strong>.
+    </p>
+
+    <nav class="subnav" aria-label="Sub-navigasi Cloud dan DevOps">
+      <a href="#roadmap">Roadmap</a>
+      <a href="#architecture">Arsitektur AWS</a>
+      <a href="#pipeline">Pipeline Deploy</a>
+      <a href="#knowledge">Konsep Kunci</a>
+      <a href="#lab">Lab WSL2 + PuTTY</a>
+      <a href="knowledge.html">Knowledge Base &nearr;</a>
+    </nav>
+
+    <!-- ---------- A. ROADMAP ---------- -->
+    <h3 class="cd-h3" id="roadmap">Roadmap Belajar Cloud &amp; DevOps</h3>
+    <p class="cd-lead">
+      Urutan belajar yang saya pakai agar tidak kewalahan: kuasai dasar dulu, baru naik ke
+      orkestrasi dan otomasi. Setiap tahap punya <em>output</em> yang bisa dilihat, bukan hanya teori.
+    </p>
+
+    <div class="roadmap">
+      <article class="rm-step">
+        <span class="rm-step__no">01</span>
+        <h4>Linux &amp; Terminal</h4>
+        <p>Dasar sebelum menyentuh cloud: navigasi filesystem, permission, user &amp; group, service, dan membaca log.</p>
+        <div class="chip-row">
+          <span class="chip">bash</span><span class="chip">chmod / chown</span>
+          <span class="chip">systemctl</span><span class="chip">journalctl</span>
+          <span class="chip">ssh / scp</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">02</span>
+        <h4>Git &amp; GitHub</h4>
+        <p>Version control adalah pintu masuk CI/CD. Semua konfigurasi server sebaiknya lahir dari repository.</p>
+        <div class="chip-row">
+          <span class="chip">branch &amp; merge</span><span class="chip">pull request</span>
+          <span class="chip">.gitignore</span><span class="chip">secret management</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">03</span>
+        <h4>Cloud Fundamentals</h4>
+        <p>Pahami model layanan dan konsep ketersediaan sebelum memilih produk AWS tertentu.</p>
+        <div class="chip-row">
+          <span class="chip">IaaS / PaaS / SaaS</span><span class="chip">Region &amp; AZ</span>
+          <span class="chip">Scalability &amp; Elasticity</span><span class="chip">High Availability</span>
+          <span class="chip">Fault Tolerance</span><span class="chip">IAM</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">04</span>
+        <h4>AWS Core Services</h4>
+        <p>Fokus pada layanan yang benar-benar dipakai tugas: compute, network, storage, identity.</p>
+        <div class="chip-row">
+          <span class="chip">EC2</span><span class="chip">VPC</span><span class="chip">Security Group</span>
+          <span class="chip">IAM</span><span class="chip">S3</span><span class="chip">RDS</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">05</span>
+        <h4>Docker</h4>
+        <p>Membungkus aplikasi + dependency agar identik di laptop, VM lab, dan EC2. Ini yang membuat deploy bisa diulang.</p>
+        <div class="chip-row">
+          <span class="chip">image &amp; container</span><span class="chip">Dockerfile</span>
+          <span class="chip">port mapping</span><span class="chip">volume</span>
+          <span class="chip">network</span><span class="chip">docker compose</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">06</span>
+        <h4>Kubernetes</h4>
+        <p>Setelah paham container, baru masuk orkestrasi: menjaga replika tetap hidup dan melayani trafik.</p>
+        <div class="chip-row">
+          <span class="chip">Pod</span><span class="chip">Deployment</span>
+          <span class="chip">ReplicaSet</span><span class="chip">Service</span>
+          <span class="chip">Namespace</span><span class="chip">ConfigMap &amp; Secret</span>
+          <span class="chip">minikube / kind</span><span class="chip">Helm</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">07</span>
+        <h4>Terraform (IaC)</h4>
+        <p>Infrastruktur ditulis sebagai kode, sehingga bisa di-<em>review</em>, diulang, dan dihapus tanpa klik manual.</p>
+        <div class="chip-row">
+          <span class="chip">provider</span><span class="chip">resource</span>
+          <span class="chip">variable &amp; output</span><span class="chip">data source</span>
+          <span class="chip">state</span><span class="chip">module</span>
+          <span class="chip">init / plan / apply / destroy</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">08</span>
+        <h4>CI/CD</h4>
+        <p>Alur <strong>Code &rarr; Build &rarr; Test &rarr; Package &rarr; Deploy &rarr; Monitor</strong> dijalankan otomatis setiap push.</p>
+        <div class="chip-row">
+          <span class="chip">GitHub Actions</span><span class="chip">CodePipeline</span>
+          <span class="chip">CodeBuild</span><span class="chip">CodeDeploy</span>
+          <span class="chip">GitLab CI</span>
+        </div>
+      </article>
+
+      <article class="rm-step">
+        <span class="rm-step__no">09</span>
+        <h4>Monitoring &amp; Observability</h4>
+        <p>Deploy bukan garis akhir. Tiga pilar observability: <em>logs</em>, <em>metrics</em>, <em>traces</em>.</p>
+        <div class="chip-row">
+          <span class="chip">Prometheus</span><span class="chip">Grafana</span>
+          <span class="chip">CloudWatch</span><span class="chip">Sentry</span>
+          <span class="chip">health check</span><span class="chip">alerting</span>
+        </div>
+      </article>
+
+      <article class="rm-step rm-step--accent">
+        <span class="rm-step__no">10</span>
+        <h4>Proyek Nyata</h4>
+        <p>Teori baru menempel kalau dipakai. Lima proyek bertingkat yang saya targetkan:</p>
+        <ol class="rm-list">
+          <li>Web app sederhana di Docker pada AWS EC2</li>
+          <li>Pipeline CI/CD otomatis (GitHub Actions)</li>
+          <li>Infrastruktur AWS dengan Terraform</li>
+          <li>Deployment Kubernetes + Helm chart</li>
+          <li>Sistem monitoring, logging, dan alerting</li>
+        </ol>
+      </article>
+    </div>
+
+    <!-- ---------- B. ARSITEKTUR AWS ---------- -->
+    <h3 class="cd-h3" id="architecture">Arsitektur AWS yang Saya Pakai</h3>
+    <p class="cd-lead">
+      Untuk UTS ini arsitekturnya sengaja dibuat sederhana agar mudah dijelaskan, tetapi
+      pemisahan <em>network</em>, <em>compute</em>, dan <em>storage</em> tetap mengikuti praktik yang benar.
+    </p>
+
+    <div class="arch-grid">
+      <div class="arch">
+        <div class="arch__box arch__box--ext">
+          <strong>Pengguna / Browser</strong>
+          <span>http://&lt;PUBLIC-IP&gt;</span>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__box">
+          <strong>Security Group</strong>
+          <span>Inbound: 22 (SSH, IP saya) &middot; 80 (HTTP, 0.0.0.0/0)</span>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__box arch__box--core">
+          <strong>Amazon EC2 &mdash; Ubuntu / Amazon Linux 2023</strong>
+          <span>t3.micro &middot; Elastic IP tetap</span>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__row">
+          <div class="arch__box arch__box--sm">
+            <strong>Apache2 / Nginx</strong>
+            <span>port 80</span>
+          </div>
+          <div class="arch__box arch__box--sm">
+            <strong>Docker (opsional)</strong>
+            <span>app:3000</span>
+          </div>
+        </div>
+        <div class="arch__arrow">&darr;</div>
+
+        <div class="arch__box">
+          <strong>/var/www/html</strong>
+          <span>index.html + assets/ (HTML, CSS, JS)</span>
+        </div>
+
+        <div class="arch__side">
+          <span class="arch__tag">IAM Role</span>
+          <span class="arch__tag">CloudWatch</span>
+          <span class="arch__tag">ECR / GHCR</span>
+          <span class="arch__tag">Route 53</span>
+          <span class="arch__tag">CloudFront</span>
+        </div>
+      </div>
+
+      <aside class="arch__notes">
+        <h4>Keputusan desain</h4>
+        <ul class="card__list">
+          <li><strong>SSH tidak dibuka ke semua orang.</strong> Rule port 22 dibatasi ke IP publik saya (<code>/32</code>), HTTP 80 dibuka untuk publik.</li>
+          <li><strong>Tidak ada Access Key di dalam instance.</strong> Semua akses AWS memakai <em>IAM Role</em> yang menempel ke EC2.</li>
+          <li><strong>Elastic IP</strong> dipakai agar alamat tidak berubah saat instance di-stop/start.</li>
+          <li><strong>Database di private subnet</strong> (untuk RDS), hanya bisa diakses dari Security Group aplikasi.</li>
+          <li><strong>Hemat biaya:</strong> instance di-<em>stop</em> setelah penilaian, lalu <code>terraform destroy</code> agar tidak ada tagihan berjalan.</li>
+        </ul>
+
+        <h4 class="mt">Layanan AWS &amp; fungsinya</h4>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr><th>Layanan</th><th>Fungsi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>EC2</td><td>Virtual machine untuk web server</td></tr>
+              <tr><td>VPC</td><td>Jaringan privat terisolasi</td></tr>
+              <tr><td>Security Group</td><td>Firewall tingkat instance</td></tr>
+              <tr><td>IAM</td><td>Identitas &amp; hak akses (least privilege)</td></tr>
+              <tr><td>S3</td><td>Penyimpanan objek (aset / backup)</td></tr>
+              <tr><td>RDS</td><td>Database terkelola (PostgreSQL/MySQL)</td></tr>
+              <tr><td>Route 53</td><td>DNS &amp; routing domain</td></tr>
+              <tr><td>CloudFront</td><td>CDN &amp; cache di edge location</td></tr>
+              <tr><td>CloudWatch</td><td>Log, metrik, dan alarm</td></tr>
+              <tr><td>ECR</td><td>Registry image Docker privat</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ---------- C. PIPELINE ---------- -->
+    <h3 class="cd-h3" id="pipeline">Pipeline dari Laptop ke EC2</h3>
+    <p class="cd-lead">
+      Alur ini yang saya siapkan untuk pengembangan berikutnya: begitu <code>git push</code>,
+      image dibangun otomatis, dikirim ke container registry, lalu EC2 menarik versi terbaru.
+    </p>
+
+    <ol class="pipe">
+      <li class="pipe__step">
+        <span class="pipe__no">1</span>
+        <div>
+          <h4>Build lokal &amp; containerisasi</h4>
+          <p>Aplikasi diuji di <code>localhost</code> dulu, lalu dibungkus Docker dengan <em>multi-stage build</em> agar image kecil dan tidak membawa devDependency.</p>
+          <pre class="code"><code>FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+EXPOSE 3000
+CMD ["node", "server.js"]</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">2</span>
+        <div>
+          <h4>Jalankan bersama reverse proxy</h4>
+          <p>Nginx menerima trafik port 80 dan meneruskannya ke container aplikasi. Konfigurasi ini juga siap dipasangi TLS.</p>
+          <pre class="code"><code>services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">3</span>
+        <div>
+          <h4>Otomasi dengan GitHub Actions</h4>
+          <p>Setiap push ke <code>main</code>: build image, push ke registry, lalu jalankan perintah deploy lewat SSH (atau SSM tanpa membuka port 22).</p>
+          <pre class="code"><code>- name: Deploy ke EC2
+  uses: appleboy/ssh-action@v1
+  with:
+    host: ${{ secrets.EC2_HOST }}
+    username: ubuntu
+    key: ${{ secrets.EC2_SSH_KEY }}
+    script: |
+      cd ~/app
+      docker compose pull
+      docker compose up -d --remove-orphans
+      curl -fsS http://localhost/health || exit 1</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">4</span>
+        <div>
+          <h4>Infrastruktur sebagai kode</h4>
+          <p>EC2, Security Group, Key Pair, dan Elastic IP dibuat ulang kapan saja dengan Terraform &mdash; tidak ada lagi konfigurasi yang hanya "ada di kepala".</p>
+          <pre class="code"><code>terraform init
+terraform plan -out tfplan
+terraform apply tfplan
+terraform output public_ip
+
+# setelah dinilai
+terraform destroy</code></pre>
+        </div>
+      </li>
+
+      <li class="pipe__step">
+        <span class="pipe__no">5</span>
+        <div>
+          <h4>Monitoring, rollback, dan pembersihan</h4>
+          <p>Health check menentukan deploy berhasil atau tidak. Jika gagal, container lama dikembalikan; image lama dibersihkan agar disk tidak penuh.</p>
+          <pre class="code"><code>docker compose ps
+docker compose logs --tail=50 app
+docker compose down &amp;&amp; docker compose up -d
+docker image prune -af --filter "until=24h"
+docker system df</code></pre>
+        </div>
+      </li>
+    </ol>
+
+    <!-- ---------- D. KONSEP KUNCI ---------- -->
+    <h3 class="cd-h3" id="knowledge">Konsep Kunci &mdash; Catatan Belajar</h3>
+    <p class="cd-lead">
+      Rangkuman pertanyaan yang paling sering muncul saat merancang sistem di AWS.
+      Klik tiap bagian untuk membuka jawabannya.
+    </p>
+
+    <div class="accordion">
+      <details open>
+        <summary>1. Network &amp; Security Architecture</summary>
+        <ul class="acc__list">
+          <li><strong>Secret di dev vs produksi:</strong> di laptop boleh <code>.env</code>; di produksi pakai SSM Parameter Store / Secrets Manager, disuntikkan oleh platform (ECS) &mdash; jangan pernah commit kunci.</li>
+          <li><strong>VPC isolation:</strong> resource backend di <em>private subnet</em> tanpa public IP, sehingga tidak bisa dirutekan dari internet.</li>
+          <li><strong>Publik vs privat:</strong> DevTools hanya melihat request sampai API Gateway; isi VPC tidak terlihat dari browser.</li>
+          <li><strong>IAM Policy vs Role:</strong> policy adalah dokumen aturan, role adalah "topi" yang dipakai service untuk mendapatkan kredensial sementara.</li>
+          <li><strong>Cognito:</strong> <em>User Pool</em> = database pengguna + autentikasi (mengeluarkan JWT); <em>Identity Pool</em> = menukar token menjadi kredensial IAM sementara.</li>
+          <li><strong>WAF &amp; Shield:</strong> WAF memeriksa isi request (SQLi/XSS/bot), Shield menahan banjir trafik DDoS.</li>
+          <li><strong>KMS:</strong> enkripsi <em>at rest</em> &mdash; data di disk selalu teracak, kunci dikelola KMS.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>2. Compute &amp; Microservices</summary>
+        <ul class="acc__list">
+          <li><strong>EC2 vs Fargate:</strong> EC2 seperti punya mobil sendiri (rawat + bayar saat diam); serverless seperti naik taksi (bayar sesuai pakai).</li>
+          <li><strong>Route publik vs terproteksi:</strong> <code>GET /products</code> boleh tanpa token; <code>POST /orders</code> wajib authorizer sehingga request tidak valid ditolak 401 sebelum masuk VPC.</li>
+          <li><strong>API Gateway vs ALB:</strong> API Gateway di edge (auth, quota, validasi); ALB di dalam VPC (distribusi trafik &amp; health check container).</li>
+          <li><strong>ECR &amp; ECS:</strong> build image &rarr; push ke ECR &rarr; ECS menarik image dan menjalankan task.</li>
+          <li><strong>Lambda cold start:</strong> inisialisasi runtime membuat request pertama lambat; solusinya <em>Provisioned Concurrency</em>.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>3. Database &amp; Caching</summary>
+        <ul class="acc__list">
+          <li><strong>RDS vs DynamoDB:</strong> RDS untuk transaksi relasional &amp; ACID; DynamoDB untuk lookup key-value berskala besar.</li>
+          <li><strong>Cache HTTP vs in-memory:</strong> cache di edge menyimpan respons final (read-only, publik); Redis menyimpan objek yang bisa berubah (session, counter stok).</li>
+          <li><strong>Pencarian:</strong> <code>LIKE '%kata%'</code> tidak tahan typo dan berat di jutaan baris &mdash; gunakan OpenSearch untuk fuzzy match &amp; ranking relevansi.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>4. Messaging &amp; Event-Driven</summary>
+        <ul class="acc__list">
+          <li><strong>SNS + SQS:</strong> service pemesan cukup memublikasikan event lalu langsung membalas sukses; email &amp; cart diproses asinkron.</li>
+          <li><strong>SNS/SQS vs Kafka vs EventBridge:</strong> SQS untuk antrean tugas sekali pakai, Kafka untuk stream yang bisa diputar ulang, EventBridge untuk routing berbasis isi event.</li>
+          <li><strong>Standard vs FIFO:</strong> Standard = throughput besar, <em>at-least-once</em>; FIFO = urutan ketat &amp; tepat sekali, throughput terbatas.</li>
+          <li><strong>Step Functions:</strong> mengorkestrasi langkah multi-service dengan retry dan <em>compensation</em> (Saga Pattern).</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>5. Storage, Frontend &amp; Delivery</summary>
+        <ul class="acc__list">
+          <li><strong>Rendering:</strong> SSR butuh compute (Lambda/ECS), bukan S3. SSG &amp; CSR bisa sepenuhnya statis di S3; ISR adalah gabungan cache + rebuild di belakang.</li>
+          <li><strong>Storage class:</strong> Standard untuk data panas, IA untuk arsip jarang dibuka, Glacier untuk retensi jangka panjang.</li>
+          <li><strong>CloudFront:</strong> menaruh salinan aset di edge location sehingga latensi turun drastis untuk pengguna jauh dari region asal.</li>
+          <li><strong>Route 53:</strong> bisa latency-based maupun failover, bukan sekadar memetakan nama ke satu IP.</li>
+          <li><strong>VPC Endpoint:</strong> resource privat mencapai S3/DynamoDB lewat jalur privat, tanpa NAT Gateway dan tanpa internet publik.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>6. DevOps, Observability &amp; Architecture</summary>
+        <ul class="acc__list">
+          <li><strong>Tiga pilar observability:</strong> logs (apa yang terjadi), metrics (seberapa parah), traces (di hop mana bermasalah).</li>
+          <li><strong>Grafana vs Sentry:</strong> Grafana menjawab "sistem sedang rusak"; Sentry menjawab "baris kode mana penyebabnya".</li>
+          <li><strong>Terraform vs CDK:</strong> Terraform deklaratif &amp; multi-cloud (HCL); CDK memakai bahasa pemrograman lalu menghasilkan CloudFormation.</li>
+          <li><strong>CodePipeline:</strong> Source &rarr; Build (CodeBuild + test + push image) &rarr; Deploy (CodeDeploy rolling update tanpa downtime).</li>
+          <li><strong>Multi-AZ vs Multi-Region:</strong> Multi-AZ wajib untuk ketahanan satu data center; Multi-Region untuk bencana skala besar dan jauh lebih kompleks.</li>
+          <li><strong>Well-Architected:</strong> Security, Reliability, Performance Efficiency, Cost Optimization, Operational Excellence, Sustainability.</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- ---------- E. LAB WSL2 + PUTTY ---------- -->
+    <h3 class="cd-h3" id="lab">Lab: WSL2 Ubuntu + PuTTY ke AWS EC2</h3>
+    <p class="cd-lead">
+      Inilah jalur yang saya pakai untuk menghubungkan laptop Windows ke instance EC2:
+      <strong>WSL2 Ubuntu</strong> untuk semua perintah Linux, dan <strong>PuTTY</strong> sebagai
+      terminal SSH alternatif yang bisa dipakai saat presentasi.
+    </p>
+
+    <div class="steps">
+      <article class="step">
+        <span class="step__no">1</span>
+        <h4>Install WSL2 + Ubuntu</h4>
+        <p>Jalankan di PowerShell (Administrator), lalu reboot bila diminta.</p>
+        <pre class="code"><code>wsl --install -d Ubuntu
+wsl --set-default-version 2
+wsl -l -v</code></pre>
+        <p class="step__note">Setelah reboot, Ubuntu akan meminta username &amp; password Linux (bebas, bukan password AWS).</p>
+      </article>
+
+      <article class="step">
+        <span class="step__no">2</span>
+        <h4>Siapkan tools di dalam Ubuntu</h4>
+        <p>Semua perintah berikut dijalankan di terminal Ubuntu (WSL2).</p>
+        <pre class="code"><code>sudo apt update &amp;&amp; sudo apt upgrade -y
+sudo apt install -y curl git unzip openssh-client apache2
+
+# verifikasi
+lsb_release -ds
+git --version
+apache2 -v</code></pre>
+      </article>
+
+      <article class="step">
+        <span class="step__no">3</span>
+        <h4>Convert key pair <code>.pem</code> ke <code>.ppk</code></h4>
+        <p>AWS memberikan file <code>.pem</code>, sedangkan PuTTY memakai format <code>.ppk</code>.</p>
+        <ol class="step__list">
+          <li>Buka <strong>PuTTYgen</strong> &rarr; <em>Load</em> &rarr; pilih file <code>.pem</code> (ubah filter ke <em>All Files</em>).</li>
+          <li>Klik <strong>Save private key</strong> &rarr; simpan sebagai <code>uts-cloud-key.ppk</code>.</li>
+          <li>Jangan pernah membagikan file ini. Simpan di folder pribadi, bukan di repository.</li>
+        </ol>
+      </article>
+
+      <article class="step">
+        <span class="step__no">4</span>
+        <h4>Konfigurasi sesi PuTTY</h4>
+        <ol class="step__list">
+          <li><em>Host Name</em>: <code>ubuntu@&lt;PUBLIC-IP&gt;</code> (atau <code>ec2-user@</code> untuk Amazon Linux).</li>
+          <li><em>Port</em>: <code>22</code> &middot; <em>Connection type</em>: <code>SSH</code>.</li>
+          <li><em>Connection &rarr; SSH &rarr; Auth &rarr; Credentials</em>: pilih file <code>.ppk</code> tadi.</li>
+          <li>Kembali ke <em>Session</em>, isi <em>Saved Sessions</em> dengan <code>UTS-EC2</code>, lalu klik <strong>Save</strong>.</li>
+          <li>Klik <strong>Open</strong> &rarr; jawab <em>yes</em> pada prompt host key.</li>
+        </ol>
+        <p class="step__note">Alternatif dari WSL2 (tanpa PuTTY): <code>ssh -i uts-cloud-key.pem ubuntu@&lt;PUBLIC-IP&gt;</code> dengan <code>chmod 400 uts-cloud-key.pem</code>.</p>
+      </article>
+
+      <article class="step">
+        <span class="step__no">5</span>
+        <h4>Pasang web server di EC2</h4>
+        <p>Dari dalam sesi SSH, siapkan Apache2 (atau Nginx, pilih salah satu).</p>
+        <pre class="code"><code>sudo apt update &amp;&amp; sudo apt install -y apache2
+sudo systemctl enable --now apache2
+sudo systemctl status apache2 --no-pager
+
+# buka firewall OS jika aktif
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp</code></pre>
+      </article>
+
+      <article class="step">
+        <span class="step__no">6</span>
+        <h4>Deploy website ke document root</h4>
+        <pre class="code"><code># dari laptop / WSL2
+scp -i uts-cloud-key.pem -r index.html assets ubuntu@&lt;PUBLIC-IP&gt;:~/
+
+# dari dalam EC2
+sudo rm -f /var/www/html/index.html
+sudo cp -r ~/index.html ~/assets /var/www/html/
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+curl -I http://localhost</code></pre>
+      </article>
+
+      <article class="step">
+        <span class="step__no">7</span>
+        <h4>Verifikasi lewat Public IP</h4>
+        <p>Buka browser (bukan <code>localhost</code>) dan pastikan halaman tampil lengkap dengan foto &amp; CSS.</p>
+        <pre class="code"><code># uji dari laptop
+curl -I http://&lt;PUBLIC-IP&gt;
+curl -o NUL -w "%{http_code}\n" http://&lt;PUBLIC-IP&gt;/assets/css/style.css</code></pre>
+        <p class="step__note">Jika CSS 404, berarti folder <code>assets</code> belum ikut ter-copy ke <code>/var/www/html</code>.</p>
+      </article>
+
+      <article class="step step--accent">
+        <span class="step__no">8</span>
+        <h4>Naik level: Docker, Terraform, Helm</h4>
+        <p>Setelah situs statis berjalan, lab dilanjutkan ke containerisasi dan orkestrasi.</p>
+        <pre class="code"><code># Docker
+docker build -t web-uts:v1 .
+docker run -d -p 8080:80 web-uts:v1
+
+# Terraform
+terraform init &amp;&amp; terraform plan &amp;&amp; terraform apply
+
+# Kubernetes + Helm
+kind create cluster --name uts
+helm upgrade --install web ./helm/nextjs-app --set image.tag=latest
+kubectl get pods,svc,ingress</code></pre>
+      </article>
+    </div>
+
+    <div class="lab-links">
+      <a class="btn btn--primary" href="WSL2-PUTTY-GUIDE.md">Panduan lengkap WSL2 + PuTTY</a>
+      <a class="btn btn--ghost" href="README.md">README tugas</a>
+      <a class="btn btn--ghost" href="NASKAH-VIDEO.md">Naskah video</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <h2 class="section__title">Portofolio &amp; Proyek</h2>
+    <p class="section__lead">Beberapa project yang pernah saya kerjakan, dari aplikasi web, AI, IoT, hingga infrastruktur cloud.</p>
+
+    <div class="cards">
+      <article class="card">
+        <span class="badge badge--blue">Full-stack &middot; Laravel</span>
+        <h3>Sistem Manajemen Karyawan (HRIS)</h3>
+        <p>Aplikasi web manajemen SDM dengan fitur impor Excel, absensi, penilaian kinerja, dan perhitungan gaji terintegrasi menggunakan MySQL.</p>
+        <ul class="card__list">
+          <li>Arsitektur MVC pada Laravel 10</li>
+          <li>Modul import data massal (PhpSpreadsheet)</li>
+          <li>Validasi input &amp; audit log</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--violet">AI &middot; Deep Learning</span>
+        <h3>Klasifikasi Ras Kelinci dengan CNN</h3>
+        <p>Model convolutional neural network MobileNetV3 untuk klasifikasi ras kelinci dari citra, dibangun dengan teknik transfer learning.</p>
+        <ul class="card__list">
+          <li>Python, TensorFlow &amp; Keras</li>
+          <li>Augmentasi data &amp; tuning hyperparameter</li>
+          <li>Evaluasi akurasi &amp; confusion matrix</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card card--accent">
+        <span class="badge badge--orange">UTS &middot; Sesi #8 (1) &middot; AWS EC2</span>
+        <h3>Deployment Website di AWS EC2</h3>
+        <p>Proyek individu untuk Tugas Sesi #8 (1) — UTS Cloud Computing. Membuat instance EC2 Ubuntu, mengatur Security Group (SSH 22 &amp; HTTP 80), memasang Apache2, dan mendeploy website statis personal melalui Public IP.</p>
+        <ul class="card__list">
+          <li>Konfigurasi EC2, Key Pair &amp; Security Group</li>
+          <li>Manajemen user, permission, dan web server</li>
+          <li>Website statis HTML/CSS responsif</li>
+        </ul>
+        <div class="card__foot"><a href="#contact">Didemonstrasikan pada video UTS &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--green">IoT &middot; Embedded</span>
+        <h3>ESP32-C3 Alarm Clock</h3>
+        <p>Jam alarm berbasis mikrokontroler ESP32-C3 dengan konektivitas Wi-Fi, tampilan digital, dan penjadwalan alarm yang dapat dikonfigurasi.</p>
+        <ul class="card__list">
+          <li>Arduino IDE &amp; C++</li>
+          <li>Integrasi Wi-Fi &amp; NTP time sync</li>
+          <li>Desain PCB sederhana</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--cyan">Data Engineering</span>
+        <h3>Pipeline Data &amp; Lakehouse</h3>
+        <p>Pipeline ingestion data batch &amp; streaming menuju lakehouse, diproses dengan Airflow dan Spark, termasuk konfigurasi Terraform.</p>
+        <ul class="card__list">
+          <li>Databricks / Snowflake / Lakeflow Spark</li>
+          <li>Airflow &amp; Kafka streaming</li>
+          <li>Terraform untuk provision infrastructure</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--pink">Monitoring &amp; Automation</span>
+        <h3>Observability Infrastructure</h3>
+        <p>Setup Prometheus untuk scraping metrik, Grafana untuk visualisasi dashboard, serta Ansible untuk otomasi konfigurasi server.</p>
+        <ul class="card__list">
+          <li>Prometheus &amp; Grafana dashboard</li>
+          <li>Ansible playbooks</li>
+          <li>Alerting &amp; health check</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PENGALAMAN & PENDIDIKAN ================= -->
+<section class="section section--alt" id="experience">
+  <div class="container">
+    <h2 class="section__title">Pendidikan &amp; Pengalaman</h2>
+
+    <div class="timeline">
+      <article class="tl-item">
+        <div class="tl-item__when">2026</div>
+        <div class="tl-item__body">
+          <h3>Artificial Intelligence &mdash; Darma Persada (HIMIFDA)</h3>
+          <p>Mengikuti kegiatan AI di lingkup HIMIFDA dan Sekolah Pascasarjana UNSADA sebagai peserta.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2026</div>
+        <div class="tl-item__body">
+          <h3>Webinar Nasional Keamanan Digital</h3>
+          <p>Partisipasi dalam webinar nasional bertema <em>Digital Security</em> yang membahas respons insiden dan praktik hardening pada server.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2025 &mdash; 2026</div>
+        <div class="tl-item__body">
+          <h3>Kerja Praktik &mdash; Sistem Manajemen Karyawan</h3>
+          <p>Mengembangkan aplikasi web manajemen karyawan berbasis Laravel + MySQL di sebuah perusahaan, mulai dari analisis kebutuhan, perancangan database, implementasi, hingga pengujian.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2023 &mdash; Sekarang</div>
+        <div class="tl-item__body">
+          <h3>S1 Teknologi Informasi &mdash; Universitas Darma Persada (UNSADA)</h3>
+          <p>NIM 2023230006, Kelas TIFM. Mata kuliah relevan: Basis Data, Pemrograman Web, Artificial Intelligence &amp; Machine Learning, Data Mining, Mobile Computing, Sistem Informasi Enterprise.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERTIFIKASI ================= -->
+<section class="section" id="certification">
+  <div class="container">
+    <h2 class="section__title">Sertifikasi Profesional</h2>
+    <p class="section__lead">Sertifikasi yang saya miliki dari penyelenggara cloud, jaringan, dan data engineering.</p>
+
+    <div class="certs">
+      <article class="cert">
+        <h3>Cisco</h3>
+        <ul>
+          <li>Ethical Hacker (Jun 2025)</li>
+          <li>Managing Cisco Network Operating Systems (Okt 2025)</li>
+          <li>Automate AI Solutions on Cisco Infrastructure</li>
+          <li>Network Technician Career Path</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>IBM</h3>
+        <ul>
+          <li>Containers &amp; Kubernetes Essentials</li>
+          <li>Quantum Machine Learning (Feb 2026)</li>
+          <li>Quantum-Safe Encryption Essentials</li>
+          <li>Beyond the Basics: Istio &amp; IBM Cloud K8s</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Google Cloud</h3>
+        <ul>
+          <li>Site Reliability Engineering (Feb 2026)</li>
+          <li>Cybersecurity: Cloud Security Risk Management</li>
+          <li>Transformer Models and BERT Model</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Fortinet</h3>
+        <ul>
+          <li>Fortinet Certified Associate Cybersecurity</li>
+          <li>FortiGate 7.6 Operator (Jun 2025)</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>The Linux Foundation</h3>
+        <ul>
+          <li>LFS158: Introduction to Kubernetes</li>
+          <li>LFQ102: Quantum Computing Essentials</li>
+          <li>LFEL1001: EU Cyber Resilience Act (CRA)</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Databricks &amp; Neo4j</h3>
+        <ul>
+          <li>Data Ingestion with Lakeflow Connect</li>
+          <li>Build Data Pipelines with Lakeflow Spark</li>
+          <li>Neo4j Graph Data Science Certification</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KONTAK ================= -->
+<section class="section section--alt" id="contact">
+  <div class="container">
+    <h2 class="section__title">Kontak</h2>
+    <p class="section__lead">Silakan hubungi saya untuk diskusi, kolaborasi proyek, atau peluang magang.</p>
+
+    <div class="contacts">
+      <a class="contact-card" href="mailto:aryafatthurahman4@gmail.com">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
+        </span>
+        <div>
+          <strong>Email</strong>
+          <span>aryafatthurahman4@gmail.com</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://wa.me/628517445861" target="_blank" rel="noopener">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.6 2 2.2 6.4 2.2 11.8c0 2.1.6 4.2 1.7 5.9L2.2 22l4.5-1.7a9.7 9.7 0 0 0 5.3 1.6h.1c5.4 0 9.8-4.4 9.8-9.9 0-2.6-1-5.1-2.9-6.9A9.6 9.6 0 0 0 12.04 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-2.6 1 1-2.5-.2-.3a7.9 7.9 0 0 1-1.3-4.3c0-4.5 3.6-8.1 8-8.1a8 8 0 0 1 5.7 2.3 8 8 0 0 1 2.3 5.8c0 4.5-3.7 8.3-8.5 8.3zm4.5-5.8c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.2-.2.3-.6.8-.8 1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.6.1-.2 0-.4 0-.6-.1-.2-.5-1.3-.8-1.8-.2-.4-.4-.4-.6-.4h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.7-.1 1.8-.7 2.1-1.4.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.5-.4z"/></svg>
+        </span>
+        <div>
+          <strong>WhatsApp</strong>
+          <span>+62 851-7445-861</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.6.5.8 5.6.8 12.1c0 5.1 3.3 9.4 7.7 10.8.5.1.7-.2.7-.5v-2c-3.1.7-3.8-1.4-3.8-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.2 1 .1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.3-5.1-5.5 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.4.1-3 0 0 .9-.3 3 1.1a10.3 10.3 0 0 1 5.5 0c2.1-1.4 3-1.1 3-1.1.6 1.6.2 2.7.1 3 .7.8 1.1 1.8 1.1 3 0 4.3-2.6 5.2-5.1 5.5.4.4.8 1.1.8 2.2v3c0 .3.2.6.7.5 4.4-1.5 7.7-5.8 7.7-10.8C23.2 5.6 18.4.5 12 .5z"/></svg>
+        </span>
+        <div>
+          <strong>GitHub</strong>
+          <span>github.com/AryaFatthurahman1</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/muhammad-arya-fatthurahman" target="_blank" rel="noopener">
+        <span class="contact-card__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.49 2.49 0 1 1 0 4.98 2.49 2.49 0 0 1 0-4.98zM.4 8.9h4.6V24H.4zM8.9 8.9h4.4v2.1h.1c.6-1.1 2.1-2.3 4.3-2.3 4.6 0 5.4 3 5.4 6.9V24h-4.6v-6.5c0-1.6 0-3.6-2.2-3.6-2.2 0-2.6 1.7-2.6 3.5V24H8.9z"/></svg>
+        </span>
+        <div>
+          <strong>LinkedIn</strong>
+          <span>/in/muhammad-arya-fatthurahman</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="host-panel">
+      <h3>Arsitektur Lab &amp; Deployment</h3>
+      <ul class="info-list info-list--2col">
+        <li><span>Komputer Target</span><strong>Amazon Linux 2023 / Ubuntu 24.04 (VMware / VirtualBox)</strong></li>
+        <li><span>Web Server</span><strong>httpd / apache2 &mdash; DocumentRoot <code>/var/www/html</code></strong></li>
+        <li><span>Container</span><strong>Docker &mdash; <code>nginx:8080</code></strong></li>
+        <li><span>Orchestrator</span><strong>Kubernetes (kind / k3s) &mdash; NodePort <code>30080</code></strong></li>
+        <li><span>IaC</span><strong>Terraform &mdash; LocalStack / AWS asli / VM lokal</strong></li>
+        <li><span>Akses Lab</span><strong><code>http://192.168.56.10</code> &middot; SSH <code>ec2-user@192.168.56.10</code></strong></li>
+        <li><span>Deployment UTS</span><strong>AWS EC2 (Ubuntu/Amazon Linux) + Apache2 melalui Public IP</strong></li>
+        <li><span>Website Live</span><strong><a href="http://aryafatthurahman1.my.id" data-live-url target="_blank" rel="noopener"><span data-live-host>aryafatthurahman1.my.id</span></a></strong></li>
+        <li><span>Portal</span><strong><a href="knowledge.html">Knowledge Base</a> &middot; <a href="login.html">Login workspace</a></strong></li>
+        <li><span>Akses SSH</span><strong>WSL2 Ubuntu &amp; PuTTY &mdash; <code>ubuntu@&lt;PUBLIC-IP&gt;</code></strong></li>
+        <li><span>Dokumentasi</span><strong><code>WSL2-PUTTY-GUIDE.md</code>, <code>LAB/00-PANDUAN-UTAMA.md</code>, <code>README.md</code></strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="footer">
+  <div class="container footer__inner">
+    <div class="footer__grid">
+      <div class="footer__col">
+        <p class="footer__brand"><span class="footer__mark">MAF</span> Muhammad Arya Fatthurahman</p>
+        <p class="footer__small">NIM 2023230006 &middot; Kelas TIFM<br>S1 Teknologi Informasi, Universitas Darma Persada (UNSADA)</p>
+      </div>
+      <div class="footer__col">
+        <h4>Navigasi</h4>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#portfolio">Portofolio</a>
+        <a href="#experience">Pengalaman</a>
+        <a href="#certification">Sertifikasi</a>
+      </div>
+      <div class="footer__col">
+        <h4>Portal</h4>
+        <a href="knowledge.html">Knowledge Base</a>
+        <a href="login.html">Masuk Workspace</a>
+        <a href="http://aryafatthurahman1.my.id" data-live-url target="_blank" rel="noopener">Live: <span data-live-host>aryafatthurahman1.my.id</span></a>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <p>&copy; <span id="year">2026</span> <strong>Muhammad Arya Fatthurahman</strong> &mdash; Tugas Sesi #8 (1) &mdash; UTS Cloud Computing (AWS EC2)</p>
+      <a class="footer__to-top" href="#top">Kembali ke atas &#8593;</a>
+    </div>
+  </div>
+</footer>
+<button type="button" class="back-top" id="backTop" data-tip="Kembali ke atas" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Toast container -->
+<div class="toast-wrap"></div>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+Ingress Next.js berhasil dipasang.
+
+1. Cek Pod:
+   kubectl get pods -l app.kubernetes.io/instance={{ .Release.Name }} -n {{ .Release.Namespace }}
+
+2. Cek Ingress + sertifikat:
+   kubectl get ingress -n {{ .Release.Namespace }}
+   kubectl get certificate -n {{ .Release.Namespace }}
+
+3. Kesehatan aplikasi:
+   kubectl port-forward svc/{{ include "nextjs-app.fullname" . }} 8080:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+   curl http://localhost:8080/api/health
+
+4. URL:
+{{- range .Values.ingress.hosts }}
+   https://{{ .host }}
+{{- end }}
+
+Catatan: DNS harus mengarah ke load balancer Ingress Controller
+dan cert-manager harus terpasang untuk TLS otomatis.

@@ -1,0 +1,178 @@
+name: ec2-lab
+
+# ------------------------------------------------------------------
+# Dipakai di EC2 (produksi) dan lokal.
+#   cp .env.example .env && docker compose up -d --build
+# ------------------------------------------------------------------
+
+services:
+  app:
+    image: ${APP_IMAGE:-ghcr.io/owner/repo:latest}
+    build:
+      context: ./app
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+    container_name: ec2-lab-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+        required: false  # Optional - only required if using local PostgreSQL
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+      # Set DATABASE_URL di .env untuk database eksternal seperti AWS RDS.
+      # Jika kosong/tidak ada, gunakan PostgreSQL lokal di service db.
+      DATABASE_URL: ${DATABASE_URL:-postgres://${POSTGRES_USER:-ec2lab}:${POSTGRES_PASSWORD:-ec2lab_dev_password}@db:5432/${POSTGRES_DB:-ec2lab}}
+      DATABASE_SSL: ${DATABASE_SSL:-false}
+      REQUIRE_DB: "true"
+    # Default hanya loopback host (untuk health check & debug).
+    # Set APP_BIND_IP=0.0.0.0 di .env bila browser lokal perlu akses lewat IP LAN.
+    # Internet tetap harus lewat Nginx (80/443).
+    ports:
+      - "${APP_BIND_IP:-127.0.0.1}:3000:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 768M
+    networks:
+      - edge
+      - data
+
+  db:
+    image: postgres:17-alpine
+    container_name: ec2-lab-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ec2lab}
+      POSTGRES_USER: ${POSTGRES_USER:-ec2lab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ec2lab_dev_password}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    # Hanya loopback host: untuk psql/npm run dev, bukan akses internet.
+    # 5433 di host -> 5432 di container (menghindari bentrok PostgreSQL lokal).
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - data
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: ec2-lab-nginx
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      DOMAIN: ${DOMAIN:-app.example.com}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates:ro
+      - ./nginx/certs:/etc/letsencrypt:ro
+      - ./nginx/www:/var/www/certbot:ro
+      - nginx-logs:/var/log/nginx
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - edge
+
+  # UI database, hanya bind ke loopback. Akses dari laptop lewat SSH tunnel:
+  #   ssh -L 8090:127.0.0.1:8090 admin@<ELASTIC_IP>
+  #   docker compose --profile tools up -d adminer
+  adminer:
+    image: adminer:4
+    container_name: ec2-lab-adminer
+    profiles: ["tools"]
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+        required: false
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - "127.0.0.1:8090:8080"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - data
+
+  # Perpanjangan sertifikat otomatis. Jalankan dengan:
+  #   docker compose --profile tls up -d certbot
+  certbot:
+    image: certbot/certbot:latest
+    container_name: ec2-lab-certbot
+    profiles: ["tls"]
+    restart: unless-stopped
+    volumes:
+      - ./nginx/certs:/etc/letsencrypt
+      - ./nginx/www:/var/www/certbot
+    entrypoint: >
+      sh -c "trap exit TERM;
+      while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet;
+        sleep 12h & wait $${!};
+      done"
+    networks:
+      - edge
+
+networks:
+  edge:
+    driver: bridge
+  data:
+    driver: bridge
+    internal: true
+
+volumes:
+  db-data:
+  nginx-logs:

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Workspace UTS Cloud Computing - checklist EC2, database, pipeline, dan guestbook. Muhammad Arya Fatthurahman NIM 2023230006.">
+  <meta name="author" content="Muhammad Arya Fatthurahman">
+  <title>Workspace — UTS Cloud Computing 2023230006</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+
+<header class="app-top">
+  <div class="container app-top__inner">
+    <a href="index.html" class="app-brand">
+      <span class="app-brand__mark">MAF</span>
+      <span class="app-brand__text">
+        <strong>UTS Cloud Workspace</strong>
+        <small>Muhammad Arya Fatthurahman &middot; 2023230006</small>
+      </span>
+    </a>
+    <span class="app-top__spacer"></span>
+    <nav class="app-top__links" aria-label="Navigasi workspace">
+      <a class="btn btn--ghost btn--sm" href="index.html">Portofolio</a>
+      <a class="btn btn--ghost btn--sm" href="knowledge.html">Knowledge</a>
+      <span class="app-top__user">Halo, <strong data-user-name>Mahasiswa</strong></span>
+      <a class="btn btn--ghost btn--sm" href="login.html" data-logout>Keluar</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container app-shell" data-guard>
+
+  <aside class="app-side" aria-label="Menu workspace">
+    <div class="app-side__nav">
+      <p class="app-side__label">Workspace</p>
+      <a href="#overview" class="is-active"><span class="app-side__num">01</span> Ringkasan</a>
+      <a href="#checklist"><span class="app-side__num">02</span> Checklist EC2</a>
+      <a href="#database"><span class="app-side__num">03</span> Database</a>
+      <a href="#pipeline"><span class="app-side__num">04</span> Pipeline</a>
+      <a href="#guestbook"><span class="app-side__num">05</span> Guestbook</a>
+      <a href="#deployment"><span class="app-side__num">06</span> Status deploy</a>
+
+      <p class="app-side__label">Referensi</p>
+      <a href="knowledge.html"><span class="app-side__num">↗</span> Knowledge base</a>
+      <a href="index.html#cloud"><span class="app-side__num">↗</span> Ringkasan Cloud</a>
+      <a href="index.html#lab"><span class="app-side__num">↗</span> Lab WSL2 + PuTTY</a>
+
+      <p class="app-side__label">Akun</p>
+      <a href="#account"><span class="app-side__num">07</span> Sesi &amp; data</a>
+      <a href="login.html" data-logout><span class="app-side__num">⎋</span> Keluar</a>
+    </div>
+  </aside>
+
+  <main class="app-main">
+
+    <!-- ================= OVERVIEW ================= -->
+    <section id="overview">
+      <div class="page-head">
+        <p class="page-head__eyebrow">Workspace &middot; UTS Cloud Computing</p>
+        <h1>Selamat datang, <span data-user-name>Mahasiswa</span></h1>
+        <p>
+          Semua yang ada di halaman ini berjalan di browser dan tersimpan di perangkat Anda.
+          Host yang sedang melayani halaman: <strong data-host>—</strong>.
+          Gunakan menu di kiri untuk berpindah bagian.
+        </p>
+      </div>
+
+      <div class="grid-4" style="margin-bottom:16px">
+        <div class="metric">
+          <p class="metric__label">Host publik</p>
+          <p class="metric__value metric__value--sm" data-host>—</p>
+          <p class="metric__hint"><span data-protocol>—</span> &middot; <span data-env>—</span></p>
+        </div>
+        <div class="metric">
+          <p class="metric__label">Nama</p>
+          <p class="metric__value metric__value--sm" data-user-name>—</p>
+          <p class="metric__hint">NIM <span data-user-nim>—</span></p>
+        </div>
+        <div class="metric">
+          <p class="metric__label">Kelas / Prodi</p>
+          <p class="metric__value metric__value--sm">TIFM</p>
+          <p class="metric__hint">S1 Teknologi Informasi &middot; UNSADA</p>
+        </div>
+        <div class="metric">
+          <p class="metric__label">Sesi dimulai</p>
+          <p class="metric__value metric__value--sm" data-session-time>—</p>
+          <p class="metric__hint">Disimpan di browser ini</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="tile">
+          <div class="tile__head">
+            <div>
+              <h2 class="tile__title">Status deployment</h2>
+              <p class="tile__sub">Ringkasan target yang dinilai</p>
+            </div>
+            <span class="pill pill--ok"><span class="dot"></span> Online</span>
+          </div>
+          <div class="tile__body">
+            <ul class="kb-list" style="margin-bottom:0">
+              <li>Alamat: <strong data-origin>—</strong></li>
+              <li>Web server: Nginx / Apache2 di EC2</li>
+              <li>Security Group: SSH 22 (IP admin), HTTP 80, HTTPS 443</li>
+              <li>Halaman: portofolio, knowledge base, login, workspace</li>
+            </ul>
+          </div>
+          <div class="tile__foot">
+            <a class="btn btn--primary btn--sm" href="index.html">Lihat situs publik</a>
+            <a class="btn btn--ghost btn--sm" href="#deployment">Detail status</a>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="tile__head">
+            <div>
+              <h2 class="tile__title">Progres tugas</h2>
+              <p class="tile__sub">Checklist EC2 yang bisa dicentang</p>
+            </div>
+            <span class="pill pill--info" id="checkCount">0 / 9 langkah</span>
+          </div>
+          <div class="tile__body">
+            <div class="progress-line" style="margin-bottom:12px">
+              <span id="checkProgress"></span>
+            </div>
+            <p style="font-size:13px;color:var(--text-soft)">
+              Centang langkah di bagian <a href="#checklist">Checklist EC2</a>. Status tersimpan
+              otomatis di browser dan tetap ada saat halaman dimuat ulang.
+            </p>
+          </div>
+          <div class="tile__foot">
+            <a class="btn btn--primary btn--sm" href="#checklist">Buka checklist</a>
+            <span class="pill pill--off">localStorage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <div>
+            <h2 class="tile__title">Akses cepat</h2>
+            <p class="tile__sub">Semua halaman yang tersedia di deployment ini</p>
+          </div>
+          <span class="pill pill--dark">4 halaman statis</span>
+        </div>
+        <div class="grid-4">
+          <a class="tile" href="index.html" style="text-decoration:none;color:inherit">
+            <p class="tile__title">Portofolio</p>
+            <p class="tile__sub">Profil, skills, cloud journey, kontak</p>
+          </a>
+          <a class="tile" href="knowledge.html" style="text-decoration:none;color:inherit">
+            <p class="tile__title">Knowledge base</p>
+            <p class="tile__sub">Roadmap, AWS, Docker, K8s, Terraform</p>
+          </a>
+          <a class="tile" href="#database" style="text-decoration:none;color:inherit">
+            <p class="tile__title">Database</p>
+            <p class="tile__sub">Catatan koneksi PostgreSQL/MySQL</p>
+          </a>
+          <a class="tile" href="#guestbook" style="text-decoration:none;color:inherit">
+            <p class="tile__title">Guestbook</p>
+            <p class="tile__sub">Pesan tersimpan di browser</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CHECKLIST ================= -->
+    <section id="checklist" style="margin-top:34px">
+      <div class="page-head">
+        <p class="page-head__eyebrow">02 &middot; Checklist</p>
+        <h1>Checklist deployment EC2</h1>
+        <p>
+          Sembilan langkah dari instance kosong sampai bisa diakses lewat IP publik. Centang
+          setiap langkah setelah benar-benar diverifikasi dari luar server.
+        </p>
+      </div>
+
+      <div class="tile">
+        <div class="tile__head">
+          <div>
+            <h2 class="tile__title">Progres</h2>
+            <p class="tile__sub" id="checkCount">0 / 9 langkah selesai</p>
+          </div>
+          <button type="button" class="btn btn--ghost btn--sm" id="checkReset">Reset checklist</button>
+        </div>
+        <div class="progress-line">
+          <span id="checkProgress"></span>
+        </div>
+      </div>
+
+      <div id="ec2Checklist" style="margin-top:14px"></div>
+
+      <div class="callout callout--warn" style="margin-top:16px">
+        <strong>Verifikasi wajib.</strong> Buka dari perangkat lain (HP dengan data seluler)
+        menggunakan IP publik. Jika hanya bisa dibuka di laptop yang sama, berarti masih
+        mengakses localhost atau tunnel lokal, bukan EC2.
+      </div>
+    </section>
+
+    <!-- ================= DATABASE ================= -->
+    <section id="database" style="margin-top:34px">
+      <div class="page-head">
+        <p class="page-head__eyebrow">03 &middot; Data</p>
+        <h1>Database workspace</h1>
+        <p>
+          Catatan konfigurasi database untuk lab Next.js/PostgreSQL. Form ini menyusun DSN
+          dan menyimpannya di browser; tidak ada koneksi jaringan yang dibuka dari halaman
+          statis ini.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="tile">
+          <div class="tile__head">
+            <div>
+              <h2 class="tile__title">Konfigurasi koneksi</h2>
+              <p class="tile__sub">Nilai default mengikuti lab lokal</p>
+            </div>
+            <span class="pill pill--info">PostgreSQL 16</span>
+          </div>
+
+          <div class="form-msg" id="dbMsg" role="status"></div>
+
+          <form id="dbForm">
+            <label class="field">
+              <span>Engine</span>
+              <select id="dbEngine">
+                <option value="postgresql">PostgreSQL</option>
+                <option value="mysql">MySQL</option>
+                <option value="mariadb">MariaDB</option>
+              </select>
+            </label>
+            <div class="grid-2" style="gap:12px">
+              <label class="field">
+                <span>Host</span>
+                <input type="text" id="dbHost" placeholder="127.0.0.1" autocomplete="off">
+                <small>Di EC2 gunakan alamat privat RDS.</small>
+              </label>
+              <label class="field">
+                <span>Port</span>
+                <input type="text" id="dbPort" placeholder="5432" inputmode="numeric">
+              </label>
+            </div>
+            <label class="field">
+              <span>Nama database</span>
+              <input type="text" id="dbName" placeholder="ec2lab" autocomplete="off">
+            </label>
+            <div class="grid-2" style="gap:12px">
+              <label class="field">
+                <span>User</span>
+                <input type="text" id="dbUser" placeholder="ec2lab" autocomplete="off">
+              </label>
+              <label class="field">
+                <span>SSL mode</span>
+                <select id="dbSsl">
+                  <option value="disable">disable</option>
+                  <option value="require">require</option>
+                  <option value="verify-full">verify-full</option>
+                </select>
+              </label>
+            </div>
+            <div class="tile__foot" style="margin-top:4px">
+              <button type="submit" class="btn btn--primary btn--sm">Simpan konfigurasi</button>
+              <button type="button" class="btn btn--ghost btn--sm" id="dbTest">Cek format</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="tile">
+          <div class="tile__head">
+            <div>
+              <h2 class="tile__title">DSN yang dihasilkan</h2>
+              <p class="tile__sub">Password disamarkan pada tampilan</p>
+            </div>
+            <button type="button" class="btn btn--ghost btn--sm" data-copy="#dbDsn">Salin</button>
+          </div>
+          <div class="code" id="dbDsn">postgresql://ec2lab:••••••@127.0.0.1:5433/ec2lab</div>
+
+          <h3 class="kb-h4">Perintah uji dari server</h3>
+          <div class="code"><span class="code__label">EC2 / WSL2</span># PostgreSQL lokal
+psql -h 127.0.0.1 -p 5433 -U ec2lab -d ec2lab
+
+# dari container
+docker exec -it uts-db psql -U ec2lab -d ec2lab -c '\dt'
+
+# tes port tanpa client
+nc -vz 127.0.0.1 5433</div>
+
+          <div class="callout" style="margin-bottom:0">
+            <strong>Aturan aman.</strong> Database tidak boleh mendengar di
+            <code>0.0.0.0</code> pada instance publik. Bind ke <code>127.0.0.1</code> atau
+            letakkan di subnet privat dan akses lewat Security Group.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PIPELINE ================= -->
+    <section id="pipeline" style="margin-top:34px">
+      <div class="page-head">
+        <p class="page-head__eyebrow">04 &middot; Delivery</p>
+        <h1>Pipeline configurator</h1>
+        <p>
+          Pilih komponen, lalu lihat alur deploy yang terbentuk. Pilihan disimpan di browser
+          dan bisa dipakai sebagai bahan narasi video.
+        </p>
+      </div>
+
+      <div class="tile">
+        <div class="form-msg" id="pipeMsg" role="status"></div>
+        <form id="pipeForm">
+          <div class="grid-3">
+            <label class="field">
+              <span>Reverse proxy</span>
+              <select id="pipeProxy">
+                <option value="nginx">Nginx</option>
+                <option value="apache">Apache2</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>TLS</span>
+              <select id="pipeTls">
+                <option value="letsencrypt">Let's Encrypt</option>
+                <option value="http">HTTP only (smoke test)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Infrastructure as Code</span>
+              <select id="pipeIac">
+                <option value="terraform">Terraform</option>
+                <option value="opentofu">OpenTofu</option>
+                <option value="manual">Manual (Console)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>CI/CD</span>
+              <select id="pipeCicd">
+                <option value="github-actions">GitHub Actions</option>
+                <option value="codepipeline">AWS CodePipeline</option>
+                <option value="gitlab">GitLab CI/CD</option>
+                <option value="jenkins">Jenkins</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Target</span>
+              <select id="pipeTarget">
+                <option value="ec2">EC2 tunggal</option>
+                <option value="eks">Amazon EKS</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Domain</span>
+              <input type="text" id="pipeDomain" placeholder="domain-anda.com" autocomplete="off">
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--sm">Simpan rancangan</button>
+        </form>
+
+        <h3 class="kb-h4">Alur yang terbentuk</h3>
+        <div class="flow" id="pipeFlow"></div>
+        <p class="tile__sub" id="pipeSummary"></p>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px">
+        <div class="tile">
+          <h2 class="tile__title">Contoh workflow GitHub Actions</h2>
+          <div class="code"><span class="code__label">.github/workflows/deploy-ec2.yml</span>on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t app:${{ github.sha }} ./app
+      - name: Deploy via SSH
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" &gt; key
+          chmod 600 key
+          rsync -avz -e "ssh -i key" \
+            ./index.html ./assets ./knowledge.html \
+            ./login.html ./dashboard.html \
+            ubuntu@${{ secrets.EC2_HOST }}:/var/www/uts/</div>
+        </div>
+        <div class="tile">
+          <h2 class="tile__title">Keputusan yang harus dicatat</h2>
+          <ul class="kb-list">
+            <li>Mengapa Nginx, bukan Apache2?</li>
+            <li>Mengapa satu EC2, bukan container orchestration?</li>
+            <li>Di mana state Terraform disimpan?</li>
+            <li>Bagaimana rollback jika deploy gagal?</li>
+            <li>Bagaimana kredensial disimpan dan dirotasi?</li>
+            <li>Siapa yang menerima alert jika situs mati?</li>
+          </ul>
+          <p class="tile__sub" style="margin-top:8px">
+            Jawaban singkatnya ada di <a href="knowledge.html#cicd">bagian CI/CD knowledge base</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GUESTBOOK ================= -->
+    <section id="guestbook" style="margin-top:34px">
+      <div class="page-head">
+        <p class="page-head__eyebrow">05 &middot; Interaksi</p>
+        <h1>Guestbook</h1>
+        <p>
+          Contoh fitur tulis-baca sederhana. Pesan disimpan di <code>localStorage</code>
+          browser ini, sehingga tetap ada setelah refresh tetapi tidak terkirim ke server.
+        </p>
+      </div>
+
+      <div class="tile">
+        <form id="gbForm">
+          <div class="gb-form">
+            <label class="field" style="margin-bottom:0">
+              <span>Nama</span>
+              <input type="text" id="gbName" maxlength="60" placeholder="Nama Anda" required>
+            </label>
+            <label class="field" style="margin-bottom:0">
+              <span>Pesan</span>
+              <input type="text" id="gbMessage" maxlength="600" placeholder="Tulis pesan singkat…" required>
+            </label>
+            <button type="submit" class="btn btn--primary">Kirim</button>
+          </div>
+        </form>
+        <div class="tile__foot">
+          <span class="pill pill--info">Tersimpan lokal</span>
+          <button type="button" class="btn btn--ghost btn--sm" id="gbReset">Kembalikan contoh</button>
+        </div>
+        <div class="gb-list" id="gbList"></div>
+      </div>
+    </section>
+
+    <!-- ================= DEPLOYMENT ================= -->
+    <section id="deployment" style="margin-top:34px">
+      <div class="page-head">
+        <p class="page-head__eyebrow">06 &middot; Status</p>
+        <h1>Status deployment</h1>
+        <p>
+          Nilai di bawah dibaca langsung dari browser, jadi selalu mencerminkan alamat yang
+          benar-benar Anda buka — bukan nilai yang ditulis manual di HTML.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="tile">
+          <h2 class="tile__title">Identitas host</h2>
+          <div class="table-wrap" style="margin-top:10px">
+            <table class="tbl">
+              <tbody>
+                <tr><th>Host</th><td><strong data-host>—</strong></td></tr>
+                <tr><th>Origin</th><td><code data-origin>—</code></td></tr>
+                <tr><th>Protokol</th><td data-protocol>—</td></tr>
+                <tr><th>Lingkungan</th><td><span class="pill" data-env>—</span></td></tr>
+                <tr><th>Waktu lokal</th><td data-clock>—</td></tr>
+                <tr><th>Halaman</th><td>4 halaman statis</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tile">
+          <h2 class="tile__title">Perintah verifikasi</h2>
+          <div class="code"><span class="code__label">terminal — dari perangkat lain</span>curl -I <span data-origin>http://host</span>/
+curl -I <span data-origin>http://host</span>/assets/css/style.css
+curl -I <span data-origin>http://host</span>/knowledge.html
+curl -I <span data-origin>http://host</span>/login.html
+curl -I <span data-origin>http://host</span>/dashboard.html</div>
+          <div class="code"><span class="code__label">server EC2</span>sudo systemctl status nginx --no-pager
+sudo ss -tlnp | grep ':80'
+sudo tail -n 40 /var/log/nginx/error.log</div>
+        </div>
+      </div>
+
+      <div class="tile" style="margin-top:16px">
+        <div class="tile__head">
+          <div>
+            <h2 class="tile__title">Target penilaian</h2>
+            <p class="tile__sub">Yang harus terlihat pada video 10–20 menit</p>
+          </div>
+          <span class="pill pill--ok">Siap</span>
+        </div>
+        <ul class="kb-list">
+          <li>Alamat publik terlihat di address bar dan diucapkan di narasi.</li>
+          <li>Halaman utama menampilkan nama lengkap, NIM, foto, About, Skills, Portfolio, Contact.</li>
+          <li>Knowledge base menjelaskan roadmap dan konfigurasi EC2.</li>
+          <li>Login demo berhasil dan masuk ke workspace ini.</li>
+          <li>Checklist, database, pipeline, dan guestbook dapat digunakan.</li>
+          <li>Terminal menunjukkan <code>curl</code> ke IP publik dan status service.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= ACCOUNT ================= -->
+    <section id="account" style="margin-top:34px">
+      <div class="page-head">
+        <p class="page-head__eyebrow">07 &middot; Akun</p>
+        <h1>Sesi &amp; data lokal</h1>
+        <p>
+          Data workspace disimpan dengan awalan <code>maf.</code> di browser ini. Menghapus
+          data akan mengembalikan checklist, database, pipeline, dan guestbook ke kondisi awal.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="tile">
+          <h2 class="tile__title">Detail sesi</h2>
+          <div class="table-wrap" style="margin-top:10px">
+            <table class="tbl">
+              <tbody>
+                <tr><th>Nama</th><td data-user-name>—</td></tr>
+                <tr><th>NIM</th><td data-user-nim>—</td></tr>
+                <tr><th>Email</th><td data-user-email>—</td></tr>
+                <tr><th>Mulai</th><td data-session-time>—</td></tr>
+                <tr><th>Metode</th><td>Demo gate (localStorage)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tile__foot">
+            <a class="btn btn--danger btn--sm" href="login.html" data-logout>Keluar dari workspace</a>
+          </div>
+        </div>
+
+        <div class="tile">
+          <h2 class="tile__title">Kunci penyimpanan</h2>
+          <div class="code">maf.session        → identitas sesi demo
+maf.checklist.v1   → status 9 langkah EC2
+maf.database.v1    → konfigurasi database
+maf.pipeline.v1    → pilihan pipeline
+maf.guestbook.v1   → daftar pesan guestbook</div>
+          <p class="tile__sub">
+            Tidak ada cookie pelacak, tidak ada request ke pihak ketiga, dan tidak ada
+            kredensial yang dikirim ke server.
+          </p>
+          <div class="tile__foot">
+            <button type="button" class="btn btn--ghost btn--sm" id="wipeLocal">Hapus semua data lokal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>
+      <strong>Muhammad Arya Fatthurahman</strong> &middot; NIM 2023230006 &middot; Kelas TIFM<br>
+      S1 Teknologi Informasi, Universitas Darma Persada &middot; UTS Cloud Computing <span data-year>2026</span>
+    </p>
+    <p class="footer__meta">
+      Host: <span data-host>—</span> &middot; Workspace v1.0
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/portal.js"></script>
+<script>
+/* Tombol khusus dashboard: hapus seluruh data lokal */
+(function () {
+  var btn = document.getElementById('wipeLocal');
+  if (!btn) return;
+
+  function wipeAll() {
+    try { localStorage.removeItem('maf.session'); } catch (e) {}
+    ['maf.checklist.v1', 'maf.database.v1', 'maf.pipeline.v1', 'maf.guestbook.v1']
+      .forEach(function (key) {
+        try { localStorage.removeItem(key); } catch (e) { /* ignore */ }
+      });
+    location.replace('login.html');
+  }
+
+  btn.addEventListener('click', function () {
+    if (window.MAF && window.MAF.confirm) {
+      window.MAF.confirm({
+        title: 'Hapus semua data lokal?',
+        message: 'Sesi login dan semua data workspace (checklist EC2, konfigurasi database, rancangan pipeline, guestbook) di browser ini akan dihapus dan dikembalikan ke kondisi awal.',
+        confirmLabel: 'Hapus semua',
+        cancelLabel: 'Batal',
+        danger: true
+      }).then(function (ok) {
+        if (ok) wipeAll();
+      });
+      return;
+    }
+    if (window.confirm('Hapus sesi dan semua data workspace di browser ini?')) {
+      wipeAll();
+    }
+  });
+})();
+</script>
+
+<!-- Toast container (untuk ui.js) -->
+<div class="toast-wrap" aria-live="polite"></div>
+
+</body>
+</html>

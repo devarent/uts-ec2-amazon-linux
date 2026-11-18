@@ -1,0 +1,38 @@
+# =====================================================================
+#  docker-compose.yml — menjalankan website + healthcheck
+#  Jalankan di direktori root proyek:
+#    cd "C:\laragon\www\UTS Ujian Tengah Semester EC2 Amazon Linux"
+#    docker compose -f LAB/03-DOCKER/docker-compose.yml up -d --build
+# =====================================================================
+
+services:
+  web:
+    build:
+      context: ../..
+      dockerfile: LAB/03-DOCKER/Dockerfile
+    image: uts-web:latest
+    container_name: uts-web
+    ports:
+      - "8080:80"           # http://localhost:8080
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  # (Opsional) LocalStack untuk simulasi AWS — lihat ../04-TERRAFORM/localstack
+  localstack:
+    image: localstack/localstack:3.7
+    container_name: localstack-aws
+    environment:
+      - SERVICES=ec2,s3,iam,sts,vpc,apigateway,cloudformation,logs
+      - DEBUG=0
+    ports:
+      - "4566:4566"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5

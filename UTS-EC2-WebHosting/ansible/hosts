@@ -1,0 +1,10 @@
+# Ansible Inventory untuk UTS Cloud Computing
+# Ganti IP dengan Public IP EC2 kamu setelah launch instance
+# Contoh: ansible-playbook -i hosts deploy-static-apache.yml
+
+[web]
+# 54.210.xx.xx ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my-aws-key.pem
+
+# Untuk test lokal (tanpa EC2):
+# localhost ansible_connection=local
+EOF

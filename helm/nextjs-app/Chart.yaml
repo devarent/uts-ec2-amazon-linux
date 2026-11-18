@@ -1,0 +1,20 @@
+apiVersion: v2
+name: nextjs-app
+description: Chart Helm untuk Next.js standalone (AWS EC2 Web Hosting Lab).
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+kubeVersion: ">=1.28.0-0"
+keywords:
+  - nextjs
+  - docker
+  - aws
+  - ec2
+  - kubernetes
+maintainers:
+  - name: EC2 Lab
+home: https://github.com/OWNER/REPO
+sources:
+  - https://github.com/OWNER/REPO
+annotations:
+  category: WebApplication

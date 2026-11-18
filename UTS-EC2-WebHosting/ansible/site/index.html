@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Website pribadi Muhammad Arya Fatthurahman - NIM 2023230006 - Teknologi Informasi, Universitas Darma Persada (UNSADA). Website statis yang di-deploy melalui web server pada lab AWS EC2.">
+  <meta name="author" content="Muhammad Arya Fatthurahman">
+  <title>Muhammad Arya Fatthurahman — NIM 2023230006 — Portofolio</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ================= HEADER / NAVBAR ================= -->
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a href="#top" class="brand">
+      <span class="brand__mark">MAF</span>
+      <span class="brand__text">
+        <strong>Muhammad Arya Fatthurahman</strong>
+        <small>NIM 2023230006 &middot; TIFM</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#portfolio">Portofolio</a>
+      <a href="#experience">Pengalaman</a>
+      <a href="#certification">Sertifikasi</a>
+      <a href="#contact" class="nav__cta">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <p class="eyebrow">Mahasiswa S1 Teknologi Informasi &mdash; Universitas Darma Persada (UNSADA)</p>
+      <h1 class="hero__title">Muhammad Arya<br>Fatthurahman</h1>
+      <p class="hero__meta">
+        <span>NIM: <strong>2023230006</strong></span>
+        <span>Kelas: <strong>TIFM</strong></span>
+        <span>Jurusan: <strong>Teknologi Informasi</strong></span>
+      </p>
+      <p class="hero__desc">
+        Aspiring Software Developer &amp; DevOps Engineer yang passionate pada
+        pengembangan perangkat lunak, AI/Machine Learning, dan infrastruktur cloud.
+        Berpengalaman membangun aplikasi web full-stack serta meng-automate deployment
+        di lingkungan AWS EC2.
+      </p>
+      <div class="hero__actions">
+        <a href="#portfolio" class="btn btn--primary">Lihat Portofolio</a>
+        <a href="#contact" class="btn btn--ghost">Hubungi Saya</a>
+      </div>
+      <p class="host-badge">
+        <span class="host-badge__dot" style="background:#f59e0b; box-shadow:0 0 0 3px rgba(245,158,11,.2);"></span>
+        <span><strong>Lab lokal (simulasi EC2)</strong> &mdash; website dilayani web server httpd/Apache2.
+        Deployment akhir di AWS EC2 dilakukan sesuai <code>README.md</code>.</span>
+      </p>
+    </div>
+
+    <div class="hero__photo">
+      <div class="photo-card">
+        <img src="assets/img/foto-profil.jpg"
+             alt="Foto profil Muhammad Arya Fatthurahman, NIM 2023230006"
+             width="320" height="440" loading="eager">
+        <div class="photo-card__info">
+          <strong>Muhammad Arya Fatthurahman</strong>
+          <span>2023230006 &middot; UNSADA &middot; TI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="container">
+    <h2 class="section__title">Tentang Saya</h2>
+    <div class="about">
+      <div class="about__text">
+        <p>
+          Halo! Saya <strong>Muhammad Arya Fatthurahman</strong>, mahasiswa semester 4 Program Studi
+          Teknologi Informasi di <strong>Universitas Darma Persada (UNSADA)</strong> dengan NIM
+          <strong>2023230006</strong>. Saya memiliki ketertarikan pada pengembangan web, kecerdasan buatan,
+          serta penerapan <em>cloud computing</em> untuk membangun solusi yang skalabel dan mudah dikelola.
+        </p>
+        <p>
+          Secara praktis saya telah mengerjakan beberapa proyek, mulai dari aplikasi manajemen karyawan
+          berbasis <em>Laravel</em> dengan fitur impor Excel, klasifikasi citra menggunakan
+          <em>CNN MobileNetV3</em>, perangkat IoT berbasis ESP32-C3, hingga pipeline data dan
+          monitoring infrastruktur menggunakan <em>Prometheus</em> &amp; <em>Grafana</em>.
+        </p>
+        <p>
+          Tugas besar ini merupakan bagian dari mata kuliah <strong>Cloud Computing</strong>: saya membuat
+          virtual private server pada <strong>AWS EC2</strong>, mengonfigurasi Linux serta web server
+          <strong>Apache2</strong>, lalu mendeploy website portofolio statis ini agar dapat diakses
+          publik melalui alamat <strong>Public IP</strong> instance.
+        </p>
+      </div>
+
+      <aside class="about__card">
+        <h3>Informasi Akademik</h3>
+        <ul class="info-list">
+          <li><span>Nama Lengkap</span><strong>Muhammad Arya Fatthurahman</strong></li>
+          <li><span>NIM</span><strong>2023230006</strong></li>
+          <li><span>Kelas</span><strong>TIFM</strong></li>
+          <li><span>Program Studi</span><strong>S1 Teknologi Informasi</strong></li>
+          <li><span>Universitas</span><strong>Universitas Darma Persada (UNSADA)</strong></li>
+          <li><span>Semester</span><strong>4 (Semester Genap 2025/2026)</strong></li>
+          <li><span>Lokasi</span><strong>Cakung, Jakarta Timur</strong></li>
+        </ul>
+
+        <h3 class="mt">Fokus Belajar</h3>
+        <div class="chip-row">
+          <span class="chip">Cloud Architecture</span>
+          <span class="chip">DevOps &amp; CI/CD</span>
+          <span class="chip">AI / Machine Learning</span>
+          <span class="chip">Web Engineering</span>
+          <span class="chip">Cyber Security</span>
+          <span class="chip">Data Engineering</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="section section--alt" id="skills">
+  <div class="container">
+    <h2 class="section__title">Keahlian</h2>
+    <p class="section__lead">Teknologi dan tools yang saya kuasai &mdash; dikelompokkan berdasarkan bidang keahlian.</p>
+
+    <div class="skills">
+      <article class="skill-card">
+        <h3>Bahasa &amp; Framework</h3>
+        <ul class="chip-row">
+          <li class="chip">Python</li>
+          <li class="chip">JavaScript</li>
+          <li class="chip">PHP / Laravel</li>
+          <li class="chip">C++</li>
+          <li class="chip">Dart / Flutter</li>
+          <li class="chip">C# / .NET</li>
+          <li class="chip">HTML5</li>
+          <li class="chip">CSS3</li>
+          <li class="chip">React.js</li>
+          <li class="chip">Tailwind CSS</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>AI &amp; Machine Learning</h3>
+        <ul class="chip-row">
+          <li class="chip">Machine Learning</li>
+          <li class="chip">Deep Learning</li>
+          <li class="chip">CNN / RNN</li>
+          <li class="chip">TensorFlow &amp; Keras</li>
+          <li class="chip">IBM Watson AI</li>
+          <li class="chip">NLP / BERT</li>
+          <li class="chip">Neo4j Graph Data Science</li>
+          <li class="chip">Quantum Machine Learning</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Cloud &amp; DevOps</h3>
+        <ul class="chip-row">
+          <li class="chip">AWS (EC2, RDS, S3, Lambda)</li>
+          <li class="chip">Docker</li>
+          <li class="chip">Kubernetes</li>
+          <li class="chip">Terraform</li>
+          <li class="chip">Ansible</li>
+          <li class="chip">Linux (Ubuntu/RHEL/Kali)</li>
+          <li class="chip">Git &amp; GitHub</li>
+          <li class="chip">CI/CD &amp; GitHub Actions</li>
+          <li class="chip">Prometheus &amp; Grafana</li>
+          <li class="chip">Google Cloud Platform</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Database &amp; Tools</h3>
+        <ul class="chip-row">
+          <li class="chip">MySQL</li>
+          <li class="chip">PostgreSQL</li>
+          <li class="chip">SQL Server</li>
+          <li class="chip">MongoDB</li>
+          <li class="chip">Apache2 / Nginx</li>
+          <li class="chip">VS Code</li>
+          <li class="chip">Postman</li>
+          <li class="chip">Linux Terminal</li>
+        </ul>
+      </article>
+
+      <article class="skill-card">
+        <h3>Security &amp; Networking</h3>
+        <ul class="chip-row">
+          <li class="chip">Fortinet FortiGate</li>
+          <li class="chip">Ethical Hacking</li>
+          <li class="chip">Cisco Networking</li>
+          <li class="chip">Network Automation</li>
+          <li class="chip">Cyber Security Risk</li>
+          <li class="chip">Quantum-Safe Encryption</li>
+        </ul>
+      </article>
+
+      <article class="skill-card skill-card--progress">
+        <h3>Level Penguasaan</h3>
+        <div class="bar">
+          <div class="bar__meta"><span>Web &amp; Backend (Laravel/Python)</span><span>90%</span></div>
+          <div class="bar__track"><span style="width:90%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>Cloud &amp; DevOps</span><span>85%</span></div>
+          <div class="bar__track"><span style="width:85%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>AI / Machine Learning</span><span>80%</span></div>
+          <div class="bar__track"><span style="width:80%"></span></div>
+        </div>
+        <div class="bar">
+          <div class="bar__meta"><span>Networking &amp; Security</span><span>75%</span></div>
+          <div class="bar__track"><span style="width:75%"></span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <h2 class="section__title">Portofolio &amp; Proyek</h2>
+    <p class="section__lead">Beberapa project yang pernah saya kerjakan, dari aplikasi web, AI, IoT, hingga infrastruktur cloud.</p>
+
+    <div class="cards">
+      <article class="card">
+        <span class="card__tag">Full-stack &middot; Laravel</span>
+        <h3>Sistem Manajemen Karyawan (HRIS)</h3>
+        <p>Aplikasi web manajemen SDM dengan fitur impor Excel, absensi, penilaian kinerja, dan perhitungan gaji terintegrasi menggunakan MySQL.</p>
+        <ul class="card__list">
+          <li>Arsitektur MVC pada Laravel 10</li>
+          <li>Modul import data massal (PhpSpreadsheet)</li>
+          <li>Validasi input &amp; audit log</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="card__tag">AI &middot; Deep Learning</span>
+        <h3>Klasifikasi Ras Kelinci dengan CNN</h3>
+        <p>Model convolutional neural network MobileNetV3 untuk klasifikasi ras kelinci dari citra, dibangun dengan teknik transfer learning.</p>
+        <ul class="card__list">
+          <li>Python, TensorFlow &amp; Keras</li>
+          <li>Augmentasi data &amp; tuning hyperparameter</li>
+          <li>Evaluasi akurasi &amp; confusion matrix</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card card--accent">
+        <span class="card__tag">Cloud &middot; AWS EC2</span>
+        <h3>Deployment Website di AWS EC2</h3>
+        <p>Tugas UTS Cloud Computing: membuat instance EC2 Ubuntu, mengatur Security Group (SSH 22 &amp; HTTP 80), memasang Apache2, dan mendeploy website statis melalui Public IP.</p>
+        <ul class="card__list">
+          <li>Konfigurasi EC2, Key Pair &amp; Security Group</li>
+          <li>Manajemen user, permission, dan web server</li>
+          <li>Website statis HTML/CSS responsif</li>
+        </ul>
+        <div class="card__foot"><a href="#contact">Didemonstrasikan pada video UTS &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="card__tag">IoT &middot; Embedded</span>
+        <h3>ESP32-C3 Alarm Clock</h3>
+        <p>Jam alarm berbasis mikrokontroler ESP32-C3 dengan konektivitas Wi-Fi, tampilan digital, dan penjadwalan alarm yang dapat dikonfigurasi.</p>
+        <ul class="card__list">
+          <li>Arduino IDE &amp; C++</li>
+          <li>Integrasi Wi-Fi &amp; NTP time sync</li>
+          <li>Desain PCB sederhana</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="card__tag">Data Engineering</span>
+        <h3>Pipeline Data &amp; Lakehouse</h3>
+        <p>Pipeline ingestion data batch &amp; streaming menuju lakehouse, diproses dengan Airflow dan Spark, termasuk konfigurasi Terraform.</p>
+        <ul class="card__list">
+          <li>Databricks / Snowflake / Lakeflow Spark</li>
+          <li>Airflow &amp; Kafka streaming</li>
+          <li>Terraform untuk provision infrastructure</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+
+      <article class="card">
+        <span class="card__tag">Monitoring &amp; Automation</span>
+        <h3>Observability Infrastructure</h3>
+        <p>Setup Prometheus untuk scraping metrik, Grafana untuk visualisasi dashboard, serta Ansible untuk otomasi konfigurasi server.</p>
+        <ul class="card__list">
+          <li>Prometheus &amp; Grafana dashboard</li>
+          <li>Ansible playbooks</li>
+          <li>Alerting &amp; health check</li>
+        </ul>
+        <div class="card__foot"><a href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">Repository &rarr;</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PENGALAMAN & PENDIDIKAN ================= -->
+<section class="section section--alt" id="experience">
+  <div class="container">
+    <h2 class="section__title">Pendidikan &amp; Pengalaman</h2>
+
+    <div class="timeline">
+      <article class="tl-item">
+        <div class="tl-item__when">2026</div>
+        <div class="tl-item__body">
+          <h3>Artificial Intelligence &mdash; Darma Persada (HIMIFDA)</h3>
+          <p>Mengikuti kegiatan AI di lingkup HIMIFDA dan Sekolah Pascasarjana UNSADA sebagai peserta.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2026</div>
+        <div class="tl-item__body">
+          <h3>Webinar Nasional Keamanan Digital</h3>
+          <p>Partisipasi dalam webinar nasional bertema <em>Digital Security</em> yang membahas respons insiden dan praktik hardening pada server.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2025 &mdash; 2026</div>
+        <div class="tl-item__body">
+          <h3>Kerja Praktik &mdash; Sistem Manajemen Karyawan</h3>
+          <p>Mengembangkan aplikasi web manajemen karyawan berbasis Laravel + MySQL di sebuah perusahaan, mulai dari analisis kebutuhan, perancangan database, implementasi, hingga pengujian.</p>
+        </div>
+      </article>
+
+      <article class="tl-item">
+        <div class="tl-item__when">2023 &mdash; Sekarang</div>
+        <div class="tl-item__body">
+          <h3>S1 Teknologi Informasi &mdash; Universitas Darma Persada (UNSADA)</h3>
+          <p>NIM 2023230006, Kelas TIFM. Mata kuliah relevan: Basis Data, Pemrograman Web, Artificial Intelligence &amp; Machine Learning, Data Mining, Mobile Computing, Sistem Informasi Enterprise.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERTIFIKASI ================= -->
+<section class="section" id="certification">
+  <div class="container">
+    <h2 class="section__title">Sertifikasi Profesional</h2>
+    <p class="section__lead">Sertifikasi yang saya miliki dari penyelenggara cloud, jaringan, dan data engineering.</p>
+
+    <div class="certs">
+      <article class="cert">
+        <h3>Cisco</h3>
+        <ul>
+          <li>Ethical Hacker (Jun 2025)</li>
+          <li>Managing Cisco Network Operating Systems (Okt 2025)</li>
+          <li>Automate AI Solutions on Cisco Infrastructure</li>
+          <li>Network Technician Career Path</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>IBM</h3>
+        <ul>
+          <li>Containers &amp; Kubernetes Essentials</li>
+          <li>Quantum Machine Learning (Feb 2026)</li>
+          <li>Quantum-Safe Encryption Essentials</li>
+          <li>Beyond the Basics: Istio &amp; IBM Cloud K8s</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Google Cloud</h3>
+        <ul>
+          <li>Site Reliability Engineering (Feb 2026)</li>
+          <li>Cybersecurity: Cloud Security Risk Management</li>
+          <li>Transformer Models and BERT Model</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Fortinet</h3>
+        <ul>
+          <li>Fortinet Certified Associate Cybersecurity</li>
+          <li>FortiGate 7.6 Operator (Jun 2025)</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>The Linux Foundation</h3>
+        <ul>
+          <li>LFS158: Introduction to Kubernetes</li>
+          <li>LFQ102: Quantum Computing Essentials</li>
+          <li>LFEL1001: EU Cyber Resilience Act (CRA)</li>
+        </ul>
+      </article>
+      <article class="cert">
+        <h3>Databricks &amp; Neo4j</h3>
+        <ul>
+          <li>Data Ingestion with Lakeflow Connect</li>
+          <li>Build Data Pipelines with Lakeflow Spark</li>
+          <li>Neo4j Graph Data Science Certification</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KONTAK ================= -->
+<section class="section section--alt" id="contact">
+  <div class="container">
+    <h2 class="section__title">Kontak</h2>
+    <p class="section__lead">Silakan hubungi saya untuk diskusi, kolaborasi proyek, atau peluang magang.</p>
+
+    <div class="contacts">
+      <a class="contact-card" href="mailto:aryafatthurahman4@gmail.com">
+        <span class="contact-card__icon">@</span>
+        <div>
+          <strong>Email</strong>
+          <span>aryafatthurahman4@gmail.com</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://wa.me/628517445861" target="_blank" rel="noopener">
+        <span class="contact-card__icon">WA</span>
+        <div>
+          <strong>WhatsApp</strong>
+          <span>+62 851-7445-861</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://github.com/AryaFatthurahman1" target="_blank" rel="noopener">
+        <span class="contact-card__icon">GH</span>
+        <div>
+          <strong>GitHub</strong>
+          <span>github.com/AryaFatthurahman1</span>
+        </div>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/muhammad-arya-fatthurahman" target="_blank" rel="noopener">
+        <span class="contact-card__icon">in</span>
+        <div>
+          <strong>LinkedIn</strong>
+          <span>/in/muhammad-arya-fatthurahman</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="host-panel">
+      <h3>Arsitektur Lab &amp; Deployment</h3>
+      <ul class="info-list info-list--2col">
+        <li><span>Komputer Target</span><strong>Amazon Linux 2023 / Ubuntu 24.04 (VMware / VirtualBox)</strong></li>
+        <li><span>Web Server</span><strong>httpd / apache2 &mdash; DocumentRoot <code>/var/www/html</code></strong></li>
+        <li><span>Container</span><strong>Docker &mdash; <code>nginx:8080</code></strong></li>
+        <li><span>Orchestrator</span><strong>Kubernetes (kind / k3s) &mdash; NodePort <code>30080</code></strong></li>
+        <li><span>IaC</span><strong>Terraform &mdash; LocalStack / AWS asli / VM lokal</strong></li>
+        <li><span>Akses Lab</span><strong><code>http://192.168.56.10</code> &middot; SSH <code>ec2-user@192.168.56.10</code></strong></li>
+        <li><span>Deployment UTS</span><strong>AWS EC2 (Ubuntu/Amazon Linux) + Apache2 melalui Public IP</strong></li>
+        <li><span>Dokumentasi</span><strong><code>LAB/00-PANDUAN-UTAMA.md</code> &amp; <code>README.md</code></strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>&copy; <span id="year">2026</span> <strong>Muhammad Arya Fatthurahman</strong> &mdash; NIM 2023230006 &mdash; Universitas Darma Persada (UNSADA)</p>
+    <p class="footer__small">
+      Tugas UTS Cloud Computing &middot; Static website (HTML + CSS) di-deploy pada AWS EC2 Ubuntu + Apache2
+      &middot; <a href="#top">Kembali ke atas &uarr;</a>
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

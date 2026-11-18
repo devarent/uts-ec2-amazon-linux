@@ -1,0 +1,131 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - "docker-compose.yml"
+      - "nginx/**"
+      - "scripts/**"
+      - ".github/workflows/deploy-ec2.yml"
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Tag image yang sudah ada di GHCR (kosongkan = build baru)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    name: Build & push image
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      image: ${{ steps.image.outputs.ref }}
+      tag: ${{ steps.image.outputs.tag }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compute immutable tag
+        id: image
+        run: |
+          TAG="${{ inputs.image_tag }}"
+          if [ -z "$TAG" ]; then TAG="sha-${GITHUB_SHA::7}"; fi
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "ref=${REGISTRY}/${IMAGE_NAME}:${TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        if: ${{ github.event_name == 'push' || inputs.image_tag == '' }}
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        if: ${{ github.event_name == 'push' || inputs.image_tag == '' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        if: ${{ github.event_name == 'push' || inputs.image_tag == '' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: ./app
+          push: true
+          tags: |
+            ${{ steps.image.outputs.ref }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL || 'https://app.example.com' }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+          provenance: false
+
+  deploy:
+    name: Deploy via SSH
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Guard secrets
+        run: |
+          test -n "${{ secrets.EC2_HOST }}" || { echo "EC2_HOST belum di-set"; exit 1; }
+          test -n "${{ secrets.EC2_USER }}" || { echo "EC2_USER belum di-set"; exit 1; }
+          test -n "${{ secrets.EC2_SSH_KEY }}" || { echo "EC2_SSH_KEY belum di-set"; exit 1; }
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT || 22 }}
+          command_timeout: 10m
+          script_stop: true
+          envs: APP_IMAGE,APP_DIR,GHCR_USER,GHCR_TOKEN
+          script: |
+            set -euo pipefail
+            APP_DIR="${APP_DIR:-/opt/app}"
+            cd "$APP_DIR"
+
+            # Sinkronkan compose/nginx/scripts terbaru (bukan .env).
+            if [ -d .git ]; then
+              git fetch --depth=1 origin main
+              git reset --hard origin/main
+            fi
+
+            echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
+            APP_IMAGE="$APP_IMAGE" bash scripts/deploy.sh
+        env:
+          APP_IMAGE: ${{ needs.build.outputs.image }}
+          APP_DIR: ${{ vars.APP_DIR || '/opt/app' }}
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          echo "### Deploy selesai 🚀" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image: \`${{ needs.build.outputs.image }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Host: \`${{ secrets.EC2_HOST }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- URL: ${{ vars.SITE_URL || 'https://app.example.com' }}" >> "$GITHUB_STEP_SUMMARY"

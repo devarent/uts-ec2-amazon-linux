@@ -1,0 +1,67 @@
+# ------------------------------------------------------------------
+# Secrets — jangan pernah commit
+# ------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# SSH / TLS
+*.pem
+*.ppk
+*.key
+nginx/certs/*
+!nginx/certs/.gitkeep
+nginx/www/*
+!nginx/www/.gitkeep
+backups/*
+!backups/.gitkeep
+
+# ------------------------------------------------------------------
+# Node / Next.js
+# ------------------------------------------------------------------
+node_modules/
+.next/
+out/
+build/
+npm-debug.log*
+*.tsbuildinfo
+next-env.d.ts
+
+# ------------------------------------------------------------------
+# Terraform
+# ------------------------------------------------------------------
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+tfplan
+*.tfplan
+terraform.tfvars
+!terraform/terraform.tfvars.example
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ------------------------------------------------------------------
+# OS / editor
+# ------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+
+# ------------------------------------------------------------------
+# Artefak lokal / presentasi (bukan bagian aplikasi)
+# ------------------------------------------------------------------
+New folder/
+New folder*.zip
+Interpersonal_Skill_Kognitif.pdf
+Interpersonal_Skill_Kognitif.pptx

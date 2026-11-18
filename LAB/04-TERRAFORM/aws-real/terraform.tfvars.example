@@ -1,0 +1,9 @@
+# Copy file ini menjadi `terraform.tfvars` lalu isi nilainya.
+# JANGAN commit terraform.tfvars berisi data sensitif ke repository publik.
+
+aws_region        = "us-east-1"
+allowed_ssh_cidr  = "103.133.167.0/32"   # GANTI dengan IP Anda — cek: curl ifconfig.me
+allowed_http_cidr = "0.0.0.0/0"
+key_name          = "uts-ec2-aryaf"       # nama key pair EC2 di akun Anda
+instance_type     = "t3.micro"
+project_name       = "uts-ec2"

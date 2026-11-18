@@ -1,0 +1,14 @@
+# Contoh konfigurasi Terraform untuk UTS Cloud Computing
+# Salin file ini menjadi terraform.tfvars lalu sesuaikan
+
+region        = "ap-southeast-1"
+project_name  = "uts-cloud-computing"
+instance_type = "t3.micro"
+key_name      = "uts-ec2-aryaf"
+
+# PENTING: batasi SSH ke IP publik kamu sendiri
+# Cek IP kamu: https://ifconfig.me
+# Ganti contoh di bawah dengan IP publik kamu (wajib berakhiran /32)
+ssh_cidr = "203.0.113.10/32"
+
+root_volume_size = 16

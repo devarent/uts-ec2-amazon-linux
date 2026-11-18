@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SERVER — Muhammad Arya Fatthurahman — NIM 2023230006</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#2d333b; --text:#c9d1d9; --muted:#8b949e;
+          --accent:#58a6ff; --green:#3fb950; --amber:#d29922; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Segoe UI",Roboto,Arial,sans-serif; background:
+    radial-gradient(1000px 500px at 15% -10%, rgba(88,166,255,.18), transparent 60%), var(--bg);
+    color:var(--text); line-height:1.65; padding:32px 16px; }
+  .wrap { max-width:980px; margin:0 auto; }
+  header { display:flex; align-items:center; gap:18px; padding:22px 24px;
+           background:var(--panel); border:1px solid var(--line); border-radius:14px; margin-bottom:18px; }
+  .badge { width:56px; height:56px; border-radius:12px; display:grid; place-items:center;
+           background:var(--accent); color:#0d1117; font-weight:800; font-size:18px; }
+  h1 { font-size:22px; letter-spacing:.3px; }
+  .sub { color:var(--muted); font-size:13px; margin-top:4px; }
+  .pill { display:inline-block; font-size:12px; padding:3px 10px; border-radius:999px;
+          border:1px solid var(--green); color:var(--green); margin-left:8px; vertical-align:middle; }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+            padding:20px 24px; margin-bottom:18px; }
+  h2 { font-size:15px; color:var(--accent); text-transform:uppercase; letter-spacing:1.4px;
+       margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  td { padding:9px 12px; border-bottom:1px dashed var(--line); }
+  tr:last-child td { border-bottom:0; }
+  td:first-child { color:var(--muted); width:220px; }
+  code { background:#0d1117; border:1px solid var(--line); border-radius:6px;
+         padding:2px 8px; color:#79c0ff; font-size:13px; }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .tile { background:#0d1117; border:1px solid var(--line); border-radius:12px; padding:14px; text-align:center; }
+  .tile b { display:block; font-size:24px; color:var(--accent); }
+  .tile span { font-size:12px; color:var(--muted); }
+  .ok { color:var(--green); }
+  .warn { color:var(--amber); }
+  ul { list-style:none; }
+  li { padding:6px 0 6px 24px; position:relative; font-size:14px; }
+  li::before { content:"▸"; position:absolute; left:2px; color:var(--accent); }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:18px 0 4px; }
+  @media (max-width:760px) { .grid { grid-template-columns:1fr 1fr; } td:first-child{width:auto;}
+                             header{flex-direction:column; text-align:center;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="badge">SRV</div>
+    <div>
+      <h1>SERVER DASHBOARD — UTS Cloud Computing <span class="pill">ONLINE</span></h1>
+      <div class="sub">Muhammad Arya Fatthurahman &middot; NIM <strong>2023230006</strong> &middot; Kelas TIFM &middot;
+        Teknologi Informasi &middot; Universitas Darma Persada (UNSADA)</div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Layanan yang Berjalan</h2>
+    <div class="grid">
+      <div class="tile"><b class="ok">:80</b><span>Web Server (Apache2 / httpd)</span></div>
+      <div class="tile"><b class="ok">:8080</b><span>Nginx via Docker</span></div>
+      <div class="tile"><b class="ok">:30080</b><span>Kubernetes NodePort</span></div>
+      <div class="tile"><b class="ok">SSH/22</b><span>Remote access (key-based)</span></div>
+      <div class="tile"><b>2 vCPU</b><span>VMware/VirtualBox VM</span></div>
+      <div class="tile"><b>2 GB</b><span>RAM allocated</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Identitas Server</h2>
+    <table>
+      <tr><td>Hostname</td><td><code>vm-ec2-amazonlinux</code></td></tr>
+      <tr><td>Sistem Operasi</td><td>Amazon Linux 2023 (atau Ubuntu Server 24.04 LTS, fallback)</td></tr>
+      <tr><td>IP Private (VPC/Host-Only)</td><td><code>192.168.56.10</code></td></tr>
+      <tr><td>IP Public (NAT)</td><td><code>10.0.2.15</code></td></tr>
+      <tr><td>Web Server</td><td>httpd (Apache) — DocumentRoot <code>/usr/share/httpd/html</code><br>
+        atau apache2 — <code>/var/www/html</code></td></tr>
+      <tr><td>User web server</td><td><code>apache</code> (Amazon Linux) / <code>www-data</code> (Ubuntu)</td></tr>
+      <tr><td>Container Runtime</td><td>Docker Engine</td></tr>
+      <tr><td>Orchestrator</td><td>Kubernetes (k3s) / kind — namespace <code>uts</code></td></tr>
+      <tr><td>IaC</td><td>Terraform (localstack / aws-real / vm-local)</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Arsitektur Lab</h2>
+    <pre style="color:var(--muted);font-size:13px;overflow:auto;background:#0d1117;border:1px solid var(--line);border-radius:10px;padding:16px;">
+Windows Host
+│
+├── WSL2 Ubuntu 24.04  (DevOps Control Center)
+│     ├── terraform → LocalStack (:4566)   [simulasi VPC/SG/EC2/S3]
+│     ├── terraform → VM VMware/VirtualBox [remote-exec via SSH]
+│     ├── docker build → registry:5000      [container image]
+│     └── kind create cluster               [Kubernetes in Docker]
+│
+├── VM-1  Amazon Linux 2023  192.168.56.10  ← Instance EC2 (lab)
+│     ├── httpd :80        /usr/share/httpd/html
+│     ├── docker :8080     nginx container
+│     └── SSH (lab_ec2)    ssh ec2-user@192.168.56.10
+│
+└── VM-2  Ubuntu 24.04     192.168.56.20  (opsional)
+      ├── k3s  (single-node Kubernetes)
+      └── NodePort 30080   →  http://192.168.56.20:30080</pre>
+  </section>
+
+  <section>
+    <h2>Perintah Uji Coba</h2>
+    <ul>
+      <li><code>curl -I http://192.168.56.10</code> → <code>HTTP/1.1 200 OK</code></li>
+      <li><code>ssh -i ~/.ssh/lab_ec2 ec2-user@192.168.56.10</code></li>
+      <li><code>docker ps</code> / <code>docker logs uts-web</code></li>
+      <li><code>sudo k3s kubectl -n uts get pods,svc -o wide</code></li>
+      <li><code>kind create cluster --config LAB/05-KUBERNETES/kind-cluster.yaml</code></li>
+      <li><code>terraform apply -var="ssh_user=ec2-user"</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Checklist Pengujian (Bagian D UTS)</h2>
+    <ul>
+      <li class="ok">EC2/VM berstatus <strong>Running</strong></li>
+      <li class="ok">Security Group/Firewall: inbound <strong>SSH 22</strong> &amp; <strong>HTTP 80</strong></li>
+      <li class="ok">Website bisa dibuka dari browser (bukan localhost) — dari WSL2 &amp; Windows</li>
+      <li class="ok">Nama <strong>Muhammad Arya Fatthurahman</strong> &amp; NIM <strong>2023230006</strong> tampil</li>
+      <li class="warn">Akses dari jaringan/HP lain — uji ke NAT IP atau ke EC2 asli</li>
+    </ul>
+  </section>
+
+  <footer>
+    UTS Cloud Computing — Muhammad Arya Fatthurahman — NIM 2023230006 — TIFM — UNSADA<br>
+    Dokumen lab lengkap: <code>LAB/00-PANDUAN-UTAMA.md</code>
+  </footer>
+</div>
+</body>
+</html>
