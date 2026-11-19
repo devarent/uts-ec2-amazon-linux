@@ -887,7 +887,7 @@ Materi Part 2 melengkapi Part 1:
 
 ## Project Governance
 
-[![CI](https://github.com/aryafatthurahman4-collab/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/aryafatthurahman4-collab/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml)
+[![CI](https://github.com/devarent/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/devarent/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml)
 
 [Contributing](CONTRIBUTING.md) | [Security Policy](SECURITY.md) | [Code of Conduct](CODE_OF_CONDUCT.md)
 
