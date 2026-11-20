@@ -36,7 +36,7 @@ uts-ec2-amazon-linux is a hands-on repository focused on: UTS Cloud Computing - 
 <!-- dbx-style-kit -->
 <div align="center">
 
-<img src="https://img.shields.io/badge/uts-ujian-tengah-semester-ec2-amazon-linux-1f6feb?style=for-the-badge" alt="uts-ujian-tengah-semester-ec2-amazon-linux" />
+<img src="https://img.shields.io/badge/uts-ec2-amazon-linux-1f6feb?style=for-the-badge" alt="uts-ec2-amazon-linux" />
 <img src="https://img.shields.io/badge/LANG%20HTML-3178c6?style=for-the-badge" alt="LANG HTML" />
 <img src="https://img.shields.io/badge/STARS%200-eab308?style=for-the-badge" alt="STARS 0" />
 <img src="https://img.shields.io/badge/LICENSE%20MIT-22c55e?style=for-the-badge" alt="LICENSE MIT" />
@@ -944,7 +944,7 @@ Materi Part 2 melengkapi Part 1:
 
 ## Project Governance
 
-[![CI](https://github.com/devarent/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/devarent/uts-ujian-tengah-semester-ec2-amazon-linux/actions/workflows/ci.yml)
+[![CI](https://github.com/devarent/uts-ec2-amazon-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/devarent/uts-ec2-amazon-linux/actions/workflows/ci.yml)
 
 [Contributing](CONTRIBUTING.md) | [Security Policy](SECURITY.md) | [Code of Conduct](CODE_OF_CONDUCT.md)
 
