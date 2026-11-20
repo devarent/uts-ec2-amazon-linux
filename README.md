@@ -1,4 +1,38 @@
 
+<!-- identity-block -->
+<div align="center">
+
+# uts-ec2-amazon-linux
+
+<sub>UTS Cloud Computing - web hosting di Amazon Linux EC2 dengan Docker, Terraform, Kubernetes, dan CI/CD.</sub>
+
+</div>
+
+## At a glance
+
+| Field | Detail |
+| --- | --- |
+| Repository | uts-ec2-amazon-linux |
+| Primary language | HTML |
+| Topics | amazon-linux, aws, cicd, cloud-computing, docker, ec2, html, kubernetes, linux, terraform |
+| License | MIT |
+| Branch | main |
+| Maintainer | [@devarent](https://github.com/devarent) |
+
+## Overview
+
+uts-ec2-amazon-linux is a hands-on repository focused on: UTS Cloud Computing - web hosting di Amazon Linux EC2 dengan Docker, Terraform, Kubernetes, dan CI/CD.. Primary language: HTML. Topics: amazon-linux, aws, cicd, cloud-computing, docker, ec2, html, kubernetes, linux, terraform. The README below documents the project; use the table above for a quick overview.
+
+### Global references
+
+<div align="center">
+
+🇮🇸 Iceland &middot; 🇳🇿 New Zealand &middot; 🇨🇭 Switzerland &middot; 🇸🇮 Slovenia &middot; 🇮🇪 Ireland &middot; 🇦🇹 Austria &middot; 🇵🇹 Portugal &middot; 🇸🇬 Singapore &middot; 🇫🇮 Finland
+
+</div>
+
+---
+
 <!-- dbx-style-kit -->
 <div align="center">
 
