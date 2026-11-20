@@ -1,3 +1,13 @@
+# Uts-Ec2-Amazon-Linux
+<sub><span style="opacity: 0.85">UTS Cloud Computing - web hosting di Amazon Linux EC2 dengan Docker, Terraform, Kubernetes, dan CI/CD.</span></sub>
+<div align="center" style="font-size: 0.9em">
+<img src="assets/brand-logo.svg" alt="Arya Fatthurahman" width="130px" />
+</div>
+
+[![CI](https://github.com/devarent/uts-ec2-amazon-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/devarent/uts-ec2-amazon-linux/actions/workflows/ci.yml)
+
+---
+
 
 <!-- identity-block -->
 <div align="center">
@@ -1069,3 +1079,9 @@ Materi Part 2 melengkapi Part 1:
 <div align="center">
 <sub>Hands-on engineering, built and documented in the open.</sub>
 </div>
+## Quickstart
+
+```bash
+cd <repo>
+# Setup instructions are in the project sections above.
+```
